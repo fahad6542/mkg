@@ -1,0 +1,745 @@
+{
+    "menu": [
+        {
+            "name": "Dashboards",
+            "badge": "",
+            "badgeClass": "badge badge-light-warning rounded-pill ms-auto me-1",
+            "icon": "home",
+            "slug": "dashboard",
+            "url": "dashboard"
+        },
+        {
+            "name": "Chart of Accounts",
+            "icon": "file-text",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "accounts/sub-account",
+                    "name": "Add Sub Account Type",
+                    "icon": "circle",
+                    "slug": "sub-account"
+                },
+                {
+                    "url": "accounts/add-new",
+                    "name": "Add New Account",
+                    "icon": "circle",
+                    "slug": "add-new"
+                },
+                {
+                    "url": "accounts/list",
+                    "name": "Manage Accounts",
+                    "icon": "circle",
+                    "slug": "manage-accounts-list"
+                }
+            ]
+        },
+        {
+            "name": "General",
+            "icon": "file-text",
+            "slug": "",
+            "submenu": [
+                {
+                    "name": "General Categories",
+                    "icon": "circle",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "group/info",
+                            "name": "General Info",
+                            "slug": "app-invoice-list"
+                        },
+                        {
+                            "url": "category/info",
+                            "name": "Category Info",
+                            "slug": "app-invoice-preview"
+                        },
+                        {
+                            "url": "/sub/category/info",
+                            "name": "Sub Category Info",
+                            "slug": "app-invoice-edit"
+                        }
+                    ]
+                },
+                {
+                    "name": "General Units",
+                    "icon": "circle",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "/unit/category",
+                            "name": "Unit Category",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "unit/info",
+                            "name": "Unit Info",
+                            "slug": "app-invoice-add"
+                        }
+                    ]
+                },
+                {
+                    "name": "General Supplier",
+                    "icon": "circle",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "author/info",
+                            "name": "Aurthor Info",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "series/info",
+                            "name": "Series Info",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "publisher/info",
+                            "name": "Publisher Info",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "topic/info",
+                            "name": "Topic Info",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "app/invoice/add",
+                            "name": "Slab Wise Discount",
+                            "slug": "app-invoice-add"
+                        }
+                    ]
+                },
+                {
+                    "name": "Financial Info",
+                    "icon": "circle",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "class/info",
+                            "name": "Class Info",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "language/info",
+                            "name": "Language Info",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "currency/info",
+                            "name": "Currency Info",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "credit/card/info",
+                            "name": "Credit Card Info",
+                            "slug": "app-invoice-add"
+                        }
+                    ]
+                },
+                {
+                    "name": "General Products",
+                    "icon": "circle",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "product/location",
+                            "name": "Product Location",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "",
+                            "name": "Product Info",
+                            "slug": ""
+                        },
+                        {
+                            "url": "product/code",
+                            "name": "Product Code",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "",
+                            "name": "Product Reorder info",
+                            "slug": ""
+                        },
+                        {
+                            "url": "",
+                            "name": "Product Bin info",
+                            "slug": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Product Label info",
+                    "icon": "circle",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "app/invoice/add",
+                            "name": "Bar Code Print",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "package/info",
+                            "name": "Package Info",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "transporter/info",
+                            "name": "Transpoter Info",
+                            "slug": "app-invoice-add"
+                        }
+                    ]
+                },
+                {
+                    "name": "General Parties",
+                    "icon": "circle",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "party/nature/info",
+                            "name": "Party Nature Info",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "party/type",
+                            "name": "Party Type",
+                            "slug": "app-invoice-add"
+                        }
+                    ]
+                },
+                {
+                    "name": "Party Invoice",
+                    "icon": "circle",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "party/payment",
+                            "name": "Party Payment",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "stock/flow/sources",
+                            "name": "Stock Flow Sources",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "denomination/info",
+                            "name": "Denomination Info",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "school/info",
+                            "name": "School Info",
+                            "slug": "app-invoice-add"
+                        }
+                    ]
+                },
+                {
+                    "name": "Sale Slab Disc",
+                    "icon": "circle",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "slab/amount/disc",
+                            "name": "Slab Bill Amount Disc",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "",
+                            "name": "Lof Off",
+                            "slug": "app-invoice-add"
+                        },
+                        {
+                            "url": "",
+                            "name": "Exit",
+                            "slug": "app-invoice-add"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Products",
+            "icon": "file-text",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "product/books/list",
+                    "name": "Books Info",
+                    "icon": "circle",
+                    "slug": "book-info"
+                },
+                {
+                    "url": "product/note-books/list",
+                    "name": "Note Books Info",
+                    "icon": "circle",
+                    "slug": "app-notebooks-list"
+                },
+                {
+                    "url": "product/uniform/list",
+                    "name": "Uniform Info",
+                    "icon": "circle",
+                    "slug": "app-uniform-list"
+                },
+                {
+                    "url": "product/stationery/list",
+                    "name": "Stationery",
+                    "icon": "circle",
+                    "slug": "app-stationery-list"
+                },
+                {
+                    "url": "product/gift/toys/list",
+                    "name": "Gift And Toys",
+                    "icon": "circle",
+                    "slug": "app-gift-toys-list"
+                }
+            ]
+        },
+        {
+            "name": "Discount Policy",
+            "icon": "file-text",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "discount/books/list",
+                    "name": "Books",
+                    "icon": "circle",
+                    "slug": ""
+                },
+                {
+                    "url": "discount/note-books/list",
+                    "name": "Note Book",
+                    "icon": "circle",
+                    "slug": ""
+                },
+                {
+                    "url": "discount/stationary/list",
+                    "name": "Stationary",
+                    "icon": "circle",
+                    "slug": ""
+                },
+                {
+                    "url": "discount/gift-item/list",
+                    "name": "Gift Item",
+                    "icon": "circle",
+                    "slug": ""
+                },
+                {
+                    "url": "discount/uniform/list",
+                    "name": "Uniform",
+                    "icon": "circle",
+                    "slug": ""
+                },
+                {
+                    "url": "discount/offer",
+                    "name": "Discount Offer",
+                    "icon": "circle",
+                    "slug": ""
+                }
+            ]
+        },
+        {
+            "name": "System",
+            "icon": "file-text",
+            "slug": "",
+            "submenu": [
+                {
+                    "name": "Purchases",
+                    "icon": "circle",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "purchase/order/info",
+                            "name": "Purchase Order Info",
+                            "slug": ""
+                        },
+                        {
+                            "url": "purchase/info",
+                            "name": "Purchase Info",
+                            "slug": ""
+                        },
+                        {
+                            "url": "purchase/market",
+                            "name": "Market purchase",
+                            "slug": ""
+                        },
+                        {
+                            "url": "purchase/return",
+                            "name": "Purchase Return",
+                            "slug": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Demand & Sales",
+                    "icon": "circle",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "advance/receipts",
+                            "name": "Advance Receipts",
+                            "slug": ""
+                        },
+                        {
+                            "url": "demand/information",
+                            "name": "Demand Info",
+                            "slug": ""
+                        },
+                        {
+                            "url": "sale/order/info",
+                            "name": "Sales Order Info",
+                            "slug": ""
+                        },
+                        {
+                            "url": "sale/estimation/info",
+                            "name": "Estimation Info",
+                            "slug": ""
+                        },
+                        {
+                            "url": "sale/invoice",
+                            "name": "Sale Invoice",
+                            "slug": ""
+                        },
+                        {
+                            "url": "sale/return/invoice",
+                            "name": "Sale Return Invoice",
+                            "slug": ""
+                        },
+                        {
+                            "url": "sale/cash/refund",
+                            "name": "Cash Refund",
+                            "slug": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Branches",
+                    "icon": "circle",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "branch/orders/info",
+                            "name": "Branch Orders",
+                            "slug": ""
+                        },
+                        {
+                            "url": "branch/order/acceptence",
+                            "name": "Branch Order Acceptence",
+                            "slug": ""
+                        },
+                        {
+                            "url": "branch/order/cancellation",
+                            "name": "Branch Order Cancellation",
+                            "slug": ""
+                        },
+                        {
+                            "url": "branch/transfer",
+                            "name": "Branch Transfer",
+                            "slug": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Stocks",
+                    "icon": "circle",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "stock/misc/inout/flows",
+                            "name": "Misc.Stock Inout Flows",
+                            "slug": ""
+                        },
+                        {
+                            "url": "stock/manufacturing/info",
+                            "name": "Manufacturing Info",
+                            "slug": ""
+                        },
+                        {
+                            "url": "stock/taking",
+                            "name": "Stock Taking",
+                            "slug": ""
+                        },
+                        {
+                            "url": "stock/location/taking/dashoard",
+                            "name": "Location Stock Taking",
+                            "slug": ""
+                        },
+                        {
+                            "url": "stock/transfer/info",
+                            "name": "Stock Transfer Info",
+                            "slug": ""
+                        },
+                        {
+                            "url": "stock/re-evaluation",
+                            "name": "Stock Re-Evaluation",
+                            "slug": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Sales Recovery",
+                    "icon": "circle",
+                    "slug": "",
+                    "submenu": [
+                        {
+                            "url": "",
+                            "name": "Party Payment Receipt",
+                            "slug": ""
+                        },
+                        {
+                            "url": "",
+                            "name": "Sales Recovery",
+                            "slug": ""
+                        }
+                    ]
+                },
+                {
+                    "url": "",
+                    "name": "Maganize Membership Info",
+                    "slug": ""
+                },
+                {
+                    "url": "",
+                    "name": "Cashier Closing",
+                    "slug": ""
+                }
+            ]
+        },
+        {
+            "name": "Human Resources",
+            "icon": "file-text",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "HR/staff/group",
+                    "name": "Staff Group",
+                    "slug": ""
+                },
+                {
+                    "url": "HR/employee/management",
+                    "name": "Employee Management",
+                    "slug": ""
+                },
+                {
+                    "url": "HR/advance/salaries",
+                    "name": "Advance Salaries",
+                    "slug": ""
+                },
+                {
+                    "url": "HR/staff/loans",
+                    "name": "Staff Loan",
+                    "slug": ""
+                },
+                {
+                    "url": "HR/staff/loan/rescheduling",
+                    "name": "Staff Loan Resheduling",
+                    "slug": ""
+                },
+                {
+                    "url": "HR/staff/repayments",
+                    "name": "Staff Repayments",
+                    "slug": ""
+                },
+                {
+                    "url": "HR/over/time",
+                    "name": "Over Time",
+                    "slug": ""
+                },
+                {
+                    "url": "HR/staff/absentise",
+                    "name": "Staff Absentise",
+                    "slug": ""
+                },
+                {
+                    "url": "HR/payroll/sheet",
+                    "name": "PayRoll Sheet",
+                    "slug": ""
+                },
+                {
+                    "url": "HR/bio/matrix/attendance",
+                    "name": "Bio Matrix Attendance",
+                    "slug": ""
+                },
+                {
+                    "url": "HR/bio/matrix/attendance/modification",
+                    "name": "Bio Matrix Attendance Modification",
+                    "slug": ""
+                },
+                {
+                    "url": "HR/mark/attendance",
+                    "name": "Mark Attendance",
+                    "slug": ""
+                },
+                {
+                    "url": "HR/clear/attendance",
+                    "name": "Clear Attendance",
+                    "slug": ""
+                }
+            ]
+        },
+        {
+            "name": "Voucher",
+            "icon": "file-text",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "cash/receipt/voucher",
+                    "name": "Cash Receipt Voucher",
+                    "slug": ""
+                },
+                {
+                    "url": "cash/payment/voucher",
+                    "name": "Cash Payment Voucher",
+                    "slug": ""
+                },
+                {
+                    "url": "bank/receipt/voucher",
+                    "name": "Bank Receipt Voucher",
+                    "slug": ""
+                },
+                {
+                    "url": "bank/payment/voucher",
+                    "name": "Bank Payment Voucher",
+                    "slug": ""
+                },
+                {
+                    "url": "journal/voucher",
+                    "name": "Journal Voucher",
+                    "slug": ""
+                },
+                {
+                    "url": "future/voucher",
+                    "name": "Future Voucher",
+                    "slug": ""
+                }
+            ]
+        },
+        {
+            "name": "Utilities",
+            "icon": "file-text",
+            "slug": "",
+            "submenu": [
+                {
+                    "url": "utilities/buisness/unit",
+                    "name": "Buisness Unit",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/chart/accounts",
+                    "name": "Chart of Accounts",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/account/opening/balance",
+                    "name": "Account Opening Balance",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/daily/sale/closing",
+                    "name": "Daily Sale Closing",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/daily/accounts/closing",
+                    "name": "Daily Accounts Closing",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/session/closing",
+                    "name": "Session Closing",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/account/options",
+                    "name": "Account Options",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/group/management",
+                    "name": "Group Management",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/user/management",
+                    "name": "User Management",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/change/password",
+                    "name": "Change Password",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/backup/database",
+                    "name": "Backup Database",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/restore/database",
+                    "name": "Restore Database",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/company/information",
+                    "name": "Company Information",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/application/configuration",
+                    "name": "Application Configuration",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/mobile/information",
+                    "name": "Mobile Information",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/sales/token/recovery",
+                    "name": "Sales Token Recovery",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/web/updation/script/generator",
+                    "name": "Web Updation Script Generator",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/bulk/group/shifting",
+                    "name": "Bulk Group Shifting",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/bulk/category/shifting",
+                    "name": "Bulk Category Shifting",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/bulk/topic/shifting",
+                    "name": "Bulk Topic Shifting",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/bulk/publisher/shifting",
+                    "name": "Bulk Publisher Shifting",
+                    "slug": ""
+                },
+                {
+                    "url": "utilities/bulk/products/shifting",
+                    "name": "Bulk Products Shifting",
+                    "slug": ""
+                }
+            ]
+        },
+        {
+            "navheader": "Others",
+            "slug": ""
+        },
+        {
+            "url": "file-manager",
+            "name": "File Manager",
+            "icon": "save",
+            "slug": "file-manager"
+        }
+    ]
+}
