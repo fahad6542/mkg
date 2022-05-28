@@ -39,7 +39,17 @@ class UnitsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title'         => 'required|string|min:1|max:255',
+            'scale'         => 'required|string|min:1|max:50',
+            'short_name'    => 'nullable|string|min:1|max:15',
+            'description'   => 'required|string',
+        ]);
+
+        Units::create($request->all());
+
+        return redirect()->route('units.index')
+                        ->with('success','Unit created successfully.');
     }
 
     /**

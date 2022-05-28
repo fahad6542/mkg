@@ -81,7 +81,7 @@
             <label for="login-email" class="form-label">{{ __('Email')}}</label>
             <input
               type="text"
-              class="form-control @error('email') error @enderror"
+              class="form-control @error('email') is-invalid @enderror"
               id="login-email"
               name="email"
               placeholder="john@mkg.com"
@@ -90,7 +90,7 @@
               autofocus
             />
             @error('email')
-                <span id="login-email-error" class="error">{{ $message }}</span>
+                <small class="text-danger">{{ $message }}</small>
             @enderror
           </div>
 
@@ -104,7 +104,7 @@
             <div class="input-group input-group-merge form-password-toggle">
               <input
                 type="password"
-                class="form-control form-control-merge @error('email') error @enderror"
+                class="form-control form-control-merge @error('email') is-invalid @enderror"
                 id="login-password"
                 name="password"
                 tabindex="2"
@@ -114,7 +114,7 @@
               <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
             </div>
             @error('email')
-                <span id="login-password-error" class="error">{{ __($message)}}</span>
+                <small class="text-danger">{{ __($message)}}</span>
             @enderror
           </div>
           <div class="mb-1">
