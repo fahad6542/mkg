@@ -11,6 +11,8 @@ use App\Models\ClassLevels;
 use App\Models\Classes;
 use App\Models\Units;
 use App\Models\Languages;
+use App\Models\Authors;
+
 
 class GeneralData extends Seeder
 {
@@ -90,6 +92,13 @@ class GeneralData extends Seeder
             array('name' => 'German','name_urdu' => 'جرمن')
         );
         Languages::insert($data);
+
+        // $data = array(
+        //     array('name' => 'Jone Alia', 'sr_id' =>1, 'description' => 'Best Poet'),
+        //     array('name' => 'Allama Iqbal',  'sr_id' =>2,'description' => 'Shairay Mashriq'),
+        // );
+
+        // Authors::insert($data);
 
 
 

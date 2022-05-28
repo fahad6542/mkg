@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\General\UnitsController;
+use App\Http\Controllers\General\AuthorsController;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StaterkitController;
 use App\Http\Controllers\LanguageController;
@@ -21,8 +23,10 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('home');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('units', UnitsController::class);
+    Route::resource('authors', AuthorsController::class);
+    
 });
 
 // Route Components
