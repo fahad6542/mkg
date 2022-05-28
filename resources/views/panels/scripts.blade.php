@@ -16,6 +16,15 @@
 <script src="{{ asset(mix('js/scripts/customizer.js')) }}"></script>
 @endif
 <!-- END: Theme JS-->
+<script>
+    $( document ).ready(function() {
+
+        @if ($errors->any())
+            $('.click_if_invalid')[0].click();
+        @endif
+    });
+
+</script>
 <!-- BEGIN: Page JS-->
 @yield('page-script')
 <!-- END: Page JS-->
