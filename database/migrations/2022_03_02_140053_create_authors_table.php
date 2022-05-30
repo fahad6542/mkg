@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
-            $table->integer('sr_id');
+            $table->integer('sr_id')->nullable();
             $table->string('name');
             $table->string('name_urdu')->nullable();
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
             $table->string('contact')->nullable();
             $table->string('avatar', 100)->default('');
             $table->longText('description');

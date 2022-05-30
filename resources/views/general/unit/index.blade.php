@@ -1,14 +1,19 @@
 @extends('layouts/contentLayoutMaster')
-@section('title', 'Unit Info ') @section('vendor-style')
+@section('title', 'Unit Info ')
+ @section('vendor-style')
 <!-- vendor css files -->
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/dataTables.bootstrap5.min.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/pickadate/pickadate.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/forms/select/select2.min.css')) }}">
-<link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}"> @endsection @section('page-style')
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}"> 
+@endsection 
+@section('page-style')
 <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/pickers/form-flat-pickr.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/pickers/form-pickadate.css')) }}"> {{-- Page Css files --}}
-<link rel="stylesheet" type="text/css" href="{{asset('css/base/plugins/forms/pickers/form-flat-pickr.css')}}"> @endsection @section('content')
+<link rel="stylesheet" type="text/css" href="{{asset('css/base/plugins/forms/pickers/form-flat-pickr.css')}}"> 
+@endsection 
+@section('content')
 <!-- Basic multiple Column Form section start -->
 <section id="ajax-datatable">
 	<div class="row">
@@ -100,17 +105,20 @@
 							<th>Action</th>
 						</tr>
 					</thead>
-					<tbody> @forelse ($units as $unit)
-						<tr>
-							<td></td>
-							<td>{{ $unit->title }}</td>
-							<td>{{ $unit->scale }}</td>
-							<td>{{ $unit->description }}</td>
-							<td></td>
-						</tr> @empty
-						<tr>
-							<td colspan="5">No unit found</td>
-						</tr> @endforelse </tbody>
+					<tbody> 
+						@forelse ($units as $unit)
+							<tr>
+								<td></td>
+								<td>{{ $unit->title }}</td>
+								<td>{{ $unit->scale }}</td>
+								<td>{{ $unit->description }}</td>
+								<td></td>
+							</tr> @empty
+							<tr>
+								<td colspan="5">No unit found</td>
+							</tr> 
+						@endforelse 
+					</tbody>
 				</table>
 			</div>
 		</div>

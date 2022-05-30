@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\General\UnitsController;
 use App\Http\Controllers\General\AuthorsController;
+use App\Http\Controllers\General\SeriesController;
+use App\Http\Controllers\General\PublishersController;
+use App\Http\Controllers\General\TopicsController;
+
+
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StaterkitController;
@@ -26,6 +31,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('units', UnitsController::class);
     Route::resource('authors', AuthorsController::class);
+    Route::resource('series', SeriesController::class);
+    Route::resource('publisher', PublishersController::class);
+    Route::resource('topics', TopicsController::class);
+
+
     
 });
 

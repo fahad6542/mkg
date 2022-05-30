@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\General;
 
 use App\Models\Publishers;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PublishersController extends Controller
 {
@@ -15,6 +17,9 @@ class PublishersController extends Controller
     public function index()
     {
         //
+        $user=Auth::user();
+        $data['publishers']=Publishers::Where('delete_status','=',1)->get();
+        return view('general.publisher.index',$data);
     }
 
     /**
@@ -36,6 +41,22 @@ class PublishersController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name'         => 'required|string|min:1|max:255',
+            'name_urdu'    => 'required|string|min:1|max:50',
+            'description'  => 'required|string',
+        ]);
+        $user=Auth::user();
+        Publishers::create([
+            'name'              => $request->name,
+            'name_urdu'         => $request->name_urdu,
+            'description'       => $request->description,
+            // 'company_id'        => $user->company_id,
+           
+        ]);
+
+        return redirect()->route('publisher.index')
+                        ->with('success','Publishers created successfully.');
     }
 
     /**
