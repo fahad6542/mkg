@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/pickers/form-pickadate.css')) }}">
 {{-- Page Css files --}}
 <link rel="stylesheet" type="text/css" href="{{asset('css/base/plugins/forms/pickers/form-flat-pickr.css')}}">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 @endsection
 
 
@@ -157,6 +158,28 @@
                 <th>Action</th>
               </tr>
             </thead>
+              <tbody> 
+              @forelse ($series as $key)
+                <tr>
+                
+                  <td>{{ $key->name }}</td>
+                  <td>{{ $key->name_urdu }}</td>
+                  <td>{{ $key->description }}</td>
+                  <td>
+                    <a href="" class="btn btn-primary btn-sm">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="" class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                  </td>
+                </tr> @empty
+                <tr>
+                  <td colspan="5">No Series found</td>
+                </tr> 
+                
+              @endforelse 
+            </tbody>
           </table>
         </div>
       </div>

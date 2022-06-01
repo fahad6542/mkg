@@ -55,14 +55,15 @@ class SeriesController extends Controller
             $is_active=1;
 
         }
-        Series::create([
+        $series=Series::create([
             'name'              => $request->name,
             'name_urdu'         => $request->name_urdu,
             'description'       => $request->description,
             'is_active'         => $is_active,
             'company_id'        => $user->company_id,
-        ]);
 
+        ]);
+        // see u later
         return redirect()->route('series.index')
                         ->with('success','Series created successfully.');
     }

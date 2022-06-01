@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\General;
 
 use App\Models\Classes;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ClassesController extends Controller
 {
@@ -15,6 +17,9 @@ class ClassesController extends Controller
     public function index()
     {
         //
+        $user=Auth::user();
+        $data['classes']=Classes::Where('delete_status','=',1)->get();
+        return view('general.class.index',$data);
     }
 
     /**
@@ -36,6 +41,20 @@ class ClassesController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name'         => 'required|string|min:1|max:255',
+            'description'  => 'required|string',
+        ]);
+       
+        Classes::create([
+            'name'              => $request->name,
+            'description'       => $request->description,
+           
+           
+        ]);
+
+        return redirect()->route('classes.index')
+                        ->with('success','Classes created successfully.');
     }
 
     /**

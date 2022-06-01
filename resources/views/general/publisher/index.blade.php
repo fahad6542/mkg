@@ -141,7 +141,7 @@
                                               type="checkbox"
                                               id=""
                                               class="checkbox"
-                                              name=""
+                                              name="is_active"
                                               placeholder=""
                                           />
                                         InActive*</label>
@@ -167,7 +167,9 @@
                                       <div class="mb-1">
                                       <label class="" for="">Series Detail*</label>
                                       <select class="form-select mt-1" id="">
-                                          <option value="">Select</option>
+                                        @foreach($series as $key)
+                                          <option value="{{$key->id}}">{{$key->name}}</option>
+                                        @endforeach  
                                       </select>
                                       </div>
                                     </div>

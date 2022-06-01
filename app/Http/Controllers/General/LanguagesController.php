@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\General;
 
 use App\Models\Languages;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class LanguagesController extends Controller
 {
@@ -15,6 +17,9 @@ class LanguagesController extends Controller
     public function index()
     {
         //
+        $user=Auth::user();
+        $data['languages']=Languages::Where('delete_status','=',1)->get();
+        return view('general.languages.index',$data);
     }
 
     /**
@@ -36,6 +41,20 @@ class LanguagesController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name'         => 'required|string|min:1|max:255',
+            'name_urdu'    => 'required|string|min:1|max:50',
+            'description'  => 'required|string',
+        ]);
+        $contract = Languages::create([
+            'name'              => $request->name,
+            'name_urdu'         => $request->name_urdu,
+            'description'       => $request->description,
+           
+        ]);
+
+        return redirect()->route('languages.index')
+                        ->with('success','Languages created successfully.');
     }
 
     /**

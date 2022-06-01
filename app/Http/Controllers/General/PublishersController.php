@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\General;
 
 use App\Models\Publishers;
+use App\Models\Series;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,8 @@ class PublishersController extends Controller
     {
         //
         $user=Auth::user();
-        $data['publishers']=Publishers::Where('delete_status','=',1)->get();
+        $data['publishers']  =Publishers::Where('delete_status','=',1)->get();
+        $data['series']      =Series::select('id','name')->Where('delete_status','=',1)->where('is_active',1)->get();   
         return view('general.publisher.index',$data);
     }
 
@@ -51,7 +53,7 @@ class PublishersController extends Controller
             'name'              => $request->name,
             'name_urdu'         => $request->name_urdu,
             'description'       => $request->description,
-            // 'company_id'        => $user->company_id,
+            'company_id'        => $user->company_id,
            
         ]);
 

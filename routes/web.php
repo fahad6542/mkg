@@ -7,6 +7,10 @@ use App\Http\Controllers\General\AuthorsController;
 use App\Http\Controllers\General\SeriesController;
 use App\Http\Controllers\General\PublishersController;
 use App\Http\Controllers\General\TopicsController;
+use App\Http\Controllers\General\ClassesController;
+use App\Http\Controllers\General\LanguagesController;
+
+
 
 
 
@@ -34,6 +38,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('series', SeriesController::class);
     Route::resource('publisher', PublishersController::class);
     Route::resource('topics', TopicsController::class);
+    Route::resource('classes', ClassesController::class);
+    Route::resource('languages', LanguagesController::class);
+
+
 
 
     

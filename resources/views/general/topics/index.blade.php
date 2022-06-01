@@ -90,22 +90,7 @@
                                         @enderror
                                       </div>
                                     </div>
-                                    <div class="col-md-12 col-12">
-                                      <div class="mb-1">
-                                        <label class="" for="">Disc % age*</label>
-                                        <input
-                                          type="text"
-                                          id=""
-                                          class="form-control mt-1 @error('disc_per') is-invalid @enderror"
-                                          name="disc_per"
-                                          value="{{old('disc_per')}}"
-                                          placeholder="Disc % age*"
-                                        />
-                                        @error('disc_per')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                      </div>
-                                    </div>
+                                    
                                   <div class="col-md-6 col-12">
                                       <div class="mb-1">
                                         <label class="" for="">
@@ -113,7 +98,7 @@
                                               type="checkbox"
                                               id=""
                                               class="checkbox"
-                                              name=""
+                                              name="is_active"
                                               placeholder="Account Name*"
                                           />
                                         InActive*</label>
@@ -147,7 +132,7 @@
                       </section>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
                       </div>
                     </div>
                   </div>
@@ -161,7 +146,7 @@
               <tr>
                 <th>Topic</th>
                 <th>In Urdu</th>
-                <th>Disc % age</th>                
+                          
                 <th>Description</th>                
                 <th>Action</th>
               </tr>
@@ -172,8 +157,6 @@
                 
                   <td>{{ $topic->name }}</td>
                   <td>{{ $topic->name_urdu }}</td>
-                  <td>{{ $topic->disc_per }}</td>
-                  <td>{{ $topic->is_active }}</td>
                   <td>{{ $topic->description }}</td>
 
                   <td>

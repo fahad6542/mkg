@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->tinyIncrements('id');
             $table->string('name')->unique();
-            $table->string('level');
+            $table->string('level')->nullable();
             $table->tinyInteger('position')->default(0);
             $table->longText('description');
             $table->tinyInteger('delete_status')->default(1);
