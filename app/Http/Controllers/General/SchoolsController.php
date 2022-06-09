@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\General;
 
-use App\Models\Classes;
+use App\Models\Schools;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
-class ClassesController extends Controller
+class SchoolsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +17,9 @@ class ClassesController extends Controller
     public function index()
     {
         //
+        $user=Auth::user();
+        $data['schools']  =Schools::Where('delete_status','=',1)->get();
+        return view('general.school_info.index',$data);
     }
 
     /**
@@ -41,10 +46,10 @@ class ClassesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Classes  $classes
+     * @param  \App\Models\Schools  $schools
      * @return \Illuminate\Http\Response
      */
-    public function show(Classes $classes)
+    public function show(Schools $schools)
     {
         //
     }
@@ -52,10 +57,10 @@ class ClassesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Classes  $classes
+     * @param  \App\Models\Schools  $schools
      * @return \Illuminate\Http\Response
      */
-    public function edit(Classes $classes)
+    public function edit(Schools $schools)
     {
         //
     }
@@ -64,10 +69,10 @@ class ClassesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Classes  $classes
+     * @param  \App\Models\Schools  $schools
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Classes $classes)
+    public function update(Request $request, Schools $schools)
     {
         //
     }
@@ -75,10 +80,10 @@ class ClassesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Classes  $classes
+     * @param  \App\Models\Schools  $schools
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Classes $classes)
+    public function destroy(Schools $schools)
     {
         //
     }

@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Series extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name', 
+        'name_urdu', 
+        'description', 
+        'company_id', 
+        'is_active'
+    ];
+
 }

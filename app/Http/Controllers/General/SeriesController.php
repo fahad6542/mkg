@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\General;
 
-use App\Models\Topics;
+use App\Models\Series;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class TopicsController extends Controller
+class SeriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +18,8 @@ class TopicsController extends Controller
     {
         //
         $user=Auth::user();
-        $data['topics']=Topics::Where('delete_status','=',1)->get();
-        return view('general.topics.index',$data);
+        $data['series']=Series::Where('delete_status','=',1)->get();
+        return view('general.series.index',$data);
     }
 
     /**
@@ -45,39 +45,47 @@ class TopicsController extends Controller
             'name'         => 'required|string|min:1|max:255',
             'name_urdu'    => 'required|string|min:1|max:50',
             'description'  => 'required|string',
+            'is_active'    => 'required',
+
         ]);
         $user=Auth::user();
-        $contract = Topics::create([
+        $is_active="0";
+        if($request->is_active == 'on')
+        {
+            $is_active=1;
+
+        }
+        $series=Series::create([
             'name'              => $request->name,
             'name_urdu'         => $request->name_urdu,
             'description'       => $request->description,
+            'is_active'         => $is_active,
             'company_id'        => $user->company_id,
-           
-        ]);
 
-        return redirect()->route('topics.index')
-                        ->with('success','Topics created successfully.');
+        ]);
+        // see u later
+        return redirect()->route('series.index')
+                        ->with('success','Series created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Topics  $topics
+     * @param  \App\Models\Series  $series
      * @return \Illuminate\Http\Response
      */
-    public function show(Topics $topics)
+    public function show(Series $series)
     {
         //
-     
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Topics  $topics
+     * @param  \App\Models\Series  $series
      * @return \Illuminate\Http\Response
      */
-    public function edit(Topics $topics)
+    public function edit(Series $series)
     {
         //
     }
@@ -86,10 +94,10 @@ class TopicsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Topics  $topics
+     * @param  \App\Models\Series  $series
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Topics $topics)
+    public function update(Request $request, Series $series)
     {
         //
     }
@@ -97,10 +105,10 @@ class TopicsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Topics  $topics
+     * @param  \App\Models\Series  $series
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Topics $topics)
+    public function destroy(Series $series)
     {
         //
     }

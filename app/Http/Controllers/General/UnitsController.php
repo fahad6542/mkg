@@ -6,6 +6,9 @@ use App\Models\Units;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use DataTables;
+
 
 class UnitsController extends Controller
 {
@@ -14,8 +17,26 @@ class UnitsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $units = Units::latest()->get();
+        
+        if ($request->ajax()) {
+            $data = Units::latest()->get();
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+   
+                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editunit">Edit</a>';
+   
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteunit">Delete</a>';
+                        
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);   
+        }
+        // 
         $user=Auth::user();
         $data['units']=Units::Where('delete_status','=',1)->get();
         return view('general.unit.index',$data);
@@ -39,17 +60,42 @@ class UnitsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        
+
+        $validator = Validator::make($request->all(), [
             'title'         => 'required|string|min:1|max:255',
-            'scale'         => 'nullable|string|min:1|max:50',
-            'short_name'    => 'nullable|string|min:1|max:15',
+            'scale'         => 'required|string|min:1|max:50',
             'description'   => 'required|string',
         ]);
 
-        Units::create($request->all());
+        if ($validator->fails())
+        {
+            $response = [
+                'success' => false,
+                'data'    => $validator->errors(),
+                'message' => "Validation error",
+            ];
+            return response()->json($response);
+        }
 
-        return redirect()->route('units.index')
-                        ->with('success','Unit created successfully.');
+        // 
+        $unit=Units::updateOrCreate(
+            ['id'           => $request->unit_id],
+            ['title'        => $request->title, 
+            'scale'         => $request->scale, 
+            'description'   => $request->description
+            ]
+        );  
+        $response = [
+            'success' => true,
+            'data'    => $unit,
+            'message' => "Unit Added Succesfully",
+        ];  
+        return response()->json($response);    
+
+
+        // 
+       
     }
 
     /**
@@ -69,9 +115,11 @@ class UnitsController extends Controller
      * @param  \App\Models\Units  $units
      * @return \Illuminate\Http\Response
      */
-    public function edit(Units $units)
+    public function edit($id)
     {
         //
+        $units = Units::find($id);
+        return response()->json($units);
     }
 
     /**
@@ -92,8 +140,11 @@ class UnitsController extends Controller
      * @param  \App\Models\Units  $units
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Units $units)
+    public function destroy($id)
     {
         //
+        Units::find($id)->delete();
+     
+        return response()->json(['success'=>'Units deleted successfully.']);
     }
 }
