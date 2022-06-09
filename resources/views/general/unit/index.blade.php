@@ -6,15 +6,15 @@
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/pickadate/pickadate.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/forms/select/select2.min.css')) }}">
-<link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}"> 
-@endsection 
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
+@endsection
 @section('page-style')
 <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/pickers/form-flat-pickr.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/pickers/form-pickadate.css')) }}"> {{-- Page Css files --}}
-<link rel="stylesheet" type="text/css" href="{{asset('css/base/plugins/forms/pickers/form-flat-pickr.css')}}"> 
+<link rel="stylesheet" type="text/css" href="{{asset('css/base/plugins/forms/pickers/form-flat-pickr.css')}}">
 
 
-@endsection 
+@endsection
 @section('content')
 <!-- Basic multiple Column Form section start -->
 <section id="ajax-datatable">
@@ -24,17 +24,17 @@
 				<!-- Button trigger modal -->
 				<div class="card-header border-bottom">
 					<h4 class="card-title">Add Unit Information</h4>
-                    <a type="button" class="btn btn-relief-primary click_if_invalid" data-bs-toggle="modal" data-bs-target="#large" href="javascript:void(0)" id="create_unit">Add New</a> 
+                    <a type="button" class="btn btn-relief-primary click_if_invalid" data-bs-toggle="modal" data-bs-target="#large" href="javascript:void(0)" id="add_new_btn">Add New</a>
 				</div>
 				<!-- Modal -->
-				<div class="modal fade text-start" id="ajaxModel" tabindex="-1" aria-labelledby="myModalLabel17" aria-hidden="true">
-					<form id="unitform" name="unitform" action="{{ route('units.store') }}" class="needs-validation" novalidate>
+				<div class="modal fade text-start" id="ajax_model" tabindex="-1" aria-labelledby="myModalLabel17" aria-hidden="true">
+					<form id="unit_form" name="unit_form" action="{{ route('units.store') }}" class="" novalidate>
                         @csrf
 						<input type="hidden" name="unit_id" id="unit_id">
 						<div class="modal-dialog modal-dialog-centered modal-lg">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h4 class="modal-title" id="modelHeading">Add Unit Information</h4>
+									<h4 class="modal-title" id="model_heading">Add Unit Information</h4>
 									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 								</div>
 								<div class="modal-body">
@@ -58,33 +58,22 @@
 															<div class="col-md-12 col-12">
 																<div class="mb-1">
 																	<label class="" for="">Unit Title*</label>
-
-
 																	<input type="text" id="title" class="form-control mt-1" name="title" placeholder="Title*" value="" />
-                                                                    
-                                                                        <small class="text-danger error-message" id="title_error" style="display:none"></small>
-                                                                    
-
+                                                                    <small class="text-danger error-message" id="title_error" style="display:none"></small>
                                                                 </div>
 															</div>
 															<div class="col-md-12 col-12">
 																<div class="mb-1">
 																	<label class="" for="">Unit Scale</label>
 																	<input type="text" id="scale" class="form-control mt-1 " name="scale" placeholder="Unit Scale*" value=""/>
-                                                                     
                                                                     <small class="text-danger error-message" id="scale_error" style="display:none"></small>
-
                                                                 </div>
 															</div>
 															<div class="col-md-12 col-12">
 																<div class="mb-1">
 																	<label class="" for="">Description*</label>
-
-																	<textarea class="form-control mt-1 @error('description') is-invalid @enderror" id="description" rows="3" name="description" placeholder="Description"></textarea>
-                                                                     
+																	<textarea class="form-control mt-1" id="description" rows="3" name="description" placeholder="Description"></textarea>
                                                                     <small class="text-danger error-message" id="description_error" style="display:none"></small>
-
-
                                                                 </div>
 															</div>
 														</div>
@@ -95,7 +84,7 @@
 									</section>
 								</div>
 								<div class="modal-footer">
-									<button type="submit" class="btn btn-primary" id="saveBtn">Save</button>
+									<button type="submit" class="btn btn-primary" id="save_btn">Save</button>
 								</div>
 							</div>
 						</div>
@@ -114,8 +103,8 @@
 							<th>Action</th>
 						</tr>
 					</thead>
-					<tbody> 
-						
+					<tbody>
+
 					</tbody>
 				</table>
 			</div>
@@ -127,12 +116,16 @@
 @endsection
 @section('page-script')
 <script type="text/javascript">
-  $(function () {
-      $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
+
+$(document).ready(function() {
+    'use strict';
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
+
     var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
@@ -145,62 +138,147 @@
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
-    $('#create_unit').click(function () {
-        $('#saveBtn').val("create-book");
+
+    //open modal when add new btn clicked
+    $('#add_new_btn').click(function () {
+        // $('#save_btn').val("create-book");
         $('#unit_id').val('');
-        $('#unitform').trigger("reset");
-        $('#modelHeading').html("Create New Unit");
-        $('#ajaxModel').modal('show');
+        $('#unit_form').trigger("reset");
+        $('#model_heading').html("Create New Unit");
+
+        $('#ajax_model').modal('show');
     });
-    $('body').on('click', '.editunit', function () {
+
+    //open modal when edit btn clicked
+    $('body').on('click', '.edit-btn', function () {
       var unit_id = $(this).data('id');
       $.get("{{ route('units.index') }}" +'/' + unit_id +'/edit', function (data) {
-          $('#modelHeading').html("Edit Unit");
-          $('#saveBtn').val("edit-book");
-          $('#ajaxModel').modal('show');    
+          $('#model_heading').html("Edit Unit");
+        //   $('#save_btn').val("edit-book");
+          $('#ajax_model').modal('show');
+          //filling the form
           $('#unit_id').val(data.id);
           $('#title').val(data.title);
           $('#scale').val(data.scale);
           $('#description').val(data.description);
 
-      })
-   });
-    $('#saveBtn1').click(function (e) {
+        })
+    });
+
+   $('#save_btn').click(function(e) {
         e.preventDefault();
 
         $(this).html('Save');
-        
+
+        //removing previous validation errors if wny
         remove_error_msg();
 
-        $.ajax({
-          data: $('#unitform').serialize(),
-          url: $('#unitform').attr("action"),
-          type: "POST",
-          dataType: 'json',
-          success: function(response){
-               
-            if(response.success==true){
-                reset_form('unitform');
-                $('#ajaxModel').modal('hide');
-                table.draw();
-              }else{
-                // jQuery.each(response.data, function(key, value){
-                //     var box_id='#'+key;
-                //     var msg_id='#'+key+'_error';
-                //     $(box_id).addClass("is-invalid");
-                //     jQuery(msg_id).html(value);
-                //     jQuery(msg_id).show();
-                // });
-              }
-                  		
-         },
-          error: function (data) {
-          
-              console.log('Error:', data);
-              $('#saveBtn').html('Save');
-          }
-      });
+        //checking if form is valid
+        if ($("#unit_form").valid()) {
+
+                $.ajax({
+                    data: $('#unit_form').serialize(),
+                    url: $('#unit_form').attr("action"),
+                    type: "POST",
+                    dataType: 'json',
+                    success: function(response) {
+
+                        //if form is successfuly saved
+                        if (response.success == true) {
+
+                            reset_form('unit_form');//reseting for the new entry
+
+                            $('#ajax_model').modal('hide');
+                            table.draw();
+                            //alert
+                            toastr['success']('👋 Unit saved', 'Success!', {
+                                closeButton: true,
+                                tapToDismiss: false,
+                            });
+
+                        } else {//if not saved
+                            display_validation_errors(response.data); //server side errors
+                        }
+                    },
+                    error: function(data){
+                        console.log('Error:', data);
+                        $('#save_btn').html('Save');
+                        toastr['error']('👋 Unable to send request', 'Error!', {
+                            closeButton: true,
+                            tapToDismiss: false,
+                        });
+                    }
+                });
+            } else {
+                toastr['error']('👋 Validation Error', 'Error!', {
+                    closeButton: true,
+                    tapToDismiss: false,
+                });
+            }
+        });
     });
+
+    $('body').on('click', '.delete-btn', function () {
+
+        var unit_id = $(this).data("id");
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        customClass: {
+          confirmButton: 'btn btn-primary',
+          cancelButton: 'btn btn-outline-danger ms-1'
+        },
+        buttonsStyling: false
+      }).then(function (result) {
+
+        if (result.value) {
+
+            $.ajax({
+                type: "DELETE",
+                url: "{{ route('units.store') }}"+'/'+unit_id,
+                success: function (data) {
+                    //table.draw(); needs to resolve
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Deleted!',
+                        text: 'Your file has been deleted.',
+                        customClass: {
+                        confirmButton: 'btn btn-success'
+                        }
+                    });
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+
+        }
+      });
+
+      var jqForm = $('#unit_form');
+
+    // jQuery Validation
+    // --------------------------------------------------------------------
+    if (jqForm.length) {
+      jqForm.validate({
+        rules: {
+          'title': {
+            required: true
+          },
+          'scale': {
+            required: true,
+          },
+          'description': {
+            required: true
+          },
+        }
+      });
+    }
+
+}); //document ready ends
 
     function reset_form(formId){
         var formId='#'+formId;
@@ -212,26 +290,23 @@
         $('.error-message').html("");
         $(".form-control").removeClass("is-invalid");
     }
-    
-    $('body').on('click', '.deleteunit', function () {
-     
-        var unit_id = $(this).data("id");
-        confirm("Are You sure want to delete !");
-      
-        $.ajax({
-            type: "DELETE",
-            url: "{{ route('units.store') }}"+'/'+unit_id,
-            success: function (data) {
-                table.draw();
-            },
-            error: function (data) {
-                console.log('Error:', data);
-            }
-        });
-    });
-  
 
-  });
+    function display_validation_errors(errorsList){
+        jQuery.each(errorsList, function(key, value) {
+            var box_id = '#' + key;
+            var msg_id = '#' + key + '_error';
+            $(box_id).addClass("is-invalid");
+            jQuery(msg_id).html(value);
+            jQuery(msg_id).show();
+        });
+        toastr['error']('👋 Validation Error', 'Error!', {
+            closeButton: true,
+            tapToDismiss: false,
+        });
+    }
+
+
+
 
 
 </script>

@@ -20,23 +20,23 @@ class UnitsController extends Controller
     public function index(Request $request)
     {
         $units = Units::latest()->get();
-        
+
         if ($request->ajax()) {
             $data = Units::latest()->get();
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-   
-                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editunit">Edit</a>';
-   
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteunit">Delete</a>';
-                        
+
+                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm edit-btn">Edit</a>';
+
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm delete-btn">Delete</a>';
+
                             return $btn;
                     })
                     ->rawColumns(['action'])
-                    ->make(true);   
+                    ->make(true);
         }
-        // 
+        //
         $user=Auth::user();
         $data['units']=Units::Where('delete_status','=',1)->get();
         return view('general.unit.index',$data);
@@ -60,7 +60,7 @@ class UnitsController extends Controller
      */
     public function store(Request $request)
     {
-        
+
 
         $validator = Validator::make($request->all(), [
             'title'         => 'required|string|min:1|max:255',
@@ -78,24 +78,24 @@ class UnitsController extends Controller
             return response()->json($response);
         }
 
-        // 
+        //
         $unit=Units::updateOrCreate(
             ['id'           => $request->unit_id],
-            ['title'        => $request->title, 
-            'scale'         => $request->scale, 
+            ['title'        => $request->title,
+            'scale'         => $request->scale,
             'description'   => $request->description
             ]
-        );  
+        );
         $response = [
             'success' => true,
             'data'    => $unit,
             'message' => "Unit Added Succesfully",
-        ];  
-        return response()->json($response);    
+        ];
+        return response()->json($response);
 
 
-        // 
-       
+        //
+
     }
 
     /**
@@ -144,7 +144,7 @@ class UnitsController extends Controller
     {
         //
         Units::find($id)->delete();
-     
+
         return response()->json(['success'=>'Units deleted successfully.']);
     }
 }
