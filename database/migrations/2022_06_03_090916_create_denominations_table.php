@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateDenominationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,12 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {// a table avialable for all
-        Schema::create('units', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title');
-            $table->string('scale')->default(1);
+    {
+        Schema::create('denominations', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->longText('value');
+            $table->integer('index');
             $table->longText('description');
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('units');
+        Schema::dropIfExists('denominations');
     }
-};
+}

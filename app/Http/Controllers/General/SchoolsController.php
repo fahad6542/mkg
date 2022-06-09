@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\General;
 
 use App\Models\Schools;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class SchoolsController extends Controller
 {
@@ -15,6 +17,9 @@ class SchoolsController extends Controller
     public function index()
     {
         //
+        $user=Auth::user();
+        $data['schools']  =Schools::Where('delete_status','=',1)->get();
+        return view('general.school_info.index',$data);
     }
 
     /**

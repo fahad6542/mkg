@@ -73,10 +73,10 @@ class GeneralData extends Seeder
         ProductType::insert($data);
 
         $data = array(
-            array('title' => 'Piece','short_name' => 'pcs', 'description' => 'Per Piece'),
-            array('title' => 'Meter','short_name' => 'm', 'description' => 'Length'),
-            array('title' => 'Kilogram','short_name' => 'Kg', 'description' => 'Weight'),
-            array('title' => 'Liter','short_name' => 'L', 'description' => 'Volume')
+            array('title' => 'pcs', 'description' => 'Per Piece'),
+            array('title' => 'm', 'description' => 'Length'),
+            array('title' => 'Kg', 'description' => 'Weight'),
+            array('title' => 'L', 'description' => 'Volume')
         );
 
         Units::insert($data);

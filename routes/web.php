@@ -9,9 +9,10 @@ use App\Http\Controllers\General\PublishersController;
 use App\Http\Controllers\General\TopicsController;
 use App\Http\Controllers\General\ClassesController;
 use App\Http\Controllers\General\LanguagesController;
-
-
-
+use App\Http\Controllers\General\CreditCardController;
+use App\Http\Controllers\General\LocationsController;
+use App\Http\Controllers\General\DenominationController;
+use App\Http\Controllers\General\SchoolsController;
 
 
 use App\Http\Controllers\HomeController;
@@ -40,9 +41,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('topics', TopicsController::class);
     Route::resource('classes', ClassesController::class);
     Route::resource('languages', LanguagesController::class);
-
-
-
+    Route::resource('credit', CreditCardController::class);
+    Route::resource('locations', LocationsController::class);
+    Route::resource('denomination', DenominationController::class);
+    Route::resource('school', SchoolsController::class);
 
     
 });

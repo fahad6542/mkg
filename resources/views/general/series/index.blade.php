@@ -93,16 +93,19 @@
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
-                                                <label class="" for="">
-                                                    <input
-                                                        type="checkbox"
-                                                        id=""
-                                                        class="checkbox"
-                                                        name="is_active"
-                                                        placeholder="Account Name*"
-                                                        
-                                                    />
-                                                InActive*</label>
+                                                  <label class="" for="">
+                                                      <input
+                                                          type="checkbox"
+                                                          id=""
+                                                          class="checkbox @error('is_active') is-invalid @enderror"
+                                                          name="is_active"
+                                                          placeholder="Account Name*"
+                                                          
+                                                      />
+                                                  InActive*</label>
+                                                  @error('is_active')
+                                                      <small class="text-danger">{{ $message }}</small>
+                                                  @enderror
                                                 </div>
                                             </div>
                                             
