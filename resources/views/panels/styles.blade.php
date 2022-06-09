@@ -4,6 +4,7 @@
 @else
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/vendors.min.css')) }}" />
 @endif
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/toastr.min.css')) }}">
 
 @yield('vendor-style')
 <!-- END: Vendor CSS-->
@@ -22,7 +23,7 @@
 @else
   <link rel="stylesheet" href="{{ asset(mix('css/base/core/menu/menu-types/vertical-menu.css')) }}" />
 @endif
-
+<link rel="stylesheet" href="{{ asset(mix('css/base/plugins/extensions/ext-component-toastr.css')) }}">
 {{-- Page Styles --}}
 <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
