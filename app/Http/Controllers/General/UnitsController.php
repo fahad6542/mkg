@@ -41,7 +41,7 @@ class UnitsController extends Controller
     {
         $request->validate([
             'title'         => 'required|string|min:1|max:255',
-            'scale'         => 'required|string|min:1|max:50',
+            'scale'         => 'nullable|string|min:1|max:50',
             'short_name'    => 'nullable|string|min:1|max:15',
             'description'   => 'required|string',
         ]);

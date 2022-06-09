@@ -49,7 +49,7 @@
 															<div class="col-md-12 col-12">
 																<div class="mb-1">
 																	<label class="" for="">Unit Title*</label>
-																	<input type="text" id="" class="form-control mt-1 @error('title') is-invalid @enderror" name="title" placeholder="Title*" value="{{old('title')}}" />
+																	<input type="text" id="" class="form-control mt-1 @error('title') is-invalid @enderror" name="title" placeholder="Title*" value="{{old('title')}}" required />
                                                                     @error('title')
                                                                         <small class="text-danger">{{ $message }}</small>
                                                                     @enderror
@@ -58,7 +58,7 @@
 															<div class="col-md-12 col-12">
 																<div class="mb-1">
 																	<label class="" for="">Unit Scale</label>
-																	<input type="text" id="" class="form-control mt-1 @error('scale') is-invalid @enderror" name="scale" placeholder="Title*" value="{{old('scale')}}"/>
+																	<input type="text" id="" class="form-control mt-1 @error('scale') is-invalid @enderror" name="scale" placeholder="Scale*" value="{{old('scale')}}"/>
                                                                     @error('scale')
                                                                         <small class="text-danger">{{ $message }}</small>
                                                                     @enderror
@@ -67,7 +67,7 @@
 															<div class="col-md-12 col-12">
 																<div class="mb-1">
 																	<label class="" for="">Description*</label>
-																	<textarea class="form-control mt-1 @error('description') is-invalid @enderror" id="" rows="3" name="description" placeholder="Description">{{old('description')}}</textarea>
+																	<textarea class="form-control mt-1 @error('description') is-invalid @enderror" id="" rows="3" name="description" placeholder="Description" required>{{old('description')}}</textarea>
                                                                     @error('description')
                                                                         <small class="text-danger">{{ $message }}</small>
                                                                     @enderror
