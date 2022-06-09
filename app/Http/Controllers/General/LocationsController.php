@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\General;
 
 use App\Models\Locations;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class LocationsController extends Controller
 {
@@ -15,6 +17,9 @@ class LocationsController extends Controller
     public function index()
     {
         //
+        $user=Auth::user();
+        $data['locations']=Locations::Where('delete_status','=',1)->get();
+        return view('general.product_location.index',$data);
     }
 
     /**
@@ -36,6 +41,20 @@ class LocationsController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name'         => 'required|string|min:1|max:255',
+            'description'  => 'required|string',
+        ]);
+        $user=Auth::user();
+        $contract = Locations::create([
+            'name'                      => $request->name,
+            'description'               => $request->description,
+            'branch_id'                 => $user->branch_id,
+           
+        ]);
+
+        return redirect()->route('locations.index')
+                        ->with('success','product location created successfully.');
     }
 
     /**

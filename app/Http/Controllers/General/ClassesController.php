@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\General;
 
-use App\Models\Series;
+use App\Models\Classes;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
-class SeriesController extends Controller
+class ClassesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +17,9 @@ class SeriesController extends Controller
     public function index()
     {
         //
+        $user=Auth::user();
+        $data['classes']=Classes::Where('delete_status','=',1)->get();
+        return view('general.class.index',$data);
     }
 
     /**
@@ -36,15 +41,29 @@ class SeriesController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name'         => 'required|string|min:1|max:255',
+            'description'  => 'required|string',
+        ]);
+       
+        Classes::create([
+            'name'              => $request->name,
+            'description'       => $request->description,
+           
+           
+        ]);
+
+        return redirect()->route('classes.index')
+                        ->with('success','Classes created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Series  $series
+     * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function show(Series $series)
+    public function show(Classes $classes)
     {
         //
     }
@@ -52,10 +71,10 @@ class SeriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Series  $series
+     * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Series $series)
+    public function edit(Classes $classes)
     {
         //
     }
@@ -64,10 +83,10 @@ class SeriesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Series  $series
+     * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Series $series)
+    public function update(Request $request, Classes $classes)
     {
         //
     }
@@ -75,10 +94,10 @@ class SeriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Series  $series
+     * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Series $series)
+    public function destroy(Classes $classes)
     {
         //
     }

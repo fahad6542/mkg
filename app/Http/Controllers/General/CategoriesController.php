@@ -17,7 +17,7 @@ class CategoriesController extends Controller
     {
         // if(\Auth::user()->can('view categories'))
         // {
-            $categories = Categories::where('company_id',1)->get();
+            $categories   = Categories::where('company_id',1)->get();
             $productTypes = ProductType::get()->pluck('name', 'id');
 
             return view('general.categories.index', compact('productTypes','categories'));
@@ -52,11 +52,12 @@ class CategoriesController extends Controller
         // {
 
             $validator = \Validator::make(
-                $request->all(), [
-                    'product_type_id' => 'required|integer',
-                    'name' => 'required|max:20',
-                    'name_urdu' => 'nullable|max:20',
-                               ]
+                $request->all(), 
+                [
+                    'product_type_id'   => 'required|integer',
+                    'name'              => 'required|max:20',
+                    'name_urdu'         => 'nullable|max:20',
+                ]
             );
             if($validator->fails())
             {
@@ -65,13 +66,13 @@ class CategoriesController extends Controller
                 return redirect()->back()->with('error', $messages->first());
             }
 
-            $category             = new Categories();
-            $category->sr_id=1;
+            $category                        = new Categories();
+            $category->sr_id                 =1;
             $category->product_type_id       = $request->product_type_id;
-            $category->name       = $request->name;
-            $category->name_urdu       = $request->name_urdu;
-            $category->description       = $request->description;
-            $category->company_id = 1;
+            $category->name                  = $request->name;
+            $category->name_urdu             = $request->name_urdu;
+            $category->description           = $request->description;
+            $category->company_id            = 1;
             $category->save();
 
             return redirect()->route('categories.index')->with('success', __('Category successfully created.'));

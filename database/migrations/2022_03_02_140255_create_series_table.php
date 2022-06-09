@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('series', function (Blueprint $table) {
             $table->id();
-            $table->integer('sr_id');
+            $table->integer('sr_id')->nullable();
             $table->string('name');
             $table->string('name_urdu');
             $table->longText('description');
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);
-            $table->integer('comapany_id');
+            $table->integer('company_id');
             $table->timestamps();
         });
     }

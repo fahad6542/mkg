@@ -17,7 +17,6 @@ return new class extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('scale')->default(1);
-            $table->string('short_name')->nullable(); //Symbol
             $table->longText('description');
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);

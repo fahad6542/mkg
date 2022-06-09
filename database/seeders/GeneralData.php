@@ -12,6 +12,8 @@ use App\Models\Classes;
 use App\Models\Units;
 use App\Models\Languages;
 use App\Models\Authors;
+use App\Models\Series;
+
 
 
 class GeneralData extends Seeder
@@ -71,10 +73,10 @@ class GeneralData extends Seeder
         ProductType::insert($data);
 
         $data = array(
-            array('title' => 'Piece','short_name' => 'pcs', 'description' => 'Per Piece'),
-            array('title' => 'Meter','short_name' => 'm', 'description' => 'Length'),
-            array('title' => 'Kilogram','short_name' => 'Kg', 'description' => 'Weight'),
-            array('title' => 'Liter','short_name' => 'L', 'description' => 'Volume')
+            array('title' => 'pcs', 'description' => 'Per Piece'),
+            array('title' => 'm', 'description' => 'Length'),
+            array('title' => 'Kg', 'description' => 'Weight'),
+            array('title' => 'L', 'description' => 'Volume')
         );
 
         Units::insert($data);
@@ -91,7 +93,17 @@ class GeneralData extends Seeder
             array('name' => 'Persian','name_urdu' => 'فارسی'),
             array('name' => 'German','name_urdu' => 'جرمن')
         );
+
         Languages::insert($data);
+
+        $data = array(
+            array('name' => 'Hary potter','name_urdu' => 'ہیری پاٹر','description'=>'Popular on Netflix','company_id'=>1 ),
+            array('name' => 'Troy: Fall of a City','name_urdu' => 'ٹرائے: شہر کا زوال','description'=>'Popular on Netflix','company_id'=>1),
+            array('name' => 'Rise of Empires: Ottoman','name_urdu' => 'سلطنتوں کا عروج: عثمانی۔','description'=>'Popular on Netflix','company_id'=>1),
+            array('name' => 'Chhota Bheem','name_urdu' => 'چھوٹا بھیم','description'=>'Popular on Netflix','company_id'=>1),
+
+        );
+        Series::insert($data);
 
         // $data = array(
         //     array('name' => 'Jone Alia', 'sr_id' =>1, 'description' => 'Best Poet'),

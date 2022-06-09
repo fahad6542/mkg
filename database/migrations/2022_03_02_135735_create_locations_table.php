@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->integer('sr_id'); //restarts for each branch
+            $table->integer('sr_id')->nullable(); //restarts for each branch
             $table->string('name');
             $table->longText('description');
             $table->integer('branch_id');

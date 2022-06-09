@@ -10,36 +10,36 @@
 $(function () {
   'use strict';
 
-  var bootstrapForm = $('.needs-validation'),
-    jqForm = $('#jquery-val-form'),
-    picker = $('.picker'),
-    select = $('.select2');
+  var bootstrapForm = $('.needs-validation');
+    // jqForm = $('#unitform'),
+    // picker = $('.picker'),
+    // select = $('.select2');
 
-  // select2
-  select.each(function () {
-    var $this = $(this);
-    $this.wrap('<div class="position-relative"></div>');
-    $this
-      .select2({
-        placeholder: 'Select value',
-        dropdownParent: $this.parent()
-      })
-      .change(function () {
-        $(this).valid();
-      });
-  });
+  // // select2
+  // select.each(function () {
+  //   var $this = $(this);
+  //   $this.wrap('<div class="position-relative"></div>');
+  //   $this
+  //     .select2({
+  //       placeholder: 'Select value',
+  //       dropdownParent: $this.parent()
+  //     })
+  //     .change(function () {
+  //       $(this).valid();
+  //     });
+  // });
 
-  // Picker
-  if (picker.length) {
-    picker.flatpickr({
-      allowInput: true,
-      onReady: function (selectedDates, dateStr, instance) {
-        if (instance.isMobile) {
-          $(instance.mobileInput).attr('step', null);
-        }
-      }
-    });
-  }
+  // // Picker
+  // if (picker.length) {
+  //   picker.flatpickr({
+  //     allowInput: true,
+  //     onReady: function (selectedDates, dateStr, instance) {
+  //       if (instance.isMobile) {
+  //         $(instance.mobileInput).attr('step', null);
+  //       }
+  //     }
+  //   });
+  // }
 
   // Bootstrap Validation
   // --------------------------------------------------------------------
@@ -54,6 +54,7 @@ $(function () {
         // if (inputGroupValidation) {
         //   inputGroupValidation(form);
         // }
+        alert("submit now");
       });
       // bootstrapForm.find('input, textarea').on('focusout', function () {
       //   $(this)
@@ -66,44 +67,5 @@ $(function () {
     });
   }
 
-  // jQuery Validation
-  // --------------------------------------------------------------------
-  if (jqForm.length) {
-    jqForm.validate({
-      rules: {
-        'basic-default-name': {
-          required: true
-        },
-        'basic-default-email': {
-          required: true,
-          email: true
-        },
-        'basic-default-password': {
-          required: true
-        },
-        'confirm-password': {
-          required: true,
-          equalTo: '#basic-default-password'
-        },
-        'select-country': {
-          required: true
-        },
-        dob: {
-          required: true
-        },
-        customFile: {
-          required: true
-        },
-        validationRadiojq: {
-          required: true
-        },
-        validationBiojq: {
-          required: true
-        },
-        validationCheck: {
-          required: true
-        }
-      }
-    });
-  }
+  
 });

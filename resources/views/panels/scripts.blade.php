@@ -25,6 +25,14 @@
     });
 
 </script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>  
+<script src="{{ asset(mix('vendors/js/forms/validation/jquery.validate.min.js')) }}"></script>
+<script src="{{ asset(mix('js/scripts/forms/form-validation.js')) }}"></script>
+
+
+
 <!-- BEGIN: Page JS-->
 @yield('page-script')
+
 <!-- END: Page JS-->
