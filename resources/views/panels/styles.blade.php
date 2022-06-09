@@ -5,7 +5,8 @@
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/vendors.min.css')) }}" />
 @endif
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/toastr.min.css')) }}">
-
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/animate/animate.min.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/sweetalert2.min.css')) }}">
 @yield('vendor-style')
 <!-- END: Vendor CSS-->
 
