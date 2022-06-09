@@ -58,16 +58,19 @@
 															<div class="col-md-12 col-12">
 																<div class="mb-1">
 																	<label class="" for="">Unit Title*</label>
-																	<input type="text" id="title" class="form-control mt-1 @error('title') is-invalid @enderror" name="title" placeholder="Title*" value="" />
+
+
+																	<input type="text" id="title" class="form-control mt-1" name="title" placeholder="Title*" value="" />
                                                                     
                                                                         <small class="text-danger error-message" id="title_error" style="display:none"></small>
                                                                     
+
                                                                 </div>
 															</div>
 															<div class="col-md-12 col-12">
 																<div class="mb-1">
 																	<label class="" for="">Unit Scale</label>
-																	<input type="text" id="scale" class="form-control mt-1 @error('scale') is-invalid @enderror" name="scale" placeholder="Unit Scale*" value=""/>
+																	<input type="text" id="scale" class="form-control mt-1 " name="scale" placeholder="Unit Scale*" value=""/>
                                                                      
                                                                     <small class="text-danger error-message" id="scale_error" style="display:none"></small>
 
@@ -76,9 +79,11 @@
 															<div class="col-md-12 col-12">
 																<div class="mb-1">
 																	<label class="" for="">Description*</label>
+
 																	<textarea class="form-control mt-1 @error('description') is-invalid @enderror" id="description" rows="3" name="description" placeholder="Description"></textarea>
                                                                      
                                                                     <small class="text-danger error-message" id="description_error" style="display:none"></small>
+
 
                                                                 </div>
 															</div>
