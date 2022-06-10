@@ -59,21 +59,21 @@
 																<div class="mb-1">
 																	<label class="" for="">Unit Title*</label>
 																	<input type="text" id="title" class="form-control mt-1" name="title" placeholder="Title*" value="" />
-                                                                    <small class="text-danger error-message" id="title_error" style="display:none"></small>
+                                                                    <small class="text-danger error-message" id="title_error"></small>
                                                                 </div>
 															</div>
 															<div class="col-md-12 col-12">
 																<div class="mb-1">
 																	<label class="" for="">Unit Scale</label>
 																	<input type="text" id="scale" class="form-control mt-1 " name="scale" placeholder="Unit Scale*" value=""/>
-                                                                    <small class="text-danger error-message" id="scale_error" style="display:none"></small>
+                                                                    <small class="text-danger error-message" id="scale_error"></small>
                                                                 </div>
 															</div>
 															<div class="col-md-12 col-12">
 																<div class="mb-1">
 																	<label class="" for="">Description*</label>
 																	<textarea class="form-control mt-1" id="description" rows="3" name="description" placeholder="Description"></textarea>
-                                                                    <small class="text-danger error-message" id="description_error" style="display:none"></small>
+                                                                    <small class="text-danger error-message" id="description_error"></small>
                                                                 </div>
 															</div>
 														</div>
@@ -93,10 +93,10 @@
 			</div>
 			<!--  -->
 			<div class="card-datatable">
-				<table class="datatables-ajax table table-responsive data-table">
+				<table class="data-table table">
 					<thead>
 						<tr>
-							<th>Unit No</th>
+							<th>Sr No</th>
 							<th>Unit Title</th>
 							<th>Unit Scale</th>
 							<th>Description</th>
@@ -116,9 +116,9 @@
 @endsection
 @section('page-script')
 <script type="text/javascript">
-
+var table;
+var jqForm = $('#unit_form');
 $(document).ready(function() {
-    'use strict';
 
     $.ajaxSetup({
         headers: {
@@ -126,7 +126,7 @@ $(document).ready(function() {
         }
     });
 
-    var table = $('.data-table').DataTable({
+    table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
         ajax: "{{ route('units.index') }}",
@@ -142,8 +142,8 @@ $(document).ready(function() {
     //open modal when add new btn clicked
     $('#add_new_btn').click(function () {
         // $('#save_btn').val("create-book");
-        $('#unit_id').val('');
-        $('#unit_form').trigger("reset");
+        $('#unit_id').val(''); //empty the PK
+        jqForm.trigger("reset");
         $('#model_heading').html("Create New Unit");
 
         $('#ajax_model').modal('show');
@@ -174,11 +174,11 @@ $(document).ready(function() {
         remove_error_msg();
 
         //checking if form is valid
-        if ($("#unit_form").valid()) {
+        if (jqForm.valid()) {
 
                 $.ajax({
-                    data: $('#unit_form').serialize(),
-                    url: $('#unit_form').attr("action"),
+                    data: jqForm.serialize(),
+                    url: jqForm.attr("action"),
                     type: "POST",
                     dataType: 'json',
                     success: function(response) {
@@ -186,7 +186,7 @@ $(document).ready(function() {
                         //if form is successfuly saved
                         if (response.success == true) {
 
-                            reset_form('unit_form');//reseting for the new entry
+                            reset_form(jqForm);//reseting for the new entry
 
                             $('#ajax_model').modal('hide');
                             table.draw();
@@ -220,7 +220,8 @@ $(document).ready(function() {
 
     $('body').on('click', '.delete-btn', function () {
 
-        var unit_id = $(this).data("id");
+        var id = $(this).data("id"); //PK
+
         Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -238,9 +239,9 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "DELETE",
-                url: "{{ route('units.store') }}"+'/'+unit_id,
+                url: "{{ route('units.store') }}"+'/'+id, //PK
                 success: function (data) {
-                    //table.draw(); needs to resolve
+                    table.draw(); //needs to resolve
                     Swal.fire({
                         icon: 'success',
                         title: 'Deleted!',
@@ -256,58 +257,33 @@ $(document).ready(function() {
             });
 
         }
-      });
+      }); //delete click end
 
-      var jqForm = $('#unit_form');
+}); //document ready ends
+
+//jquery form validation
+$(function () {
+    'use strict';
 
     // jQuery Validation
     // --------------------------------------------------------------------
     if (jqForm.length) {
-      jqForm.validate({
-        rules: {
-          'title': {
-            required: true
-          },
-          'scale': {
-            required: true,
-          },
-          'description': {
-            required: true
-          },
-        }
-      });
-    }
-
-}); //document ready ends
-
-    function reset_form(formId){
-        var formId='#'+formId;
-        $(formId).trigger("reset");
-        remove_error_msg();
-    }
-
-    function remove_error_msg(){
-        $('.error-message').html("");
-        $(".form-control").removeClass("is-invalid");
-    }
-
-    function display_validation_errors(errorsList){
-        jQuery.each(errorsList, function(key, value) {
-            var box_id = '#' + key;
-            var msg_id = '#' + key + '_error';
-            $(box_id).addClass("is-invalid");
-            jQuery(msg_id).html(value);
-            jQuery(msg_id).show();
-        });
-        toastr['error']('👋 Validation Error', 'Error!', {
-            closeButton: true,
-            tapToDismiss: false,
+        jqForm.validate({
+            rules: {
+            'title': {
+                required: true
+            },
+            'scale': {
+                required: true,
+            },
+            'description': {
+                required: true
+            }
+            }
         });
     }
 
-
-
-
+});
 
 </script>
 @endsection
