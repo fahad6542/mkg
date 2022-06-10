@@ -60,8 +60,6 @@ class UnitsController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $validator = Validator::make($request->all(), [
             'title'         => 'required|string|min:1|max:255',
             'scale'         => 'required|string|min:1|max:50',

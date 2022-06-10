@@ -89,12 +89,50 @@
         });
 
     });
+
+    //JQuery Form Helper functions
+    function reset_form(formObject){
+        formObject.trigger("reset");
+        remove_error_msg();
+    }
+
+    function remove_error_msg(){
+        $('.error-message').html("");
+        $(".form-control").removeClass("is-invalid");
+    }
+
+    function display_validation_errors(errorsList){
+
+        jQuery.each(errorsList, function(key, value) {
+            var box_id = '#' + key;
+            var msg_id = '#' + key + '_error';
+            $(box_id).addClass("is-invalid");
+            jQuery(msg_id).html(value);
+            jQuery(msg_id).show();
+        });
+        toastr['error']('👋 Validation Error', 'Error!', {
+            closeButton: true,
+            tapToDismiss: false,
+        });
+    }
 </script>
 
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+<script src="{{ asset(mix('vendors/js/tables/datatable/jquery.dataTables.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.bootstrap5.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/responsive.bootstrap5.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/datatables.checkboxes.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/datatables.buttons.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/jszip.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/pdfmake.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/vfs_fonts.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/buttons.html5.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/buttons.print.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.rowGroup.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
 <script src="{{ asset(mix('vendors/js/forms/validation/jquery.validate.min.js')) }}"></script>
-<script src="{{ asset(mix('js/scripts/forms/form-validation.js')) }}"></script>
+
 <script src="{{ asset(mix('vendors/js/extensions/sweetalert2.all.min.js')) }}"></script>
 <script src="{{ asset(mix('vendors/js/extensions/polyfill.min.js')) }}"></script>
 
