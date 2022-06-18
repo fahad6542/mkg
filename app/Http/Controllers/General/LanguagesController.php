@@ -6,7 +6,8 @@ use App\Models\Languages;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Validator;
+use DataTables;
 class LanguagesController extends Controller
 {
     /**
@@ -14,9 +15,29 @@ class LanguagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $language = Languages::latest()->get();
+
+        if ($request->ajax()) {
+            $data = Languages::latest()->get();
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+
+                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm edit-btn">Edit</a>';
+
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm delete-btn">Delete</a>';
+
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
+     
+
         $user=Auth::user();
         $data['languages']=Languages::Where('delete_status','=',1)->get();
         return view('general.languages.index',$data);
@@ -41,20 +62,49 @@ class LanguagesController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
+
+        $validator = Validator::make($request->all(), [
             'name'         => 'required|string|min:1|max:255',
             'name_urdu'    => 'required|string|min:1|max:50',
             'description'  => 'required|string',
-        ]);
-        $contract = Languages::create([
-            'name'              => $request->name,
-            'name_urdu'         => $request->name_urdu,
-            'description'       => $request->description,
-           
-        ]);
 
-        return redirect()->route('languages.index')
-                        ->with('success','Languages created successfully.');
+        ]);
+        $user=Auth::user();
+        $is_active="0";
+        if($request->is_active == 'on')
+        {
+            $is_active=1;
+
+        }
+
+        if ($validator->fails())
+        {
+            $response = [
+                'success' => false,
+                'data'    => $validator->errors(),
+                'message' => "Validation error",
+            ];
+            return response()->json($response);
+        }
+
+        $user=Auth::user();
+        $languages=Languages::updateOrCreate(
+            ['id'           => $request->language_id],
+            ['name'         => $request->name,
+            'name_urdu'     => $request->name_urdu,
+
+            'description'   => $request->description,
+
+            ]
+        );
+        
+        $response = [
+            'success' => true,
+            'data'    => $languages,
+            'message' => "Languages Added Succesfully",
+        ];
+        return response()->json($response);
+        
     }
 
     /**
@@ -74,9 +124,11 @@ class LanguagesController extends Controller
      * @param  \App\Models\Languages  $languages
      * @return \Illuminate\Http\Response
      */
-    public function edit(Languages $languages)
+    public function edit($id)
     {
         //
+        $languages = Languages::find($id);
+        return response()->json($languages);
     }
 
     /**
@@ -97,8 +149,11 @@ class LanguagesController extends Controller
      * @param  \App\Models\Languages  $languages
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Languages $languages)
+    public function destroy($id)
     {
         //
+        Languages::find($id)->delete();
+
+        return response()->json(['success'=>'Languages deleted successfully.']);
     }
 }
