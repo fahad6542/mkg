@@ -13,6 +13,7 @@ use App\Models\Units;
 use App\Models\Languages;
 use App\Models\Authors;
 use App\Models\Series;
+use App\Models\Schools;
 
 
 
@@ -63,11 +64,12 @@ class GeneralData extends Seeder
         Classes::insert($data);
 
         $data = array(
-            array('name' => 'Books','description' => 'All types of books'),
-            array('name' => 'Note Books','description' => 'All types of note books'),
-            array('name' => 'Stationeries','description' => 'All types of stationeries'),
-            array('name' => 'Uniform','description' => 'All types of Garments'),
-            array('name' => 'Others','description' => 'miscellaneous'),
+            array('name' => 'Books','description' => 'All types of books','is_delete_able'=>0),
+            array('name' => 'Note Books','description' => 'All types of note books','is_delete_able'=>0),
+            array('name' => 'Stationeries','description' => 'All types of stationeries','is_delete_able'=>0),
+            array('name' => 'Uniform','description' => 'All types of Garments','is_delete_able'=>0),
+            array('name' => 'Gift And Toys','description' => 'All types of Garments','is_delete_able'=>0),
+            array('name' => 'Others','description' => 'miscellaneous','is_delete_able'=>0),
         );
 
         ProductType::insert($data);
@@ -112,7 +114,15 @@ class GeneralData extends Seeder
 
         // Authors::insert($data);
 
+        $data = array(
+            array('name'=>'La Salle Higher Secondary School','company_id'=>1),
+            array('name'=>'Comprehensive School','company_id'=>1),
+            array('name'=>'Zakria Public School','company_id'=>1),
+            array('name'=>'Nishat High School','company_id'=>1),
+            array('name'=>'Lahore Grammer School','company_id'=>1),
+        );
 
+        Schools::insert($data);
 
 
     }

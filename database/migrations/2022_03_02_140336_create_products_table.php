@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->integer('sr_id'); //restarts for each branch
+            $table->integer('sr_id'); //restarts for each company
             $table->string('barcode');
             $table->string('name');
             $table->string('name_urdu');
+            $table->string('inv_display_name');
+
             $table->string('label_txt');
             $table->longText('description');
             $table->string('keywords');
