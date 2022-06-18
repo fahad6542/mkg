@@ -13,6 +13,7 @@ use App\Http\Controllers\General\CreditCardController;
 use App\Http\Controllers\General\LocationsController;
 use App\Http\Controllers\General\DenominationController;
 use App\Http\Controllers\General\SchoolsController;
+use App\Http\Controllers\General\ProdcustsController;
 
 
 use App\Http\Controllers\HomeController;
@@ -46,7 +47,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('denomination', DenominationController::class);
     Route::resource('school', SchoolsController::class);
 
-    
+    Route::resource('products', SchoolsController::class);
+
+
 });
 
 // Route Components
