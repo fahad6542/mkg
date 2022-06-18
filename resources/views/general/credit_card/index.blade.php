@@ -189,7 +189,7 @@ $(document).ready(function() {
           $('#ajax_model').modal('show');
           //filling the form
           $('#credit_card_id').val(data.id);
-          $('#name').val(data.name);
+          $('#credit_title').val(data.credit_title);
           $('#description').val(data.description);
 
         })
