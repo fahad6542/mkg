@@ -6,6 +6,8 @@ use App\Models\Classes;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use DataTables;
 
 class ClassesController extends Controller
 {
@@ -14,9 +16,27 @@ class ClassesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $classes = Classes::latest()->get();
+
+        if ($request->ajax()) {
+            $data = Classes::latest()->get();
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+
+                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm edit-btn">Edit</a>';
+
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm delete-btn">Delete</a>';
+
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
         $user=Auth::user();
         $data['classes']=Classes::Where('delete_status','=',1)->get();
         return view('general.class.index',$data);
@@ -41,20 +61,44 @@ class ClassesController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name'         => 'required|string|min:1|max:255',
             'description'  => 'required|string',
-        ]);
-       
-        Classes::create([
-            'name'              => $request->name,
-            'description'       => $request->description,
-           
-           
-        ]);
 
-        return redirect()->route('classes.index')
-                        ->with('success','Classes created successfully.');
+        ]);
+        $user=Auth::user();
+        $is_active="0";
+        if($request->is_active == 'on')
+        {
+            $is_active=1;
+
+        }
+
+        if ($validator->fails())
+        {
+            $response = [
+                'success' => false,
+                'data'    => $validator->errors(),
+                'message' => "Validation error",
+            ];
+            return response()->json($response);
+        }
+
+        $user=Auth::user();
+        $classes=Classes::updateOrCreate(
+            ['id'           => $request->class_id],
+            ['name'         => $request->name,
+            'description'   => $request->description,
+
+            ]
+        );
+        
+        $response = [
+            'success' => true,
+            'data'    => $classes,
+            'message' => "Topic Added Succesfully",
+        ];
+        return response()->json($response);
     }
 
     /**
@@ -74,9 +118,11 @@ class ClassesController extends Controller
      * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Classes $classes)
+    public function edit($id)
     {
         //
+        $classes = Classes::find($id);
+        return response()->json($classes);
     }
 
     /**
@@ -97,8 +143,11 @@ class ClassesController extends Controller
      * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Classes $classes)
+    public function destroy($id)
     {
         //
+        Classes::find($id)->delete();
+
+        return response()->json(['success'=>'Classes deleted successfully.']);
     }
 }
