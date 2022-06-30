@@ -89,7 +89,7 @@ class ClassesController extends Controller
             ['id'           => $request->class_id],
             ['name'         => $request->name,
             'description'   => $request->description,
-
+            'is_active'     => $is_active,
             ]
         );
         
