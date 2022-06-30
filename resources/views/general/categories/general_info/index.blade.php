@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Add Credit Currency')
+@section('title', 'General Info ')
 
 @section('vendor-style')
   <!-- vendor css files -->
@@ -16,8 +16,6 @@
 <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/pickers/form-pickadate.css')) }}">
 {{-- Page Css files --}}
 <link rel="stylesheet" type="text/css" href="{{asset('css/base/plugins/forms/pickers/form-flat-pickr.css')}}">
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 @endsection
 
 
@@ -32,8 +30,8 @@
       <div class="card">
          <!-- Button trigger modal -->
          <div class="card-header border-bottom">
-          <h4 class="card-title">Add Credit Card</h4>
-           <a type="button" class="btn btn-relief-primary click_if_invalid" data-bs-toggle="modal" data-bs-target="#large" href="javascript:void(0)" id="add_new_btn">Add New</a>
+          <h4 class="card-title">Add  General Info</h4>
+           <a type="button" class="btn btn-relief-primary" data-bs-toggle="modal" data-bs-target="#large" href="javascript:void(0)" id="add_new_btn">Add New</a>
         </div>
               <!-- Modal -->
               <div
@@ -42,114 +40,117 @@
                 tabindex="-1"
                 aria-labelledby="myModalLabel17"
                 aria-hidden="true">
-				<form class="" id="credit_card_form" name="credit_card_form"  method="post" action="{{route('credit.store')}}">
+                <form class="" id="productType_form" name="productType_form"  method="post" action="{{route('general-info.store')}}">
                     @csrf
-                    <input type="hidden" name="credit_card_id" id="credit_card_id">
+                    <input type="hidden" name="productType_id" id="productType_id">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h4 class="modal-title" id="model_heading">Add Credit Card</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                            <section id="">
-                            <div class="row">
-                                <div class="col-12">
-                                <div class="card">
-                                    
-                                    <div class="card-body">
-                                    <form class="form">
-                                        <div class="row">
-                                        <div class="col-md-12 col-12">
-                                            <div class="mb-1">
-                                            <label class="" for="">Credit Card Title*</label>
-                                            <input
-                                                type="text"
-                                                id="credit_title"
-                                                class="form-control mt-1"
-                                                name="credit_title"
-                                                value=""
-                                                placeholder="Credit Card Title*"
-                                            />
-                                            <small class="text-danger error-message" id="credit_title_error"></small>
-                                            </div>
-                                        </div>
-                                                                    
-                                        <div class="col-md-12 col-12">
-                                        <div class="mb-1">
-                                            <label class="" for="">Description*</label>
-                                            <textarea
-                                            class="form-control mt-1"
-                                            id="description"
-                                            rows="3"
-                                            name="description"
-                                            placeholder="Description"
-                                            ></textarea>
-                                            <small class="text-danger error-message" id="description_error"></small>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="mb-1">
-                                                <label class="" for="">
-                                                    <input
-                                                        type="checkbox"
-                                                        id="is_active"
-                                                        class="checkbox"
-                                                        name="is_active"
-                                                        placeholder="Account Name*"
-                                                    />
-                                                Discontinue*</label>
-                                               
-                                            </div>
-                                        </div>
-                                        
-                                        </div>
-                                    </form>
-                                    </div>
-                                </div>
-                                </div>
-
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title" id="model_heading">General Info</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        <section id="">
+                        <div class="row">
+                            <div class="col-12">
+                            <div class="card">
                                 
+                                <div class="card-body">
+                                <form class="form">
+                                    <div class="row">
+                                    
+                                    <div class="col-md-12 col-12">
+                                        <div class="mb-1">
+                                        <label class="" for="">Group Title*</label>
+                                        <input
+                                            type="text"
+                                            id="name"
+                                            class="form-control mt-1"
+                                            name="name"
+                                            value=""
+                                            placeholder="Group Title*"
+                                        />
+                                        <small class="text-danger error-message" id="name_error"></small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="mb-1">
+                                        <label class="" for="">
+                                            <input
+                                                type="checkbox"
+                                                id="is_active"
+                                                class="checkbox"
+                                                name="is_active"
+                                                placeholder=""
+                                            />
+                                        InActive*</label>
+                                        </div>
+                                    </div>
+                                
+                                    
+                                    <div class="col-md-12 col-12">
+                                    <div class="mb-1">
+                                        <label class="" for="">Description*</label>
+                                        <textarea
+                                        class="form-control mt-1"
+                                        id="description"
+                                        rows="3"
+                                        name="description"
+                                        placeholder="Description"
+                                        ></textarea>
+                                        <small class="text-danger error-message" id="description_error"></small>
+                                        </div>
+                                    </div>
+                                        
+                                    
+                                    </div>
+                                </form>
+                                </div>
                             </div>
-                            </section>
                             </div>
-                            <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary"  id="save_btn">Save</button>
-                            </div>
+
+                            
+                        </div>
+                        </section>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="save_btn">Save</button>
                         </div>
                     </div>
-                </form>
+                    </div>
               </div>
             </div>
+        
+        
+             
+
+
         <!--  -->
         <div class="card-datatable">
           <table class="data-table table">
             <thead>
               <tr>
                 <th>Sr#</th>
-                <th>Credit Card Title</th>                
-                <th>Description</th>                
+                <th>Group Title</th>
+                <th>Description</th>
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody> 
-              
-            </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
 </section>
-
 <!-- Basic Floating Label Form section end -->
 @endsection
+
 
 
 @section('page-script')
 <script type="text/javascript">
 var table;
-var jqForm = $('#credit_card_form');
+var jqForm = $('#productType_form');
 $(document).ready(function() {
 
     $.ajaxSetup({
@@ -161,10 +162,10 @@ $(document).ready(function() {
     table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('credit.index') }}",
+        ajax: "{{ route('general-info.index') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'credit_title', name: 'credit_title'},
+            {data: 'name', name: 'name'},
             {data: 'description', name: 'description'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
@@ -173,7 +174,7 @@ $(document).ready(function() {
     //open modal when add new btn clicked
     $('#add_new_btn').click(function () {
         // $('#save_btn').val("create-book");
-        $('#credit_card_id').val(''); //empty the PK
+        $('#productType_id').val(''); //empty the PK
         jqForm.trigger("reset");
         $('#model_heading').html("Create New");
 
@@ -182,14 +183,14 @@ $(document).ready(function() {
 
     //open modal when edit btn clicked
     $('body').on('click', '.edit-btn', function () {
-      var credit_card_id = $(this).data('id');
-      $.get("{{ route('credit.index') }}" +'/' + credit_card_id +'/edit', function (data) {
+      var productType_id = $(this).data('id');
+      $.get("{{ route('general-info.index') }}" +'/' + productType_id +'/edit', function (data) {
           $('#model_heading').html("Edit");
         //   $('#save_btn').val("edit-book");
           $('#ajax_model').modal('show');
           //filling the form
-          $('#credit_card_id').val(data.id);
-          $('#credit_title').val(data.credit_title);
+          $('#productType_id').val(data.id);
+          $('#name').val(data.name);
           $('#description').val(data.description);
 
         })
@@ -221,7 +222,7 @@ $(document).ready(function() {
                             $('#ajax_model').modal('hide');
                             table.draw();
                             //alert
-                            toastr['success']('👋 credit saved', 'Success!', {
+                            toastr['success']('👋 General Info saved', 'Success!', {
                                 closeButton: true,
                                 tapToDismiss: false,
                             });
@@ -269,7 +270,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "DELETE",
-                url: "{{ route('credit.store') }}"+'/'+id, //PK
+                url: "{{ route('general-info.store') }}"+'/'+id, //PK
                 success: function (data) {
                     table.draw(); //needs to resolve
                     Swal.fire({
@@ -300,9 +301,10 @@ $(function () {
     if (jqForm.length) {
         jqForm.validate({
             rules: {
-            'credit_title': {
+            'name': {
                 required: true
-            }
+            },
+            
             'description': {
                 required: true
             }

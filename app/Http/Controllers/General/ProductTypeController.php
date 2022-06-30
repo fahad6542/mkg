@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\General;
 
-use App\Models\Credit_card;
+use App\Models\ProductType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use DataTables;
 
-class CreditCardController extends Controller
+class ProductTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +19,10 @@ class CreditCardController extends Controller
     public function index(Request $request)
     {
         //
-        $credit_card = Credit_card::latest()->get();
+        $productType = ProductType::latest()->get();
 
         if ($request->ajax()) {
-            $data = Credit_card::latest()->get();
+            $data = ProductType::latest()->get();
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -37,9 +37,10 @@ class CreditCardController extends Controller
                     ->make(true);
         }
 
+        
         $user=Auth::user();
-        $data['credits']=Credit_card::Where('delete_status','=',1)->get();
-        return view('general.credit_card.index',$data);
+        $data['productType']=ProductType::Where('delete_status','=',1)->get();
+        return view('general.categories.general_info.index',$data);
     }
 
     /**
@@ -60,8 +61,10 @@ class CreditCardController extends Controller
      */
     public function store(Request $request)
     {
+        //
+
         $validator = Validator::make($request->all(), [
-            'credit_title'          => 'required|string|min:1|max:255',
+            'name'          => 'required|string|min:1|max:255',
             'description'           => 'required|string',
 
         ]);
@@ -83,33 +86,31 @@ class CreditCardController extends Controller
             return response()->json($response);
         }
 
-        $user=Auth::user();
-        $credit_card=Credit_card::updateOrCreate(
-            ['id'                   => $request->credit_card_id],
-            ['credit_title'         => $request->credit_title,
+       
+        $productType=ProductType::updateOrCreate(
+            ['id'                   => $request->productType_id],
+            ['name'                 => $request->name,
             'description'           => $request->description,
-            'branch_id'             => $user->branch_id,
-
+            'is_active'             => $is_active,
+           
             ]
         );
         
         $response = [
             'success' => true,
-            'data'    => $credit_card,
-            'message' => "Languages Added Succesfully",
+            'data'    => $productType,
+            'message' => "ProductType Added Succesfully",
         ];
         return response()->json($response);
-        //
-        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Credit_card  $credit_card
+     * @param  \App\Models\ProductType  $productType
      * @return \Illuminate\Http\Response
      */
-    public function show(Credit_card $credit_card)
+    public function show(ProductType $productType)
     {
         //
     }
@@ -117,24 +118,24 @@ class CreditCardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Credit_card  $credit_card
+     * @param  \App\Models\ProductType  $productType
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
-        $credit_card = Credit_card::find($id);
-        return response()->json($credit_card);
+        $productType = ProductType::find($id);
+        return response()->json($productType);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Credit_card  $credit_card
+     * @param  \App\Models\ProductType  $productType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Credit_card $credit_card)
+    public function update(Request $request, ProductType $productType)
     {
         //
     }
@@ -142,14 +143,14 @@ class CreditCardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Credit_card  $credit_card
+     * @param  \App\Models\ProductType  $productType
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
-        Credit_card::find($id)->delete();
+        ProductType::find($id)->delete();
 
-        return response()->json(['success'=>'Credit card deleted successfully.']);
+        return response()->json(['success'=>'ProductType deleted successfully.']);
     }
 }

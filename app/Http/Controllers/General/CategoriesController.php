@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\General;
 
 use App\Models\Categories;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\ProductType;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use DataTables;
 
 class CategoriesController extends Controller
 {
@@ -13,14 +17,34 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // if(\Auth::user()->can('view categories'))
-        // {
-            $categories   = Categories::where('company_id',1)->get();
-            $productTypes = ProductType::get()->pluck('name', 'id');
+        
 
-            return view('general.categories.index', compact('productTypes','categories'));
+            if ($request->ajax()) {
+                $data = Categories::join('product_types','categories.product_type_id', '=', 'product_types.id')
+            ->select('categories.*', 'product_types.name')
+            ->get();
+                return Datatables::of($data)
+                        ->addIndexColumn()
+                        ->addColumn('action', function($row){
+    
+                               $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm edit-btn">Edit</a>';
+    
+                               $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm delete-btn">Delete</a>';
+    
+                                return $btn;
+                        })
+                        ->rawColumns(['action'])
+                        ->make(true);
+            }
+            
+            // $data          = subCategory::with('type')->get();
+            $categories   = Categories::where('company_id',1)->with('type')->get();
+            $productTypes = ProductType::get()->pluck('name', 'id');
+            // dd($productTypes);
+
+            return view('general.categories.category_info.index', compact('productTypes','categories'));
         // }
         // else
         // {
@@ -47,40 +71,44 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        // `sr_id`, `product_type_id`, `name`, `name_urdu`, `description`
-        // if(\Auth::user()->can('create category'))
-        // {
 
-            $validator = \Validator::make(
-                $request->all(), 
-                [
-                    'product_type_id'   => 'required|integer',
-                    'name'              => 'required|max:20',
-                    'name_urdu'         => 'nullable|max:20',
-                ]
-            );
-            if($validator->fails())
-            {
-                $messages = $validator->getMessageBag();
+        $validator = Validator::make($request->all(), [
+    
+            'product_type_id'         => 'required|max:20',
+            'title'                   => 'nullable|max:20',
+            'description'             => 'nullable|max:200',
 
-                return redirect()->back()->with('error', $messages->first());
-            }
+        ]);
 
-            $category                        = new Categories();
-            $category->sr_id                 =1;
-            $category->product_type_id       = $request->product_type_id;
-            $category->name                  = $request->name;
-            $category->name_urdu             = $request->name_urdu;
-            $category->description           = $request->description;
-            $category->company_id            = 1;
-            $category->save();
+        if ($validator->fails())
+        {
+            $response = [
+                'success' => false,
+                'data'    => $validator->errors(),
+                'message' => "Validation error",
+            ];
+            return response()->json($response);
+        }
 
-            return redirect()->route('categories.index')->with('success', __('Category successfully created.'));
-        // }
-        // else
-        // {
-        //     return redirect()->back()->with('error', __('Permission denied.'));
-        // }
+        //
+        $user=Auth::user();
+        $categories=Categories::updateOrCreate(
+            ['id'                       => $request->category_info_id],
+            ['product_type_id'          => $request->product_type_id,
+            'title'                     => $request->title,
+            'description'               => $request->description,
+            'company_id'                => $user->company_id,
+          
+            ]
+        );
+        $response = [
+            'success' => true,
+            'data'    => $categories,
+            'message' => "Category Added Succesfully",
+        ];
+        return response()->json($response);
+       return redirect()->back()->with('error', __('Permission denied.'));
+       
     }
 
     /**
@@ -100,9 +128,11 @@ class CategoriesController extends Controller
      * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categories $categories)
+    public function edit($id)
     {
         //
+        $category_info = Categories::find($id);
+        return response()->json($category_info);
     }
 
     /**
@@ -123,8 +153,11 @@ class CategoriesController extends Controller
      * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categories $categories)
+    public function destroy($id)
     {
         //
+        Categories::find($id)->delete();
+
+        return response()->json(['success'=>'Categories Info deleted successfully.']);
     }
 }

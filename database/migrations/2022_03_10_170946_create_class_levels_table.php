@@ -16,7 +16,7 @@ class CreateClassLevelsTable extends Migration
         Schema::create('class_levels', function (Blueprint $table) {
             $table->tinyIncrements('id');
             $table->string('name')->unique();
-            $table->longText('description')->nullable()->default('text');
+            $table->longText('description')->nullable();
             $table->tinyInteger('position')->default(0);
             $table->tinyInteger('is_active')->default(1);
             $table->timestamps();

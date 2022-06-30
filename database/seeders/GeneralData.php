@@ -64,12 +64,12 @@ class GeneralData extends Seeder
         Classes::insert($data);
 
         $data = array(
-            array('name' => 'Books','description' => 'All types of books','is_delete_able'=>0),
-            array('name' => 'Note Books','description' => 'All types of note books','is_delete_able'=>0),
-            array('name' => 'Stationeries','description' => 'All types of stationeries','is_delete_able'=>0),
-            array('name' => 'Uniform','description' => 'All types of Garments','is_delete_able'=>0),
-            array('name' => 'Gift And Toys','description' => 'All types of Garments','is_delete_able'=>0),
-            array('name' => 'Others','description' => 'miscellaneous','is_delete_able'=>0),
+            array('name' => 'Books',            'description' => 'All types of books',          'is_delete_able'=>0),
+            array('name' => 'Note Books',       'description' => 'All types of note books',     'is_delete_able'=>0),
+            array('name' => 'Stationeries',     'description' => 'All types of stationeries',   'is_delete_able'=>0),
+            array('name' => 'Uniform',          'description' => 'All types of Garments',       'is_delete_able'=>0),
+            array('name' => 'Gift And Toys',    'description' => 'All types of Gift And Toys',  'is_delete_able'=>0),
+            array('name' => 'Others',           'description' => 'miscellaneous',               'is_delete_able'=>0),
         );
 
         ProductType::insert($data);

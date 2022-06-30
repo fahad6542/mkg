@@ -44,17 +44,17 @@
                     "slug": "",
                     "submenu": [
                         {
-                            "url": "group/info",
+                            "url": "general-info",
                             "name": "General Info",
                             "slug": "app-invoice-list"
                         },
                         {
-                            "url": "category/info",
+                            "url": "category-info",
                             "name": "Category Info",
                             "slug": "app-invoice-preview"
                         },
                         {
-                            "url": "/sub/category/info",
+                            "url": "subcategory-info",
                             "name": "Sub Category Info",
                             "slug": "app-invoice-edit"
                         }
@@ -133,21 +133,13 @@
                             "name": "Product Location",
                             "slug": "app-invoice-add"
                         },
-                        {
-                            "url": "",
-                            "name": "Product Info",
-                            "slug": ""
-                        },
+                        
                         {
                             "url": "product/code",
                             "name": "Product Code",
                             "slug": "app-invoice-add"
                         },
-                        {
-                            "url": "",
-                            "name": "Product Reorder info",
-                            "slug": ""
-                        },
+                       
                         {
                             "url": "",
                             "name": "Product Bin info",
