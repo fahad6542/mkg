@@ -16,11 +16,12 @@ class CreateSubjectsTable extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->longText('description')->nullable();
+            $table->text('description')->nullable();
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);
             $table->integer('company_id');
             $table->timestamps();
+            $table->unique(["name", "company_id"], 'subject_company_unique');
         });
     }
 

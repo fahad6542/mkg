@@ -13,12 +13,12 @@ use App\Http\Controllers\General\CreditCardController;
 use App\Http\Controllers\General\LocationsController;
 use App\Http\Controllers\General\DenominationController;
 use App\Http\Controllers\General\SchoolsController;
-use App\Http\Controllers\General\ProdcustsController;
+
 use App\Http\Controllers\General\ProductTypeController;
 use App\Http\Controllers\General\CategoriesController;
 use App\Http\Controllers\General\SubCategoriesController;
 
-
+use App\Http\Controllers\General\Products\BooksController;
 
 
 
@@ -51,11 +51,15 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('credit', CreditCardController::class);
     Route::resource('locations', LocationsController::class);
     Route::resource('denomination', DenominationController::class);
+
     Route::resource('school', SchoolsController::class);
     Route::resource('general-info', ProductTypeController::class);
     Route::resource('category-info', CategoriesController::class);
     Route::resource('subcategory-info', SubCategoriesController::class);
-    Route::resource('products', SchoolsController::class);
+
+
+    Route::resource('books', BooksController::class);
+
 
 
 });

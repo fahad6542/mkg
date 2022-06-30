@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('level')->nullable();
             $table->tinyInteger('position')->default(0);
-            $table->longText('description');
+            $table->text('description')->nullable();
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);
             $table->timestamps();

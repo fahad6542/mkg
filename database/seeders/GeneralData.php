@@ -75,10 +75,10 @@ class GeneralData extends Seeder
         ProductType::insert($data);
 
         $data = array(
-            array('title' => 'pcs', 'description' => 'Per Piece'),
-            array('title' => 'm', 'description' => 'Length'),
-            array('title' => 'Kg', 'description' => 'Weight'),
-            array('title' => 'L', 'description' => 'Volume')
+            array('title' => '12 pcs Pack', 'qty' => 12, 'description' => 'Dozen'),
+            array('title' => '10 pcs Pack','qty' => 10, 'description' => 'Decade'),
+            // array('title' => '1 meter', 'description' => 'Weight'),
+            // array('title' => 'L', 'description' => 'Volume')
         );
 
         Units::insert($data);
@@ -107,12 +107,12 @@ class GeneralData extends Seeder
         );
         Series::insert($data);
 
-        // $data = array(
-        //     array('name' => 'Jone Alia', 'sr_id' =>1, 'description' => 'Best Poet'),
-        //     array('name' => 'Allama Iqbal',  'sr_id' =>2,'description' => 'Shairay Mashriq'),
-        // );
+        $data = array(
+            array('name' => 'Allama Iqbal',  'sr_id' =>1,'description' => 'Shairay Mashriq', 'company_id' => 1),
+            array('name' => 'Jone Alia', 'sr_id' =>2, 'description' => 'Best Poet', 'company_id' => 1),
+        );
 
-        // Authors::insert($data);
+        Authors::insert($data);
 
         $data = array(
             array('name'=>'La Salle Higher Secondary School','company_id'=>1),
