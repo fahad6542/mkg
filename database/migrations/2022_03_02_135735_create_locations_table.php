@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('sr_id')->nullable(); //restarts for each branch
             $table->string('name');
-            $table->longText('description');
+            $table->text('description');
             $table->integer('branch_id');
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);

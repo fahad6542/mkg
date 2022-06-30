@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateProductMetasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bindings', function (Blueprint $table) {
+        Schema::create('product_metas', function (Blueprint $table) {
             $table->id();
-            $table->integer('sr_id');
-            $table->string('name');
-            $table->text('description');
-            $table->tinyInteger('delete_status')->default(1);
-            $table->tinyInteger('is_active')->default(1);
-            $table->integer('comapany_id');
             $table->timestamps();
         });
     }
@@ -32,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bindings');
+        Schema::dropIfExists('product_metas');
     }
-};
+}

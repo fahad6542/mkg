@@ -15,12 +15,14 @@ class CreateCreditCardsTable extends Migration
     {
         Schema::create('credit_cards', function (Blueprint $table) {
             $table->id();
-            $table->string('credit_title');
-            $table->longText('description');
+            $table->string('title');
+            $table->text('description')->nullable();
             $table->integer('branch_id');
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);
             $table->timestamps();
+            $table->unique(["title", "branch_id"], 'subject_company_unique');
+
         });
     }
 

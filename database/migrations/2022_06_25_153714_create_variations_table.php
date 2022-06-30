@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateVariationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        // Schema::create('discount_slabs', function (Blueprint $table) {
+        //currently no need of it using units as replacement
+        // Schema::create('variations', function (Blueprint $table) {
         //     $table->id();
-        //     $table->double('amount');
-        //     $table->unsignedBigInteger('branch_id');
         //     $table->timestamps();
         // });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('discount_slabs');
+        Schema::dropIfExists('variations');
     }
-};
+}

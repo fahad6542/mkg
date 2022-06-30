@@ -45,7 +45,7 @@ return new class extends Migration
             $table->string('shipping_zip')->nullable();
             $table->text('shipping_address')->nullable();
             $table->string('lang')->default('en');
-            $table->longText('description')->nullable();
+            $table->text('description')->nullable();
             //End Customer
             $table->integer('company_id')->default(0);
             $table->integer('branch_id')->default(0);

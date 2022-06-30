@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('name_urdu')->unique();
-            $table->longText('description')->nullable();
+            $table->text('description')->nullable();
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);
             $table->timestamps();

@@ -15,22 +15,24 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->integer('sr_id'); //restarts for each company
-            $table->string('barcode');
-            $table->string('name');
-            $table->string('name_urdu');
-            $table->string('inv_display_name');
+            $table->integer('sr_id')->nullable(); //restarts for each company
+            $table->string('barcode')->unique()->comment('Scan from bar code reader or auto generate');
+            $table->string('name')->unique();
+            $table->string('name_urdu')->unique();
+            $table->string('inv_display_name')->default('name');
 
-            $table->string('label_txt');
-            $table->longText('description');
-            $table->string('keywords');
-            $table->string('featured_image');
-            $table->string('gallery_images');
-            $table->date('publish_date');
-            $table->string('weight');
-            $table->string('dimensions');
-            $table->string('total_pages');
-            $table->string('inside_box');
+            $table->string('label_txt')->unique();
+            $table->date('manufacturing_date')->nullable()->comment('publishing date');
+            $table->longText('description')->nullable();
+            $table->string('keywords')->nullable()->comment('comma seperated, tags');
+            // $table->string('featured_image');
+            // $table->string('gallery_images');
+            //Packing Size Info
+            $table->float('weight',6,2);
+            $table->string('dimensions')->nullable();
+            $table->string('total_pages')->nullable();
+            $table->string('inside_box')->nullable();
+
             $table->string('ISBN');
 
             $table->float('l_sale_price',15,2)->default('0.00');
@@ -51,19 +53,21 @@ return new class extends Migration
             $table->float('p_retail_discount_amt',3,2)->default('0.00');
             $table->float('pw_sales_discount',3,2)->default('0.00');
 
-            $table->string('type')->default('book');
-            $table->unsignedInteger('unit_id');
-            $table->unsignedBigInteger('location_id');
+            // $table->unsignedBigInteger('location_id_0')->comment('Counter Place');
+            // $table->unsignedBigInteger('location_id_1')->comment('Shelf Place');
+            // $table->unsignedBigInteger('location_id_2')->comment('Store');
+
+            $table->tinyInteger('product_type_id'); //Book
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('sub_category_id');
             $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('publisher_id');
-            $table->unsignedBigInteger('author');
-            $table->unsignedBigInteger('topic_id');
-            $table->unsignedTinyInteger('class_id');
-            $table->unsignedTinyInteger('language_id');
-            $table->unsignedBigInteger('series_id');
-            $table->unsignedBigInteger('binding_id');
+            $table->unsignedBigInteger('author')->nullable();
+            $table->unsignedBigInteger('topic_id')->nullable();
+            $table->unsignedTinyInteger('class_id')->nullable();
+            $table->unsignedTinyInteger('language_id')->nullable();
+            $table->unsignedBigInteger('series_id')->nullable();
+            $table->unsignedBigInteger('binding_id')->nulable();
             $table->unsignedTinyInteger('is_avialable_online')->default('1');
 
             $table->tinyInteger('delete_status')->default(1);
