@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('contact')->nullable();
             $table->string('avatar', 100)->default('');
-            $table->Text('address');
-            $table->Text('address_urdu')->nullable();
-            $table->longText('description');
+            $table->text('address')->nullable();
+            $table->text('address_urdu')->nullable();
+            $table->text('description')->nullable();
             $table->integer('created_by')->default(0);
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);

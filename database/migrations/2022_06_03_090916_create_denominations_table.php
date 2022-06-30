@@ -15,10 +15,10 @@ class CreateDenominationsTable extends Migration
     {
         Schema::create('denominations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->longText('value');
+            $table->string('name')->unique();
+            $table->smallInteger('value')->nullable();
             $table->integer('index');
-            $table->longText('description');
+            $table->text('description');
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);
             $table->timestamps();

@@ -13,10 +13,10 @@ class CreatePackagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('packages', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        // Schema::create('packages', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -26,6 +26,6 @@ class CreatePackagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('packages');
+        // Schema::dropIfExists('packages');
     }
 }
