@@ -44,17 +44,17 @@
                     "slug": "",
                     "submenu": [
                         {
-                            "url": "group/info",
+                            "url": "general-info",
                             "name": "General Info",
                             "slug": "app-invoice-list"
                         },
                         {
-                            "url": "category/info",
+                            "url": "category-info",
                             "name": "Category Info",
                             "slug": "app-invoice-preview"
                         },
                         {
-                            "url": "/sub/category/info",
+                            "url": "subcategory-info",
                             "name": "Sub Category Info",
                             "slug": "app-invoice-edit"
                         }
@@ -65,13 +65,9 @@
                     "icon": "circle",
                     "slug": "",
                     "submenu": [
+                        
                         {
-                            "url": "/unit/category",
-                            "name": "Unit Category",
-                            "slug": "app-invoice-add"
-                        },
-                        {
-                            "url": "unit/info",
+                            "url": "units",
                             "name": "Unit Info",
                             "slug": "app-invoice-add"
                         }
@@ -83,28 +79,23 @@
                     "slug": "",
                     "submenu": [
                         {
-                            "url": "author/info",
+                            "url": "authors",
                             "name": "Aurthor Info",
                             "slug": "app-invoice-add"
                         },
                         {
-                            "url": "series/info",
+                            "url": "series",
                             "name": "Series Info",
                             "slug": "app-invoice-add"
                         },
                         {
-                            "url": "publisher/info",
+                            "url": "publisher",
                             "name": "Publisher Info",
                             "slug": "app-invoice-add"
                         },
                         {
-                            "url": "topic/info",
+                            "url": "topics",
                             "name": "Topic Info",
-                            "slug": "app-invoice-add"
-                        },
-                        {
-                            "url": "app/invoice/add",
-                            "name": "Slab Wise Discount",
                             "slug": "app-invoice-add"
                         }
                     ]
@@ -115,22 +106,18 @@
                     "slug": "",
                     "submenu": [
                         {
-                            "url": "class/info",
+                            "url": "classes",
                             "name": "Class Info",
                             "slug": "app-invoice-add"
                         },
                         {
-                            "url": "language/info",
+                            "url": "languages",
                             "name": "Language Info",
                             "slug": "app-invoice-add"
                         },
+                       
                         {
-                            "url": "currency/info",
-                            "name": "Currency Info",
-                            "slug": "app-invoice-add"
-                        },
-                        {
-                            "url": "credit/card/info",
+                            "url": "credit",
                             "name": "Credit Card Info",
                             "slug": "app-invoice-add"
                         }
@@ -142,25 +129,17 @@
                     "slug": "",
                     "submenu": [
                         {
-                            "url": "product/location",
+                            "url": "locations",
                             "name": "Product Location",
                             "slug": "app-invoice-add"
                         },
-                        {
-                            "url": "",
-                            "name": "Product Info",
-                            "slug": ""
-                        },
+                        
                         {
                             "url": "product/code",
                             "name": "Product Code",
                             "slug": "app-invoice-add"
                         },
-                        {
-                            "url": "",
-                            "name": "Product Reorder info",
-                            "slug": ""
-                        },
+                       
                         {
                             "url": "",
                             "name": "Product Bin info",
@@ -223,39 +202,18 @@
                             "slug": "app-invoice-add"
                         },
                         {
-                            "url": "denomination/info",
+                            "url": "denomination",
                             "name": "Denomination Info",
                             "slug": "app-invoice-add"
                         },
                         {
-                            "url": "school/info",
+                            "url": "school",
                             "name": "School Info",
                             "slug": "app-invoice-add"
                         }
                     ]
-                },
-                {
-                    "name": "Sale Slab Disc",
-                    "icon": "circle",
-                    "slug": "",
-                    "submenu": [
-                        {
-                            "url": "slab/amount/disc",
-                            "name": "Slab Bill Amount Disc",
-                            "slug": "app-invoice-add"
-                        },
-                        {
-                            "url": "",
-                            "name": "Lof Off",
-                            "slug": "app-invoice-add"
-                        },
-                        {
-                            "url": "",
-                            "name": "Exit",
-                            "slug": "app-invoice-add"
-                        }
-                    ]
                 }
+                
             ]
         },
         {

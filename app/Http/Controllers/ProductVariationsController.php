@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SubCategories;
+use App\Models\ProductVariations;
 use Illuminate\Http\Request;
 
-class SubCategoriesController extends Controller
+class ProductVariationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class SubCategoriesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\SubCategories  $subCategories
+     * @param  \App\Models\ProductVariations  $productVariations
      * @return \Illuminate\Http\Response
      */
-    public function show(SubCategories $subCategories)
+    public function show(ProductVariations $productVariations)
     {
         //
     }
@@ -52,10 +52,10 @@ class SubCategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\SubCategories  $subCategories
+     * @param  \App\Models\ProductVariations  $productVariations
      * @return \Illuminate\Http\Response
      */
-    public function edit(SubCategories $subCategories)
+    public function edit(ProductVariations $productVariations)
     {
         //
     }
@@ -64,10 +64,10 @@ class SubCategoriesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\SubCategories  $subCategories
+     * @param  \App\Models\ProductVariations  $productVariations
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SubCategories $subCategories)
+    public function update(Request $request, ProductVariations $productVariations)
     {
         //
     }
@@ -75,10 +75,10 @@ class SubCategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\SubCategories  $subCategories
+     * @param  \App\Models\ProductVariations  $productVariations
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SubCategories $subCategories)
+    public function destroy(ProductVariations $productVariations)
     {
         //
     }

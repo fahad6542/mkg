@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('sub_categories', function (Blueprint $table) {
             $table->id();
-            $table->integer('sr_id');
+            $table->integer('sr_id')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->string('name');
-            $table->longText('description');
+            $table->text('description')->nullable();
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);
             $table->unsignedBigInteger('company_id');

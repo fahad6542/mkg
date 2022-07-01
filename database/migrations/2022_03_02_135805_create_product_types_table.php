@@ -20,6 +20,7 @@ return new class extends Migration
             $table->longText('description');
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);
+            $table->tinyInteger('is_delete_able')->default(1);
             $table->timestamps();
         });
     }

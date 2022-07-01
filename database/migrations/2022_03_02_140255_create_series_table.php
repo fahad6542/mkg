@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('sr_id')->nullable();
             $table->string('name');
-            $table->string('name_urdu');
-            $table->longText('description');
+            $table->string('name_urdu')->nullable();
+            $table->text('description')->nullable();
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);
             $table->integer('company_id');

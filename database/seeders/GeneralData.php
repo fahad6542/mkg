@@ -13,6 +13,7 @@ use App\Models\Units;
 use App\Models\Languages;
 use App\Models\Authors;
 use App\Models\Series;
+use App\Models\Schools;
 
 
 
@@ -63,20 +64,21 @@ class GeneralData extends Seeder
         Classes::insert($data);
 
         $data = array(
-            array('name' => 'Books','description' => 'All types of books'),
-            array('name' => 'Note Books','description' => 'All types of note books'),
-            array('name' => 'Stationeries','description' => 'All types of stationeries'),
-            array('name' => 'Uniform','description' => 'All types of Garments'),
-            array('name' => 'Others','description' => 'miscellaneous'),
+            array('name' => 'Books',            'description' => 'All types of books',          'is_delete_able'=>0),
+            array('name' => 'Note Books',       'description' => 'All types of note books',     'is_delete_able'=>0),
+            array('name' => 'Stationeries',     'description' => 'All types of stationeries',   'is_delete_able'=>0),
+            array('name' => 'Uniform',          'description' => 'All types of Garments',       'is_delete_able'=>0),
+            array('name' => 'Gift And Toys',    'description' => 'All types of Gift And Toys',  'is_delete_able'=>0),
+            array('name' => 'Others',           'description' => 'miscellaneous',               'is_delete_able'=>0),
         );
 
         ProductType::insert($data);
 
         $data = array(
-            array('title' => 'pcs', 'description' => 'Per Piece'),
-            array('title' => 'm', 'description' => 'Length'),
-            array('title' => 'Kg', 'description' => 'Weight'),
-            array('title' => 'L', 'description' => 'Volume')
+            array('title' => '12 pcs Pack', 'qty' => 12, 'description' => 'Dozen'),
+            array('title' => '10 pcs Pack','qty' => 10, 'description' => 'Decade'),
+            // array('title' => '1 meter', 'description' => 'Weight'),
+            // array('title' => 'L', 'description' => 'Volume')
         );
 
         Units::insert($data);
@@ -105,14 +107,22 @@ class GeneralData extends Seeder
         );
         Series::insert($data);
 
-        // $data = array(
-        //     array('name' => 'Jone Alia', 'sr_id' =>1, 'description' => 'Best Poet'),
-        //     array('name' => 'Allama Iqbal',  'sr_id' =>2,'description' => 'Shairay Mashriq'),
-        // );
+        $data = array(
+            array('name' => 'Allama Iqbal',  'sr_id' =>1,'description' => 'Shairay Mashriq', 'company_id' => 1),
+            array('name' => 'Jone Alia', 'sr_id' =>2, 'description' => 'Best Poet', 'company_id' => 1),
+        );
 
-        // Authors::insert($data);
+        Authors::insert($data);
 
+        $data = array(
+            array('name'=>'La Salle Higher Secondary School','company_id'=>1),
+            array('name'=>'Comprehensive School','company_id'=>1),
+            array('name'=>'Zakria Public School','company_id'=>1),
+            array('name'=>'Nishat High School','company_id'=>1),
+            array('name'=>'Lahore Grammer School','company_id'=>1),
+        );
 
+        Schools::insert($data);
 
 
     }

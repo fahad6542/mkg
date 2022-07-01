@@ -44,7 +44,7 @@
 												<div class="card">
 													<div class="card-body">
 														<div class="row">
-															<div class="col-md-12 col-12">
+															<!-- <div class="col-md-12 col-12">
 																<div class="mb-1">
 																	<label class="" for="select2-basic">Group Name*</label>
 																	<select class="form-select mt-1 @error('group') is-invalid @enderror" id="">
@@ -54,7 +54,7 @@
                                                                         <small class="text-danger">{{ $message }}</small>
                                                                     @enderror
 																</div>
-															</div>
+															</div> -->
 															<div class="col-md-12 col-12">
 																<div class="mb-1">
 																	<label class="" for="">Unit Title*</label>
@@ -144,7 +144,7 @@ $(document).ready(function() {
         // $('#save_btn').val("create-book");
         $('#unit_id').val(''); //empty the PK
         jqForm.trigger("reset");
-        $('#model_heading').html("Create New Unit");
+        $('#model_heading').html("Create New");
 
         $('#ajax_model').modal('show');
     });
@@ -153,7 +153,7 @@ $(document).ready(function() {
     $('body').on('click', '.edit-btn', function () {
       var unit_id = $(this).data('id');
       $.get("{{ route('units.index') }}" +'/' + unit_id +'/edit', function (data) {
-          $('#model_heading').html("Edit Unit");
+          $('#model_heading').html("Edit");
         //   $('#save_btn').val("edit-book");
           $('#ajax_model').modal('show');
           //filling the form

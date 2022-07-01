@@ -17,7 +17,8 @@ return new class extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('scale')->default(1);
-            $table->longText('description');
+            $table->unsignedTinyInteger('qty')->comment('Size of the pack');
+            $table->text('description')->nullable();
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);
             $table->timestamps();

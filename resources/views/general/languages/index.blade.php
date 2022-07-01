@@ -31,21 +31,22 @@
          <!-- Button trigger modal -->
          <div class="card-header border-bottom">
           <h4 class="card-title">Add Language</h4>
-           <a type="button" class="btn btn-relief-primary click_if_invalid" data-bs-toggle="modal" data-bs-target="#large" href="">Add New</a>
+           <a type="button" class="btn btn-relief-primary click_if_invalid" data-bs-toggle="modal" data-bs-target="#large" href="javascript:void(0)" id="add_new_btn">Add New</a>
         </div>
               <!-- Modal -->
               <div
                 class="modal fade text-start"
-                id="large"
+                id="ajax_model"
                 tabindex="-1"
                 aria-labelledby="myModalLabel17"
                 aria-hidden="true">
-			    <form class="form" method="post" action="{{route('languages.store')}}">
+			          <form class="" id="language_form" name="language_form" method="post" action="{{route('languages.store')}}">
                     @csrf
+                    <input type="hidden" name="language_id" id="language_id">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel17">Add Language</h4>
+                            <h4 class="modal-title" id="model_heading">Add Language</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -62,15 +63,13 @@
                                             <label class="" for="">Language*</label>
                                             <input
                                                 type="text"
-                                                id=""
-                                                class="form-control mt-1 @error('name') is-invalid @enderror"
+                                                id="name"
+                                                class="form-control mt-1"
                                                 name="name"
-                                                value="{{old('name')}}"
+                                                value=""
                                                 placeholder="Language*"
                                             />
-                                            @error('name')
-                                            <small class="text-danger">{{ $message }}</small>
-                                           @enderror
+                                            <small class="text-danger error-message" id="name_error"></small>
                                             </div>
                                         </div>
                                         <div class="col-md-12 col-12">
@@ -78,15 +77,13 @@
                                             <label class="" for="">In Urdu*</label>
                                             <input
                                                 type="text"
-                                                id=""
-                                                class="form-control mt-1 @error('name_urdu') is-invalid @enderror"
+                                                id="name_urdu"
+                                                class="form-control mt-1"
                                                 name="name_urdu"
-                                                value="{{old('name_urdu')}}"
+                                                value=""
                                                 placeholder="In Urdu*"
                                             />
-                                            @error('name_urdu')
-                                             <small class="text-danger">{{ $message }}</small>
-                                            @enderror
+                                            <small class="text-danger error-message" id="name_urdu_error"></small>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-12">
@@ -94,15 +91,13 @@
                                             <label class="" for="">
                                                 <input
                                                     type="checkbox"
-                                                    id=""
-                                                    class="checkbox @error('is_active') is-invalid @enderror"
+                                                    id="is_active"
+                                                    class="checkbox"
                                                     name="is_active"
                                                     placeholder=""
                                                 />
                                             InActive*</label>
-                                                @error('is_active')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
+                                                
                                             </div>
                                         </div>
                                                                             
@@ -110,15 +105,13 @@
                                         <div class="mb-1">
                                             <label class="" for="">Description*</label>
                                             <textarea
-                                            class="form-control mt-1 @error('description') is-invalid @enderror"
-                                            id=""
+                                            class="form-control mt-1"
+                                            id="description"
                                             rows="3"
                                             name="description"
                                             placeholder="Description"
-                                            >{{old('description')}}</textarea>
-                                            @error('description')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                            @enderror
+                                            ></textarea>
+                                            <small class="text-danger error-message" id="description_error"></small>
                                             </div>
                                         </div>
                                         
@@ -133,7 +126,7 @@
                             </section>
                             </div>
                             <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                            <button type="submit" class="btn btn-primary"  id="save_btn">Save</button>
                             </div>
                         </div>
                     </div>
@@ -141,9 +134,10 @@
             </div>
         <!--  -->
         <div class="card-datatable">
-          <table class="datatables-ajax table table-responsive">
+          <table class="data-table table">
             <thead>
               <tr>
+              <th>Sr#</th>
                 <th>Language</th>
                 <th>In Urdu</th>                
                 <th>Description</th>                
@@ -151,27 +145,7 @@
               </tr>
             </thead>
             <tbody> 
-              @forelse ($languages as $language)
-                <tr>
-                
-                  <td>{{ $language->name }}</td>
-                  <td>{{ $language->name_urdu }}</td>
-                  <td>{{ $language->description }}</td>
-
-                  <td>
-                    <a href="" class="btn btn-primary btn-sm">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <a href="" class="btn btn-danger btn-sm">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                  </td>
-                </tr> @empty
-                <tr>
-                  <td colspan="5">No language found</td>
-                </tr> 
-                
-              @endforelse 
+             
             </tbody>
           </table>
         </div>
@@ -181,4 +155,180 @@
 </section>
 
 <!-- Basic Floating Label Form section end -->
+@endsection
+
+
+
+@section('page-script')
+<script type="text/javascript">
+var table;
+var jqForm = $('#language_form');
+$(document).ready(function() {
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    table = $('.data-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('languages.index') }}",
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'name', name: 'name'},
+            {data: 'name_urdu', name: 'name_urdu'},
+            {data: 'description', name: 'description'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
+
+    //open modal when add new btn clicked
+    $('#add_new_btn').click(function () {
+        // $('#save_btn').val("create-book");
+        $('#language_id').val(''); //empty the PK
+        jqForm.trigger("reset");
+        $('#model_heading').html("Create New");
+
+        $('#ajax_model').modal('show');
+    });
+
+    //open modal when edit btn clicked
+    $('body').on('click', '.edit-btn', function () {
+      var language_id = $(this).data('id');
+      $.get("{{ route('languages.index') }}" +'/' + language_id +'/edit', function (data) {
+          $('#model_heading').html("Edit");
+        //   $('#save_btn').val("edit-book");
+          $('#ajax_model').modal('show');
+          //filling the form
+          $('#language_id').val(data.id);
+          $('#name').val(data.name);
+          $('#name_urdu').val(data.name_urdu);
+          $('#description').val(data.description);
+
+        })
+    });
+
+   $('#save_btn').click(function(e) {
+        e.preventDefault();
+
+        $(this).html('Save');
+
+        //removing previous validation errors if wny
+        remove_error_msg();
+
+        //checking if form is valid
+        if (jqForm.valid()) {
+
+                $.ajax({
+                    data: jqForm.serialize(),
+                    url: jqForm.attr("action"),
+                    type: "POST",
+                    dataType: 'json',
+                    success: function(response) {
+
+                        //if form is successfuly saved
+                        if (response.success == true) {
+
+                            reset_form(jqForm);//reseting for the new entry
+
+                            $('#ajax_model').modal('hide');
+                            table.draw();
+                            //alert
+                            toastr['success']('👋 languages saved', 'Success!', {
+                                closeButton: true,
+                                tapToDismiss: false,
+                            });
+
+                        } else {//if not saved
+                            display_validation_errors(response.data); //server side errors
+                        }
+                    },
+                    error: function(data){
+                        console.log('Error:', data);
+                        $('#save_btn').html('Save');
+                        toastr['error']('👋 Unable to send request', 'Error!', {
+                            closeButton: true,
+                            tapToDismiss: false,
+                        });
+                    }
+                });
+            } else {
+                toastr['error']('👋 Validation Error', 'Error!', {
+                    closeButton: true,
+                    tapToDismiss: false,
+                });
+            }
+        });
+    });
+
+    $('body').on('click', '.delete-btn', function () {
+
+        var id = $(this).data("id"); //PK
+
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        customClass: {
+          confirmButton: 'btn btn-primary',
+          cancelButton: 'btn btn-outline-danger ms-1'
+        },
+        buttonsStyling: false
+      }).then(function (result) {
+
+        if (result.value) {
+
+            $.ajax({
+                type: "DELETE",
+                url: "{{ route('languages.store') }}"+'/'+id, //PK
+                success: function (data) {
+                    table.draw(); //needs to resolve
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Deleted!',
+                        text: 'Your file has been deleted.',
+                        customClass: {
+                        confirmButton: 'btn btn-success'
+                        }
+                    });
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+
+        }
+      }); //delete click end
+
+}); //document ready ends
+
+//jquery form validation
+$(function () {
+    'use strict';
+
+    // jQuery Validation
+    // --------------------------------------------------------------------
+    if (jqForm.length) {
+        jqForm.validate({
+            rules: {
+            'name': {
+                required: true
+            },
+            'name_urdu': {
+                required: true,
+            },
+            'description': {
+                required: true
+            }
+            }
+        });
+    }
+
+});
+
+</script>
 @endsection

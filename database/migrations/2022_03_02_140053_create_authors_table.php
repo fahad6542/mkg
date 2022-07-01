@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('contact')->nullable();
             $table->string('avatar', 100)->default('');
-            $table->longText('description');
+            $table->text('description');
             $table->integer('created_by')->default(0);
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);

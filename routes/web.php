@@ -21,6 +21,13 @@ use App\Http\Controllers\HR\LeaveController;
 use App\Http\Controllers\HR\HolidayController;
 use App\Http\Controllers\HR\ReportController;
 
+use App\Http\Controllers\General\ProductTypeController;
+use App\Http\Controllers\General\CategoriesController;
+use App\Http\Controllers\General\SubCategoriesController;
+
+use App\Http\Controllers\General\Products\BooksController;
+
+
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StaterkitController;
@@ -51,7 +58,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('credit', CreditCardController::class);
     Route::resource('locations', LocationsController::class);
     Route::resource('denomination', DenominationController::class);
+
     Route::resource('school', SchoolsController::class);
+
    
 
     // HR Modules
@@ -62,6 +71,14 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('holiday',HolidayController::class);
     Route::resource('report',ReportController::class);
     
+
+    Route::resource('general-info', ProductTypeController::class);
+    Route::resource('category-info', CategoriesController::class);
+    Route::resource('subcategory-info', SubCategoriesController::class);
+
+
+    Route::resource('books', BooksController::class);
+
 });
 
 

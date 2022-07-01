@@ -6,6 +6,8 @@ use App\Models\Locations;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use DataTables;
 
 class LocationsController extends Controller
 {
@@ -14,9 +16,27 @@ class LocationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $locations = Locations::latest()->get();
+
+        if ($request->ajax()) {
+            $data = Locations::latest()->get();
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+
+                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm edit-btn">Edit</a>';
+
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm delete-btn">Delete</a>';
+
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
         $user=Auth::user();
         $data['locations']=Locations::Where('delete_status','=',1)->get();
         return view('general.product_location.index',$data);
@@ -41,20 +61,45 @@ class LocationsController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
-            'name'         => 'required|string|min:1|max:255',
-            'description'  => 'required|string',
+        $validator = Validator::make($request->all(), [
+            'name'                  => 'required|string|min:1|max:255',
+            'description'           => 'required|string',
+
         ]);
         $user=Auth::user();
-        $contract = Locations::create([
-            'name'                      => $request->name,
-            'description'               => $request->description,
-            'branch_id'                 => $user->branch_id,
-           
-        ]);
+        $is_active="0";
+        if($request->is_active == 'on')
+        {
+            $is_active=1;
 
-        return redirect()->route('locations.index')
-                        ->with('success','product location created successfully.');
+        }
+
+        if ($validator->fails())
+        {
+            $response = [
+                'success' => false,
+                'data'    => $validator->errors(),
+                'message' => "Validation error",
+            ];
+            return response()->json($response);
+        }
+        $user=Auth::user();
+        $locations=Locations::updateOrCreate(
+            ['id'                   => $request->Location_id],
+            ['name'                 => $request->name,
+            'description'           => $request->description,
+            'branch_id'             => $user->branch_id,
+
+            ]
+        );
+        
+        $response = [
+            'success' => true,
+            'data'    => $locations,
+            'message' => "Locations Added Succesfully",
+        ];
+        return response()->json($response);
+
     }
 
     /**
@@ -74,9 +119,11 @@ class LocationsController extends Controller
      * @param  \App\Models\Locations  $locations
      * @return \Illuminate\Http\Response
      */
-    public function edit(Locations $locations)
+    public function edit($id)
     {
         //
+        $locations = Locations::find($id);
+        return response()->json($locations);
     }
 
     /**
@@ -97,8 +144,11 @@ class LocationsController extends Controller
      * @param  \App\Models\Locations  $locations
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Locations $locations)
+    public function destroy($id)
     {
         //
+        Locations::find($id)->delete();
+
+        return response()->json(['success'=>'Locations deleted successfully.']);
     }
 }

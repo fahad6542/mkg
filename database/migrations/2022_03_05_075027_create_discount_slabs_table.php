@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('discount_slabs', function (Blueprint $table) {
-            $table->id();
-            $table->double('amount');
-            $table->unsignedBigInteger('branch_id');
-            $table->timestamps();
-        });
+        // Schema::create('discount_slabs', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->double('amount');
+        //     $table->unsignedBigInteger('branch_id');
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discount_slabs');
+        // Schema::dropIfExists('discount_slabs');
     }
 };
