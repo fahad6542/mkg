@@ -1,11 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\General;
 
+use App\Models\SubCategories;
 use App\Models\ProductType;
+use App\Models\Categories;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use DataTables;
 
-class ProductTypeController extends Controller
+class SubCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +21,10 @@ class ProductTypeController extends Controller
     public function index()
     {
         //
+        $sub_categories   = SubCategories::where('company_id',1)->with('type')->get();
+        $productTypes = ProductType::get()->pluck('name', 'id');
+        $categories = Categories::get()->pluck('title', 'id');
+        return view('general.categories.sub_category_info.index',compact('productTypes','categories'));
     }
 
     /**
@@ -41,10 +51,10 @@ class ProductTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProductType  $productType
+     * @param  \App\Models\SubCategories  $subCategories
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductType $productType)
+    public function show(SubCategories $subCategories)
     {
         //
     }
@@ -52,10 +62,10 @@ class ProductTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProductType  $productType
+     * @param  \App\Models\SubCategories  $subCategories
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductType $productType)
+    public function edit(SubCategories $subCategories)
     {
         //
     }
@@ -64,10 +74,10 @@ class ProductTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProductType  $productType
+     * @param  \App\Models\SubCategories  $subCategories
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductType $productType)
+    public function update(Request $request, SubCategories $subCategories)
     {
         //
     }
@@ -75,10 +85,10 @@ class ProductTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProductType  $productType
+     * @param  \App\Models\SubCategories  $subCategories
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductType $productType)
+    public function destroy(SubCategories $subCategories)
     {
         //
     }
