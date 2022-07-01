@@ -23,7 +23,7 @@ class AttendanceController extends Controller
 
         if ($request->ajax()){
 
-            
+   
         $data = Employee::leftJoin('attendances', 'employees.id', '=' ,'attendances.employee_id')
         ->where('employees.delete_status','1' && 'employees.is_active','1') 
         ->select('employees.name','attendances.id', 'attendances.Date','attendances.shift_time_in','attendances.shift_time_out')
