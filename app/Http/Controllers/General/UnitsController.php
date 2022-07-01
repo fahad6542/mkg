@@ -115,7 +115,6 @@ class UnitsController extends Controller
      */
     public function edit($id)
     {
-        //
         $units = Units::find($id);
         return response()->json($units);
     }
@@ -142,7 +141,6 @@ class UnitsController extends Controller
     {
         //
         Units::find($id)->delete();
-
         return response()->json(['success'=>'Units deleted successfully.']);
     }
 }
