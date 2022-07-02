@@ -29,6 +29,7 @@ return new class extends Migration
             $table->tinyInteger('is_active')->default(1);
             $table->integer('company_id');
             $table->timestamps();
+            $table->unique(["name", "company_id"], 'publisher_company_unique');
         });
     }
 

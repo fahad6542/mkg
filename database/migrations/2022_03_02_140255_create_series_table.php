@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('series', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('publisher_id')->constrained();
             $table->integer('sr_id')->nullable();
             $table->string('name');
             $table->string('name_urdu')->nullable();
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->tinyInteger('is_active')->default(1);
             $table->integer('company_id');
             $table->timestamps();
+            $table->unique(["name", "publisher_id"], 'publisher_series_unique');
         });
     }
 
