@@ -11,7 +11,7 @@ use App\Http\Controllers\General\TopicsController;
 use App\Http\Controllers\General\ClassesController;
 use App\Http\Controllers\General\LanguagesController;
 use App\Http\Controllers\General\CreditCardController;
-use App\Http\Controllers\General\LocationsController;
+use App\Http\Controlleemrs\General\LocationsController;
 use App\Http\Controllers\General\DenominationController;
 use App\Http\Controllers\General\SchoolsController;
 

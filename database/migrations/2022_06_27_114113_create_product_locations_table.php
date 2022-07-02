@@ -16,7 +16,8 @@ class CreateProductLocationsTable extends Migration
         Schema::create('product_locations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('branch_id');
-            $table->unsignedBigInteger('product_id');
+            // $table->unsignedBigInteger('product_id');
+            $table->foreignId('product_id')->constrained();
             $table->unsignedBigInteger('location_0'); //Shelf counter
             $table->unsignedBigInteger('location_1')->nullable(); //Store
             $table->unsignedBigInteger('location_2')->nullable(); //Warehouse
