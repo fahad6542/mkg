@@ -17,13 +17,9 @@ class HolidayController extends Controller
     public function index(Request $request)
     {
        
-    
-
         if ($request->ajax() ) {
 
             $data=Holiday::all();
-           
-
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -36,8 +32,6 @@ class HolidayController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-
-
         return view('HR.Holidays.index');
     }
 

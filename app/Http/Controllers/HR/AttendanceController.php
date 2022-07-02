@@ -16,24 +16,14 @@ class AttendanceController extends Controller
     
     {
 
-
-     
-
-
-
         if ($request->ajax()){
 
-            
+   
         $data = Employee::leftJoin('attendances', 'employees.id', '=' ,'attendances.employee_id')
         ->where('employees.delete_status','1' && 'employees.is_active','1') 
         ->select('employees.name','attendances.id', 'attendances.Date','attendances.shift_time_in','attendances.shift_time_out')
         ->get();
-
-       
-    //    $uniqueCollection = $data->unique('employees.id');
-
-        
-            return Datatables::of($data)
+           return Datatables::of($data)
                     ->addIndexColumn()
 
                     ->addColumn('action', function($row){
@@ -48,7 +38,7 @@ class AttendanceController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-    return view('HR.Attendance_Report.index');
+    return view('HR.Attendance.index');
 
      }
 
@@ -62,7 +52,7 @@ class AttendanceController extends Controller
         $data = Employee::where('delete_status',1)->get();
         $attendance=Attendance::all();
 
-        return view('HR.Attendance_Report.create',compact('data'));
+        return view('HR.Attendance.create',compact('data'));
     }
 
     /**
@@ -83,10 +73,7 @@ class AttendanceController extends Controller
      
           ]);
 
-          $attendance=new Attendance;
-
-         
-
+            $attendance=new Attendance;
             $attendance->employee_id=$request->employee_id;
             $attendance->Date=$request->Date;
             $attendance->shift_time_in=$request->shift_time_in;
@@ -152,7 +139,7 @@ else{
     public function edit(Attendance $attendance)
     {
         $data = Employee::where('delete_status',1)->get();
-        return view('HR.Attendance_Report.edit',compact('attendance','data'));
+        return view('HR.Attendance.edit',compact('attendance','data'));
     }
 
     /**

@@ -21,24 +21,17 @@ class EmployeeController extends Controller
     public function index(Request $request)
 
     {
-    
-       
+        
         if ($request->ajax()) {
-            $data = Employee::where('delete_status',1)->get();
-
-          
+            $data = Employee::where('delete_status',1)->get();      
             return Datatables::of($data)
-                    ->addIndexColumn()
-
-                 
+                    ->addIndexColumn()                
                     ->addColumn('action', function($row){
 
                            $btn = '<a  href="' . route("attendance.edit",$row->id) .'"  class="edit btn btn-primary btn-sm edit-btn">Edit</a>';
                            $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm delete-btn">Delete</a>';
                            $btn = $btn.' <a  href="' . route("employee.show",$row->id) .'"  class="view btn btn-success btn-sm view-btn">View</a>';
                             return $btn;
-
-
                     })
                     ->rawColumns(['action'])
                     ->make(true);
@@ -57,25 +50,13 @@ class EmployeeController extends Controller
     public function create()
     {
      
-
-        
-        $user=Auth::user();
+      $user=Auth::user();
         // dd($user);
         $branch=Branch::where('company_id',$user->company_id)->get();
         return view('HR.Employee.create',compact('branch'));
 
     }
 
-
-
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
@@ -90,8 +71,7 @@ class EmployeeController extends Controller
        'early_relaxation_time' =>'max:59',
        'late_relaxation_time'  =>'max:59',
        
-      
-
+    
      ]);
 
         $salaried_emp=0;
@@ -205,12 +185,7 @@ class EmployeeController extends Controller
             'email'                 => 'required|email|unique:users',
             'early_relaxation_time' =>'max:59',
             'late_relaxation_time'  =>'max:59',
-            
-           
-           
-     
-           
-     
+                
           ]);
 
             if($employee->password==$request->password){
@@ -292,14 +267,8 @@ class EmployeeController extends Controller
              $employee->early_relaxation_time=$request->early_relaxation_time;
              $employee->late_relaxation_time=$request->late_relaxation_time;
              $employee->is_active=$request->is_active;
-
-             
            
              $employee->update();
-            
-     
-                
-
 
           return redirect()->route('employee.index')
             ->with('success','Employee updated  successfully.');

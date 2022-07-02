@@ -531,8 +531,8 @@
                     "slug": ""
                 },
                 {
-                    "url": "report",
-                    "name": "Attendance Reports",
+                    "url": "Attendance/Sheet",
+                    "name": "Attendance Sheet",
                     "slug": ""
                 },
                 {
