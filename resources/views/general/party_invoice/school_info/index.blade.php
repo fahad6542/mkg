@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Add Category Info')
+@section('title', 'Add School Information')
 
 @section('vendor-style')
   <!-- vendor css files -->
@@ -30,7 +30,7 @@
       <div class="card">
          <!-- Button trigger modal -->
          <div class="card-header border-bottom">
-          <h4 class="card-title">Add  Category Info</h4>
+          <h4 class="card-title">Add School Information</h4>
            <a type="button" class="btn btn-relief-primary click_if_invalid" data-bs-toggle="modal" data-bs-target="#large" href="javascript:void(0)" id="add_new_btn">Add New</a>
         </div>
               <!-- Modal -->
@@ -40,13 +40,13 @@
                 tabindex="-1"
                 aria-labelledby="myModalLabel17"
                 aria-hidden="true">
-                <form class="" id="category_info_form" name="category_info_form"  method="post" action="{{route('category.store')}}">
+                <form class="" id="school_form" name="school_form" method="post" action="{{route('schools.store')}}">
                   @csrf
-                  <input type="hidden" name="category_info_id" id="category_info_id">
+                  <input type="hidden" name="school_id" id="school_id">
                   <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h4 class="modal-title" id="model_heading">Add Category</h4>
+                        <h4 class="modal-title" id="model_heading">Add School Information</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
@@ -54,38 +54,94 @@
                         <div class="row">
                           <div class="col-12">
                             <div class="card">
-                            
+                              
                               <div class="card-body">
                                 <form class="form">
                                   <div class="row">
                                     
                                     <div class="col-md-12 col-12">
                                       <div class="mb-1">
-                                      <label class="" for="select2-basic">Group Name*</label>
-                                      <select class="form-select mt-1" id="" name="product_type_id">
-                                          @foreach($productTypes as $x => $val)
-                                            <option value="{{$x}}">{{$val}}</option>
-                                          @endforeach  
-                                      </select>
+                                        <label class="" for="">Name*</label>
+                                        <input
+                                          type="text"
+                                          id="name"
+                                          class="form-control mt-1"
+                                          name="name"
+                                          placeholder="Name*"
+                                        />
+                                        <small class="text-danger error-message" id="name_error"></small>
                                       </div>
                                     </div>
                                     <div class="col-md-12 col-12">
                                       <div class="mb-1">
-                                        <label class="" for="">Category Title*</label>
+                                      <label class="" for="select2-basic">In Urdu*</label>
+                                      <input
+                                          type="text"
+                                          id="name_urdu"
+                                          class="form-control mt-1"
+                                          name="name_urdu"
+                                          placeholder="In Urdu*"
+                                        />
+                                        <small class="text-danger error-message" id="name_urdu_error"></small>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                      <div class="mb-1">
+                                        <label class="" for="">Contact Person</label>
                                         <input
                                           type="text"
-                                          id="title"
+                                          id="contact_person"
                                           class="form-control mt-1"
-                                          name="title"
-                                          placeholder="Category Title*"
+                                          name="contact_person"
+                                          placeholder="Contact Person"
                                         />
-                                        <small class="text-danger error-message" id="title_error"></small>
+                                        <small class="text-danger error-message" id="contact_person_error"></small>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                      <div class="mb-1">
+                                        <label class="" for="">Contact No</label>
+                                        <input
+                                          type="text"
+                                          id="contact_no"
+                                          class="form-control mt-1"
+                                          name="contact_no"
+                                          placeholder="Contact No"
+                                        />
+                                        <small class="text-danger error-message" id="contact_no_error"></small>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-12 col-12">
+                                      <div class="mb-1">
+                                        <label class="" for="">Address</label>
+                                        <input
+                                          type="text"
+                                          id="address"
+                                          class="form-control mt-1"
+                                          name="address"
+                                          placeholder="Address"
+                                        />
+                                        <small class="text-danger error-message" id="address_error"></small>
+                                      </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="col-md-6 col-12">
+                                      <div class="mb-1">
+                                        <label class="" for="">
+                                          <input
+                                              type="checkbox"
+                                              id="is_active"
+                                              class="checkbox"
+                                              name="is_active"
+                                          />
+                                        InActive*</label>
                                       </div>
                                     </div>
                                     
                                     <div class="col-md-12 col-12">
                                     <div class="mb-1">
-                                        <label class="" for="">Description*</label>
+                                        <label class="mt-1" for="">Description*</label>
                                         <textarea
                                         class="form-control mt-1"
                                         id="description"
@@ -96,7 +152,6 @@
                                       <small class="text-danger error-message" id="description_error"></small>
                                       </div>
                                     </div>
-                                        
                                     
                                   </div>
                                 </form>
@@ -109,24 +164,25 @@
                       </section>
                       </div>
                       <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" id="save_btn">Save</button>
+                        <button type="button" class="btn btn-primary" id="save_btn">Save</button>
                       </div>
                     </div>
                   </div>
                 </form>
               </div>
             </div>
-        
         <!--  -->
         <div class="card-datatable">
           <table class="data-table table">
             <thead>
               <tr>
                 <th>Sr#</th>
-                <th>Category Name</th>
-                <th>Category Title</th>
-                <th>Description</th>
-                
+                <th>Name</th>
+                <th>Name In Urdu</th>
+                <th>Contact Person</th>
+                <th>Contact No</th>
+                <th>Address</th>
+                <th>Description</th>               
                 <th>Action</th>
               </tr>
             </thead>
@@ -137,16 +193,16 @@
   </div>
 </section>
 
-
 <!-- Basic Floating Label Form section end -->
 @endsection
+
 
 
 
 @section('page-script')
 <script type="text/javascript">
 var table;
-var jqForm = $('#category_info_form');
+var jqForm = $('#school_form');
 $(document).ready(function() {
 
     $.ajaxSetup({
@@ -158,35 +214,43 @@ $(document).ready(function() {
     table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('category.index') }}",
+        ajax: "{{ route('schools.index') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'name', name: 'name'},
-            {data: 'title', name: 'title'},
+            {data: 'name_urdu', name: 'name_urdu'},
+            {data: 'contact_person', name: 'contact_person'},
+            {data: 'contact_no', name: 'contact_no'},
+            {data: 'address', name: 'address'},
             {data: 'description', name: 'description'},
-            {data: 'action', name: 'action', orderable: false, searchable: false},          
+            {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
+
     //open modal when add new btn clicked
     $('#add_new_btn').click(function () {
         // $('#save_btn').val("create-book");
-        $('#category_info_id').val(''); //empty the PK
+        $('#school_id').val(''); //empty the PK
         jqForm.trigger("reset");
         $('#model_heading').html("Create New");
+
         $('#ajax_model').modal('show');
     });
 
     //open modal when edit btn clicked
     $('body').on('click', '.edit-btn', function () {
-      var category_info_id = $(this).data('id');
-      $.get("{{ route('category.index') }}" +'/' + category_info_id +'/edit', function (data) {
+      var school_id = $(this).data('id');
+      $.get("{{ route('schools.index') }}" +'/' + school_id +'/edit', function (data) {
           $('#model_heading').html("Edit");
         //   $('#save_btn').val("edit-book");
           $('#ajax_model').modal('show');
           //filling the form
-          $('#category_info_id').val(data.id);
-         
-          $('#title').val(data.title);
+          $('#school_id').val(data.id);
+          $('#name').val(data.name);
+          $('#name_urdu').val(data.name_urdu);
+          $('#contact_person').val(data.contact_person);
+          $('#contact_no').val(data.contact_no);
+          $('#address').val(data.address);
           $('#description').val(data.description);
 
         })
@@ -218,7 +282,7 @@ $(document).ready(function() {
                             $('#ajax_model').modal('hide');
                             table.draw();
                             //alert
-                            toastr['success']('👋 Category Info saved', 'Success!', {
+                            toastr['success']('👋 schools saved', 'Success!', {
                                 closeButton: true,
                                 tapToDismiss: false,
                             });
@@ -266,7 +330,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "DELETE",
-                url: "{{ route('category.store') }}"+'/'+id, //PK
+                url: "{{ route('schools.store') }}"+'/'+id, //PK
                 success: function (data) {
                     table.draw(); //needs to resolve
                     Swal.fire({
@@ -297,8 +361,19 @@ $(function () {
     if (jqForm.length) {
         jqForm.validate({
             rules: {
-            
-            'title': {
+            'name': {
+                required: true
+            },
+            'name_urdu': {
+                required: true
+            },
+            'contact_person': {
+                required: true
+            },
+            'contact_no': {
+                required: true
+            },
+            'address': {
                 required: true
             },
             'description': {

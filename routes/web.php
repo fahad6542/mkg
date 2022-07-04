@@ -52,10 +52,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('locations', LocationsController::class);
     Route::resource('denomination', DenominationController::class);
 
-    Route::resource('school', SchoolsController::class);
+    Route::resource('schools', SchoolsController::class);
     Route::resource('general-info', ProductTypeController::class);
-    Route::resource('category-info', CategoriesController::class);
-    Route::resource('subcategory-info', SubCategoriesController::class);
+    Route::resource('category', CategoriesController::class);
+    Route::resource('subcategory', SubCategoriesController::class);
+    Route::post('/fetch-category',[SubCategoriesController::class,'fetchCategory']);
 
 
     Route::resource('books', BooksController::class);
