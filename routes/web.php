@@ -72,8 +72,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('leave',LeaveController::class);
     Route::resource('holiday',HolidayController::class);
     Route::resource('report',ReportController::class);
-    Route::get('Attendance/Sheet', [AttendanceSheetController::class, 'index'])->name('Attendance/Sheet');
-    Route::post('Attendance/Show', [AttendanceSheetController::class, 'show'])->name('show');
+    Route::get('attendance_sheet', [AttendanceSheetController::class, 'index'])->name('attendance_sheet');
+    Route::post('attendance/show', [AttendanceSheetController::class, 'show'])->name('show');
 
     Route::resource('general-info', ProductTypeController::class);
     Route::resource('category', CategoriesController::class);

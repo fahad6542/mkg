@@ -531,7 +531,7 @@
                     "slug": ""
                 },
                 {
-                    "url": "Attendance/Sheet",
+                    "url": "attendance_sheet",
                     "name": "Attendance Sheet",
                     "slug": ""
                 },
