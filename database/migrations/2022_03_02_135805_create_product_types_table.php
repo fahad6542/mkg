@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        //Product Group
+        //Product Group as a front label
         Schema::create('product_types', function (Blueprint $table) {
             $table->tinyIncrements('id');
             $table->string('name');
-            $table->longText('description');
+            $table->text('description');
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);
             $table->tinyInteger('is_delete_able')->default(1);
+            $table->string('form_type')->default('others')->comment('Form Template');
             $table->timestamps();
         });
     }

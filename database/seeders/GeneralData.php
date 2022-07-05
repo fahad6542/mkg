@@ -12,6 +12,7 @@ use App\Models\Classes;
 use App\Models\Units;
 use App\Models\Languages;
 use App\Models\Authors;
+use App\Models\Publishers;
 use App\Models\Series;
 use App\Models\Schools;
 
@@ -64,12 +65,12 @@ class GeneralData extends Seeder
         Classes::insert($data);
 
         $data = array(
-            array('name' => 'Books',            'description' => 'All types of books',          'is_delete_able'=>0),
-            array('name' => 'Note Books',       'description' => 'All types of note books',     'is_delete_able'=>0),
-            array('name' => 'Stationeries',     'description' => 'All types of stationeries',   'is_delete_able'=>0),
-            array('name' => 'Uniform',          'description' => 'All types of Garments',       'is_delete_able'=>0),
-            array('name' => 'Gift And Toys',    'description' => 'All types of Gift And Toys',  'is_delete_able'=>0),
-            array('name' => 'Others',           'description' => 'miscellaneous',               'is_delete_able'=>0),
+            array('name' => 'Books',            'description' => 'All types of Books',          'is_delete_able'=>0, 'form_type'=>'books'),
+            array('name' => 'Note Books',       'description' => 'All types of Note books',     'is_delete_able'=>0, 'form_type'=>'noteBooks'),
+            array('name' => 'Stationaries',     'description' => 'All types of Stationaries',   'is_delete_able'=>0, 'form_type'=>'stationaries'),
+            array('name' => 'Uniforms',         'description' => 'All types of Garments',       'is_delete_able'=>0, 'form_type'=>'uniforms'),
+            array('name' => 'Gift And Toys',    'description' => 'All types of Gift And Toys',  'is_delete_able'=>0, 'form_type'=>'giftAndToys'),
+            array('name' => 'Others',           'description' => 'miscellaneous',               'is_delete_able'=>0, 'form_type'=>'others'),
         );
 
         ProductType::insert($data);
@@ -99,15 +100,6 @@ class GeneralData extends Seeder
         Languages::insert($data);
 
         $data = array(
-            array('name' => 'Hary potter','name_urdu' => 'ہیری پاٹر','description'=>'Popular on Netflix','company_id'=>1 ),
-            array('name' => 'Troy: Fall of a City','name_urdu' => 'ٹرائے: شہر کا زوال','description'=>'Popular on Netflix','company_id'=>1),
-            array('name' => 'Rise of Empires: Ottoman','name_urdu' => 'سلطنتوں کا عروج: عثمانی۔','description'=>'Popular on Netflix','company_id'=>1),
-            array('name' => 'Chhota Bheem','name_urdu' => 'چھوٹا بھیم','description'=>'Popular on Netflix','company_id'=>1),
-
-        );
-        Series::insert($data);
-
-        $data = array(
             array('name' => 'Allama Iqbal',  'sr_id' =>1,'description' => 'Shairay Mashriq', 'company_id' => 1),
             array('name' => 'Jone Alia', 'sr_id' =>2, 'description' => 'Best Poet', 'company_id' => 1),
         );
@@ -123,6 +115,30 @@ class GeneralData extends Seeder
         );
 
         Schools::insert($data);
+
+        $data = array(
+            array('name'=>'Auraq Publications','email'=>'admin@auraqpublications.com','company_id'=>1),
+            array('name'=>'Oxford','email'=>'admin@oxford.com','company_id'=>1),
+            array('name'=>'Gabba','email'=>'admin@gabba.com','company_id'=>1),
+            array('name'=>'Bloomsbury Publishing (UK)','email'=>'admin@bloomsbury.com','company_id'=>1),
+        );
+
+        Publishers::insert($data);
+
+        $data = array(
+            array('name'=>'Easy Computer','publisher_id'=>1, 'company_id'=>1),
+            array('name'=>'My First Reading Book','publisher_id'=>1, 'company_id'=>1),
+            array('name'=>'New Syllabus Mathematics D1','publisher_id'=>2, 'company_id'=>1),
+            array('name'=>'New Syllabus Mathematics D2','publisher_id'=>2, 'company_id'=>1),
+            array('name'=>'Explorer','publisher_id'=>3, 'company_id'=>1),
+        );
+
+        $data = array(
+            array('name' => 'Hary potter','name_urdu' => 'ہیری پاٹر','description'=>'Popular on Netflix','publisher_id'=>4, 'company_id'=>1 ),
+            array('name' => 'Troy: Fall of a City','name_urdu' => 'ٹرائے: شہر کا زوال','description'=>'Popular on Netflix','publisher_id'=>4 ,'company_id'=>1),
+            array('name' => 'Rise of Empires: Ottoman','name_urdu' => 'سلطنتوں کا عروج: عثمانی۔','description'=>'Popular on Netflix','publisher_id'=>4, 'company_id'=>1),
+            array('name' => 'Chhota Bheem','name_urdu' => 'چھوٹا بھیم','description'=>'Popular on Cartoon Network','publisher_id'=>4, 'company_id'=>1),
+        );
 
 
     }

@@ -13,15 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
+        // All the common attributes of the product will be here
         Schema::create('products', function (Blueprint $table) {
+
             $table->id();
             $table->integer('sr_id')->nullable(); //restarts for each company
             $table->string('barcode')->unique()->comment('Scan from bar code reader or auto generate');
+
             $table->string('name')->unique();
             $table->string('name_urdu')->unique();
             $table->string('inv_display_name')->default('name');
+            $table->string('label_txt');
 
-            $table->string('label_txt')->unique();
             $table->date('manufacturing_date')->nullable()->comment('publishing date');
             $table->longText('description')->nullable();
             $table->string('keywords')->nullable()->comment('comma seperated, tags');
@@ -30,10 +33,7 @@ return new class extends Migration
             //Packing Size Info
             $table->float('weight',6,2);
             $table->string('dimensions')->nullable();
-            $table->string('total_pages')->nullable();
             $table->string('inside_box')->nullable();
-
-            $table->string('ISBN');
 
             $table->float('l_sale_price',15,2)->default('0.00');
             $table->float('l_comission',3,2)->default('0.00');
@@ -49,7 +49,11 @@ return new class extends Migration
 
             $table->float('supplier_price',15,2)->default('0.00');
             $table->float('trade_percentage',3,2)->default('0.00');
+
             $table->float('purchase_price',15,2)->default('0.00');
+            $table->float('comission',15,2)->default('0.00');
+            $table->float('sale_price',15,2)->default('0.00');
+
             $table->float('p_retail_discount_amt',3,2)->default('0.00');
             $table->float('pw_sales_discount',3,2)->default('0.00');
 
@@ -57,24 +61,27 @@ return new class extends Migration
             // $table->unsignedBigInteger('location_id_1')->comment('Shelf Place');
             // $table->unsignedBigInteger('location_id_2')->comment('Store');
 
-            $table->tinyInteger('product_type_id'); //Book
-            $table->unsignedBigInteger('category_id');
+            $table->string('form_type')->default('others');
             $table->unsignedBigInteger('sub_category_id');
+
             $table->unsignedBigInteger('supplier_id');
-            $table->unsignedBigInteger('publisher_id');
-            $table->unsignedBigInteger('author')->nullable();
-            $table->unsignedBigInteger('topic_id')->nullable();
-            $table->unsignedTinyInteger('class_id')->nullable();
-            $table->unsignedTinyInteger('language_id')->nullable();
-            $table->unsignedBigInteger('series_id')->nullable();
-            $table->unsignedBigInteger('binding_id')->nulable();
-            $table->unsignedTinyInteger('is_avialable_online')->default('1');
+            $table->unsignedBigInteger('publisher_id')->nullable()->comment('Manufacturer');
+
+            //details
+            $table->boolean('is_slow_moving')->default('0');
+            $table->boolean('is_avialable_online')->default('0')->comment('Web Restrict');
+            $table->boolean('is_imported')->default('0');
+            $table->boolean('is_discontinued')->default('0');
+            $table->boolean('daily_checked')->default('0')->comment('Item to be checked Daily');
 
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);
 
+            $table->string('alternate_code')->nullable();
+
             $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('created_by')->default(0);
+            $table->unsignedBigInteger('updated_by')->default(0);
 
             $table->timestamps();
         });
