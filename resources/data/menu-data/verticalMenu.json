@@ -321,6 +321,7 @@
                             "name": "Market purchase",
                             "slug": ""
                         },
+                      
                         {
                             "url": "purchase/return",
                             "name": "Purchase Return",
@@ -474,10 +475,11 @@
                     "slug": ""
                 },
                 {
-                    "url": "HR/employee/management",
+                    "url": "employee",
                     "name": "Employee Management",
                     "slug": ""
                 },
+                
                 {
                     "url": "HR/advance/salaries",
                     "name": "Advance Salaries",
@@ -524,8 +526,23 @@
                     "slug": ""
                 },
                 {
-                    "url": "HR/mark/attendance",
+                    "url": "attendance",
                     "name": "Mark Attendance",
+                    "slug": ""
+                },
+                {
+                    "url": "Attendance/Sheet",
+                    "name": "Attendance Sheet",
+                    "slug": ""
+                },
+                {
+                    "url": "leave",
+                    "name": "Leave Application",
+                    "slug": ""
+                },
+                {
+                    "url": "holiday",
+                    "name": "Add Holidays",
                     "slug": ""
                 },
                 {

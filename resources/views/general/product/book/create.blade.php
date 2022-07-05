@@ -60,9 +60,8 @@
               </div>
               <div class="col-md-11 col-12">
                 <div class="mb-1">
-                  <input type="text" class="form-control @error('code') error @enderror"
-                    name="name_urdu"
-                    placeholder="Product Name (Urdu)*" />
+                  <input type="text" class="form-control @error('name_urdu') error @enderror"
+                    name="name_urdu" placeholder="Product Name (Urdu)*" />
                 </div>
               </div>
 
@@ -76,15 +75,13 @@
               </div>
               <div class="col-md-3 col-12">
                 <div class="mb-1">
-                  <input type="text" class="form-control" placeholder="Book" value="Book"/>
+                  <input type="text" class="form-control" placeholder="Book" value="Book" readonly/>
                 </div>
               </div>
               <div class="col-md-3 col-12">
                 <div class="mb-1">
                   <input type="text" class="form-control @error('label_txt') error @enderror"
-                    name="label_txt"
-                    placeholder="Label Text*"
-                  />
+                    name="label_txt" placeholder="Label Text*"/>
                 </div>
               </div>
               <div class="col-md-3 col-12">
@@ -93,10 +90,9 @@
                     name="barcode" placeholder="Product Code*" title="Input using barcode reader"/>
                 </div>
               </div>
-
               <div class="col-md-3 col-12">
                 <div class="mb-1">
-                  <input type="text" class="form-control @error('code') error @enderror"
+                  <input type="text" class="form-control @error('manufacturing_date') error @enderror"
                     name="manufacturing_date" />
                 </div>
               </div>
@@ -107,67 +103,42 @@
                               placeholder="Product Description*"></textarea>
                 </div>
               </div>
-
+              `keywords`, ``, `inside_box`, `l_sale_price`, `l_comission`, `l_purchase_price`, `retail_discount_policy`, `whole_sale_discount_policy`, `p_sale_price`, `p_comission`, `rental_discount_amt`, `lw_sale_discount`, `supplier_price`, `trade_percentage`, `purchase_price`, `p_retail_discount_amt`, `pw_sales_discount`, `form_type`, `sub_category_id`, `supplier_id`, `publisher_id`, `is_slow_moving`, `is_avialable_online`, `is_imported`, `is_discontinued`, `daily_checked`, `delete_status`, `is_active`, `alternate_code`, `company_id`, `created_by`, `created_at`, `updated_at`
               <div class="col-md-4 col-12">
                 <div class="mb-1">
-                  <input type="text" class="form-control @error('code') error @enderror"
-                    name="company-column"
-                    placeholder="Purchase Price"
-                  />
+                  <input type="text" class="form-control @error('purchase_price') error @enderror"
+                    name="purchase_price" placeholder="Purchase Price"/>
                 </div>
               </div>
               <div class="col-md-4 col-12">
                 <div class="mb-1">
-                  <input
-                    type="text"
-                    id="company-column"
-                      class="form-control @error('code') error @enderror"
-                    name="company-column"
-                    placeholder="Comission"
-                  />
+                  <input type="text" id="comission" class="form-control @error('comission') error @enderror"
+                    name="comission" placeholder="Comission"/>
                 </div>
               </div>
               <div class="col-md-4 col-12">
                 <div class="mb-1">
-                  <input
-                    type="text"
-                    id="company-column"
-                      class="form-control @error('code') error @enderror"
-                    name="company-column"
-                    placeholder="Sale Price"
-                  />
+                  <input type="text" id="sale_price" class="form-control @error('code') error @enderror"
+                    name="sale_price" placeholder="Sale Price"/>
                 </div>
               </div>
 
-
-
               <div class="col-md-4 col-12">
                 <div class="mb-1">
-                  <input
-                    type="text"
-                    id="company-column"
-                      class="form-control @error('code') error @enderror"
-                    name="company-column"
-                    placeholder="Weight"
-                  />
+                  <input type="text" id="weight" class="form-control @error('weight') error @enderror"
+                    name="weight" placeholder="Weight"/>
                 </div>
               </div>
               <div class="col-md-4 col-12">
                 <div class="mb-1">
-                  <select class="select2 form-select" id="select2-Dimension">
-                    <option value="">Dimension</option>
-                  </select>
+                    <input type="text" id="dimensions" class="form-control @error('dimensions') error @enderror"
+                    name="dimensions" placeholder="Dimensions"/>
                 </div>
               </div>
               <div class="col-md-4 col-12">
                 <div class="mb-1">
-                  <input
-                    type="text"
-                    id="company-column"
-                      class="form-control @error('code') error @enderror"
-                    name="company-column"
-                    placeholder="No. of Pages"
-                  />
+                  <input type="number" id="total_pages" class="form-control @error('total_pages') error @enderror"
+                    name="total_pages" placeholder="No. of Pages" />
                 </div>
               </div>
 
@@ -179,28 +150,18 @@
                 </div>
               </div>
 
-
               <div class="col-md-4 col-12">
                 <div class="mb-1">
-                  <input
-                    type="text"
-                    id="company-column"
-                      class="form-control @error('code') error @enderror"
-                    name="company-column"
-                    placeholder="Size"
-                  />
+                  <input type="text" id="size" class="form-control @error('size') error @enderror"
+                    name="size" placeholder="Size" />
                 </div>
               </div>
 
-
-
-
-
               <div class="col-md-4 col-12">
                 <div class="mb-1">
-                   <select class="select2 form-select" id="select2-Calculate">
-                    <option value="">Discount Policy</option>
-                  </select>
+                   <select class="select2 form-select" id="discount_policy" name="discount_policy">
+                        <option value="">Discount Policy</option>
+                   </select>
                 </div>
               </div>
 

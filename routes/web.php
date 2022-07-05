@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\General\UnitsController;
@@ -10,9 +11,18 @@ use App\Http\Controllers\General\TopicsController;
 use App\Http\Controllers\General\ClassesController;
 use App\Http\Controllers\General\LanguagesController;
 use App\Http\Controllers\General\CreditCardController;
-use App\Http\Controllers\General\LocationsController;
+use App\Http\Controlleemrs\General\LocationsController;
 use App\Http\Controllers\General\DenominationController;
 use App\Http\Controllers\General\SchoolsController;
+
+use App\Http\Controllers\HR\EmployeeController;
+use App\Http\Controllers\HR\AttendanceController;
+use App\Http\Controllers\HR\LeaveController;
+use App\Http\Controllers\HR\HolidayController;
+use App\Http\Controllers\HR\ReportController;
+use App\Http\Controllers\HR\AttendanceSheetController;
+
+
 use App\Http\Controllers\General\ProductTypeController;
 use App\Http\Controllers\General\CategoriesController;
 use App\Http\Controllers\General\SubCategoriesController;
@@ -50,7 +60,21 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('locations', LocationsController::class);
     Route::resource('denomination', DenominationController::class);
 
+
     Route::resource('schools', SchoolsController::class);
+
+   
+
+    // HR Modules
+
+    Route::resource('employee', EmployeeController::class);
+    Route::resource('attendance',AttendanceController::class);
+    Route::resource('leave',LeaveController::class);
+    Route::resource('holiday',HolidayController::class);
+    Route::resource('report',ReportController::class);
+    Route::get('Attendance/Sheet', [AttendanceSheetController::class, 'index'])->name('Attendance/Sheet');
+    Route::post('Attendance/Show', [AttendanceSheetController::class, 'show'])->name('show');
+
     Route::resource('general-info', ProductTypeController::class);
     Route::resource('category', CategoriesController::class);
     Route::resource('subcategory', SubCategoriesController::class);
@@ -59,7 +83,6 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::resource('books', BooksController::class);
-
 
 
 });
