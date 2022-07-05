@@ -132,12 +132,10 @@ class LeaveController extends Controller
           $leave->Date=$request->Date;
           $leave->description=$request->description;
           $leave->update();
-          
-         
+        
           return redirect()->route('leave.index')
             ->with('success','Leave update successfully.');
-     
-    
+        
     }
 
     /**

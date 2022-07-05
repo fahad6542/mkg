@@ -28,7 +28,7 @@
 @endsection
 @section('content')
 
-<form action="{{route('show')}}" method="post">
+<form action="{{route('show')}}" method="post" id="employee_form">
 @csrf
    
 <div class="row" id="table-bordered">
@@ -36,17 +36,20 @@
       <div class="card">
       <div class="row">
 
+        
         <div class="col-md-3 mb-1" style="margin-top: 22px; margin-left:10px;">
             <select class="select2 form-select  @error('employee_id') error @enderror"  style="" name="employee_id" id="selectem">
                 <option disabled selected>Select Employee</option>
                 @foreach ($data as $item)             
-                <option   value="{{ $item->id }}">{{$item->name}}</option>            
+                <option   value="{{ $item->id }}" >{{$item->name}}</option>            
                 @endforeach
               </select>  
               @error('employee_id')
               <div class="danger text-danger">{{ $message }}</div>
               @enderror
              </div>
+
+
              <div class="col-md-3 mb-1" style="margin-top: 22px; margin-left:10px;">
                 <select class="select2 form-select  @error('month') error @enderror"  style="" name="month" id="selectem">
                     <option disabled selected>Select Month</option>                          
@@ -122,6 +125,7 @@
           <table class="table table-bordered">
             <thead>
               <tr>
+                <th>Daily Date</th>
                 <th>Days</th>
                 <th>Time In</th>
                 {{-- <th>Users</th> --}}
@@ -130,64 +134,55 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              @php
+                $count=1;
+              @endphp
+              @if(isset($days,$date))
+              
+              @foreach ($date as $item)
+              @php
+                $check=0;
+              @endphp
+              <tr>   
+              <td>
+                <span class="fw-bold">{{$item}}</span>
+              </td>     
                 <td>
-                  <img
-                    src="{{asset('images/icons/angular.svg')}}"
-                    class="me-75"
-                    height="20"
-                    width="20"
-                    alt="Angular"
-                  />
-                  <span class="fw-bold">Angular Project</span>
+                  <span class="fw-bold">{{$days[$count]}}</span>
                 </td>
-                <td>Peter Charls</td>
-                {{-- <td>
-                  <div class="avatar-group">
-                    <div
-                      data-bs-toggle="tooltip"
-                      data-popup="tooltip-custom"
-                      data-bs-placement="top"
-                      class="avatar pull-up my-0"
-                      title="Lilian Nenez"
-                    >
-                      <img
-                        src="{{asset('images/portrait/small/avatar-s-5.jpg')}}"
-                        alt="Avatar"
-                        height="26"
-                        width="26"
-                      />
-                    </div>
-                    <div
-                      data-bs-toggle="tooltip"
-                      data-popup="tooltip-custom"
-                      data-bs-placement="top"
-                      class="avatar pull-up my-0"
-                      title="Alberto Glotzbach"
-                    >
-                      <img
-                        src="{{asset('images/portrait/small/avatar-s-6.jpg')}}"
-                        alt="Avatar"
-                        height="26"
-                        width="26"
-                      />
-                    </div>
-                    <div
-                      data-bs-toggle="tooltip"
-                      data-popup="tooltip-custom"
-                      data-bs-placement="top"
-                      class="avatar pull-up my-0"
-                      title="Alberto Glotzbach"
-                    >
-                      <img
-                        src="{{asset('images/portrait/small/avatar-s-7.jpg')}}"
-                        alt="Avatar"
-                        height="26"
-                        width="26"
-                      />
-                    </div>
-                  </div>
-                </td> --}}
+                @php
+                  dd($attendance_data);
+                @endphp
+                @foreach ($attendance_data as $a)
+                  @if($a->Date == $item && $a->title == null)
+                  @php
+                    $check = 1;
+                  @endphp
+                  <td>{{$a->shift_time_in}}</td>
+                  <td>{{$a->shift_time_out}}</td>
+                  @endif
+
+                  @if ($a->title != null && $a->Date == $item)
+                  
+                  <td>{{$a->title}}</td>
+                  <td>{{$a->title}}</td>
+
+                  @php
+                  $check = 1;
+                  @endphp
+
+                  @endif
+                @endforeach 
+
+{{-- @php
+    dd($attendance_data);
+@endphp --}}
+               
+
+                @if($check == 0 )
+                  <td>a</td>
+                  <td>a</td>
+                @endif
                 <td><span class="badge rounded-pill badge-light-primary me-1">Active</span></td>
                 <td>
                   <div class="dropdown">
@@ -207,6 +202,14 @@
                   </div>
                 </td>
               </tr>
+              @php
+                
+              $count++;
+              @endphp
+              @endforeach
+                  
+              @endif
+            
               {{-- <tr>
                 <td>
                   <img
@@ -477,6 +480,35 @@
   <script src="{{ asset(mix('js/scripts/forms/form-file-uploader.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/forms/pickers/form-pickers.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>
+
+  <script>
+    var jqForm = $('#employee_form');
+    //jquery form validation
+$(function () {
+    'use strict';
+
+    // jQuery Validation
+    // --------------------------------------------------------------------
+    if (jqForm.length) {
+        jqForm.validate({
+            rules: {
+            'employee_id': {
+                required: true
+            },
+            'month': {
+                required: true,
+            },
+            'year':{
+                required: true
+            },
+            }
+        });
+    }
+
+});
+
+
+  </script>
 
 @endsection
 
