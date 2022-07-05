@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Denomination extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'value','index','description','is_active'];
 }

@@ -13,11 +13,9 @@ use App\Http\Controllers\General\CreditCardController;
 use App\Http\Controllers\General\LocationsController;
 use App\Http\Controllers\General\DenominationController;
 use App\Http\Controllers\General\SchoolsController;
-
 use App\Http\Controllers\General\ProductTypeController;
 use App\Http\Controllers\General\CategoriesController;
 use App\Http\Controllers\General\SubCategoriesController;
-
 use App\Http\Controllers\General\Products\BooksController;
 
 
@@ -55,6 +53,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('schools', SchoolsController::class);
     Route::resource('general-info', ProductTypeController::class);
     Route::resource('category', CategoriesController::class);
+    Route::resource('subcategory', SubCategoriesController::class);
     Route::resource('subcategory', SubCategoriesController::class);
     Route::post('/fetch-category',[SubCategoriesController::class,'fetchCategory']);
 
