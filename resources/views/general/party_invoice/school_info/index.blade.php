@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Add Denomination Information')
+@section('title', 'Add School Information')
 
 @section('vendor-style')
   <!-- vendor css files -->
@@ -30,8 +30,8 @@
       <div class="card">
          <!-- Button trigger modal -->
          <div class="card-header border-bottom">
-          <h4 class="card-title">Add Denomination Information</h4>
-           <a type="button" class="btn btn-relief-primary click_if_invalid" data-bs-toggle="modal" data-bs-target="#large"  href="javascript:void(0)" id="add_new_btn">Add New</a>
+          <h4 class="card-title">Add School Information</h4>
+           <a type="button" class="btn btn-relief-primary click_if_invalid" data-bs-toggle="modal" data-bs-target="#large" href="javascript:void(0)" id="add_new_btn">Add New</a>
         </div>
               <!-- Modal -->
               <div
@@ -40,13 +40,13 @@
                 tabindex="-1"
                 aria-labelledby="myModalLabel17"
                 aria-hidden="true">
-                <form class="" id="denomination_form" name="denomination_form" method="post" action="{{route('denomination.store')}}">
+                <form class="" id="school_form" name="school_form" method="post" action="{{route('schools.store')}}">
                   @csrf
-                    <input type="hidden" name="denomination_id" id="denomination_id">
+                  <input type="hidden" name="school_id" id="school_id">
                   <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h4 class="modal-title" id="model_heading">Add Denomination Information</h4>
+                        <h4 class="modal-title" id="model_heading">Add School Information</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
@@ -54,54 +54,94 @@
                         <div class="row">
                           <div class="col-12">
                             <div class="card">
-                            
+                              
                               <div class="card-body">
                                 <form class="form">
                                   <div class="row">
                                     
                                     <div class="col-md-12 col-12">
                                       <div class="mb-1">
-                                        <label class="" for="">Title*</label>
+                                        <label class="" for="">Name*</label>
                                         <input
                                           type="text"
                                           id="name"
                                           class="form-control mt-1"
                                           name="name"
-                                          placeholder="Title*"
+                                          placeholder="Name*"
                                         />
                                         <small class="text-danger error-message" id="name_error"></small>
                                       </div>
                                     </div>
                                     <div class="col-md-12 col-12">
                                       <div class="mb-1">
-                                      <label class="" for="select2-basic">Value*</label>
+                                      <label class="" for="select2-basic">In Urdu*</label>
                                       <input
                                           type="text"
-                                          id="value"
+                                          id="name_urdu"
                                           class="form-control mt-1"
-                                          name="value"
-                                          placeholder="Value*"
+                                          name="name_urdu"
+                                          placeholder="In Urdu*"
                                         />
-                                        <small class="text-danger error-message" id="value_error"></small>
+                                        <small class="text-danger error-message" id="name_urdu_error"></small>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                      <div class="mb-1">
+                                        <label class="" for="">Contact Person</label>
+                                        <input
+                                          type="text"
+                                          id="contact_person"
+                                          class="form-control mt-1"
+                                          name="contact_person"
+                                          placeholder="Contact Person"
+                                        />
+                                        <small class="text-danger error-message" id="contact_person_error"></small>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                      <div class="mb-1">
+                                        <label class="" for="">Contact No</label>
+                                        <input
+                                          type="text"
+                                          id="contact_no"
+                                          class="form-control mt-1"
+                                          name="contact_no"
+                                          placeholder="Contact No"
+                                        />
+                                        <small class="text-danger error-message" id="contact_no_error"></small>
                                       </div>
                                     </div>
                                     <div class="col-md-12 col-12">
                                       <div class="mb-1">
-                                        <label class="" for="select2-basic">Index*</label>
+                                        <label class="" for="">Address</label>
                                         <input
                                           type="text"
-                                          id="index"
+                                          id="address"
                                           class="form-control mt-1"
-                                          name="index"
-                                          placeholder="Index*"
+                                          name="address"
+                                          placeholder="Address"
                                         />
-                                        <small class="text-danger error-message" id="index_error"></small>
+                                        <small class="text-danger error-message" id="address_error"></small>
+                                      </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="col-md-6 col-12">
+                                      <div class="mb-1">
+                                        <label class="" for="">
+                                          <input
+                                              type="checkbox"
+                                              id="is_active"
+                                              class="checkbox"
+                                              name="is_active"
+                                          />
+                                        InActive*</label>
                                       </div>
                                     </div>
                                     
                                     <div class="col-md-12 col-12">
                                     <div class="mb-1">
-                                        <label class="" for="">Description*</label>
+                                        <label class="mt-1" for="">Description*</label>
                                         <textarea
                                         class="form-control mt-1"
                                         id="description"
@@ -112,20 +152,7 @@
                                       <small class="text-danger error-message" id="description_error"></small>
                                       </div>
                                     </div>
-
-                                    <div class="col-md-6 col-12">
-                                      <div class="mb-1">
-                                        <label class="" for="">
-                                          <input
-                                              type="checkbox"
-                                              id="is_active"
-                                              class="checkbox"
-                                              name="is_active"
-                                          />
-                                        Discontinue*</label>
-                                      </div>
-                                    </div>
-      
+                                    
                                   </div>
                                 </form>
                               </div>
@@ -137,10 +164,11 @@
                       </section>
                       </div>
                       <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary"  id="save_btn">Save</button>
+                        <button type="button" class="btn btn-primary" id="save_btn">Save</button>
                       </div>
                     </div>
                   </div>
+                </form>
               </div>
             </div>
         <!--  -->
@@ -149,10 +177,12 @@
             <thead>
               <tr>
                 <th>Sr#</th>
-                <th>Title</th>
-                <th>Value</th>
-                <th>Index</th>
-                <th>Description</th>
+                <th>Name</th>
+                <th>Name In Urdu</th>
+                <th>Contact Person</th>
+                <th>Contact No</th>
+                <th>Address</th>
+                <th>Description</th>               
                 <th>Action</th>
               </tr>
             </thead>
@@ -167,75 +197,96 @@
 @endsection
 
 
+
+
 @section('page-script')
 <script type="text/javascript">
 var table;
-var jqForm = $('#denomination_form');
+var jqForm = $('#school_form');
 $(document).ready(function() {
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
     table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('denomination.index') }}",
+        ajax: "{{ route('schools.index') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'name', name: 'name'},
-            {data: 'value', name: 'value'},
-            {data: 'index', name: 'index'},
+            {data: 'name_urdu', name: 'name_urdu'},
+            {data: 'contact_person', name: 'contact_person'},
+            {data: 'contact_no', name: 'contact_no'},
+            {data: 'address', name: 'address'},
             {data: 'description', name: 'description'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
+
     //open modal when add new btn clicked
     $('#add_new_btn').click(function () {
         // $('#save_btn').val("create-book");
-        $('#denomination_id').val(''); //empty the PK
+        $('#school_id').val(''); //empty the PK
         jqForm.trigger("reset");
         $('#model_heading').html("Create New");
+
         $('#ajax_model').modal('show');
     });
+
     //open modal when edit btn clicked
     $('body').on('click', '.edit-btn', function () {
-      var denomination_id = $(this).data('id');
-      $.get("{{ route('denomination.index') }}" +'/' + denomination_id +'/edit', function (data) {
+      var school_id = $(this).data('id');
+      $.get("{{ route('schools.index') }}" +'/' + school_id +'/edit', function (data) {
           $('#model_heading').html("Edit");
         //   $('#save_btn').val("edit-book");
           $('#ajax_model').modal('show');
           //filling the form
-          $('#denomination_id').val(data.id);
+          $('#school_id').val(data.id);
           $('#name').val(data.name);
-          $('#value').val(data.value);
-          $('#index').val(data.index);
+          $('#name_urdu').val(data.name_urdu);
+          $('#contact_person').val(data.contact_person);
+          $('#contact_no').val(data.contact_no);
+          $('#address').val(data.address);
           $('#description').val(data.description);
+
         })
     });
+
    $('#save_btn').click(function(e) {
         e.preventDefault();
+
         $(this).html('Save');
+
         //removing previous validation errors if wny
         remove_error_msg();
+
         //checking if form is valid
         if (jqForm.valid()) {
+
                 $.ajax({
                     data: jqForm.serialize(),
                     url: jqForm.attr("action"),
                     type: "POST",
                     dataType: 'json',
                     success: function(response) {
+
                         //if form is successfuly saved
                         if (response.success == true) {
+
                             reset_form(jqForm);//reseting for the new entry
+
                             $('#ajax_model').modal('hide');
                             table.draw();
                             //alert
-                            toastr['success']('👋 Denomination saved', 'Success!', {
+                            toastr['success']('👋 schools saved', 'Success!', {
                                 closeButton: true,
                                 tapToDismiss: false,
                             });
+
                         } else {//if not saved
                             display_validation_errors(response.data); //server side errors
                         }
@@ -257,8 +308,11 @@ $(document).ready(function() {
             }
         });
     });
+
     $('body').on('click', '.delete-btn', function () {
+
         var id = $(this).data("id"); //PK
+
         Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -271,10 +325,12 @@ $(document).ready(function() {
         },
         buttonsStyling: false
       }).then(function (result) {
+
         if (result.value) {
+
             $.ajax({
                 type: "DELETE",
-                url: "{{ route('denomination.store') }}"+'/'+id, //PK
+                url: "{{ route('schools.store') }}"+'/'+id, //PK
                 success: function (data) {
                     table.draw(); //needs to resolve
                     Swal.fire({
@@ -290,12 +346,16 @@ $(document).ready(function() {
                     console.log('Error:', data);
                 }
             });
+
         }
       }); //delete click end
+
 }); //document ready ends
+
 //jquery form validation
 $(function () {
     'use strict';
+
     // jQuery Validation
     // --------------------------------------------------------------------
     if (jqForm.length) {
@@ -304,10 +364,16 @@ $(function () {
             'name': {
                 required: true
             },
-            'value': {
+            'name_urdu': {
                 required: true
             },
-            'index': {
+            'contact_person': {
+                required: true
+            },
+            'contact_no': {
+                required: true
+            },
+            'address': {
                 required: true
             },
             'description': {
@@ -316,6 +382,8 @@ $(function () {
             }
         });
     }
+
 });
+
 </script>
-@endsection 
+@endsection
