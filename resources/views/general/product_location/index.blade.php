@@ -42,7 +42,7 @@
                 tabindex="-1"
                 aria-labelledby="myModalLabel17"
                 aria-hidden="true">
-				      <form class="" id="location_form" name="location_form" method="post" action="{{route('locations.store')}}">
+				<form class="" id="location_form" name="location_form" method="post" action="{{route('locations.store')}}">
                     @csrf
                     <input type="hidden" name="location_id" id="location_id">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -119,6 +119,7 @@
                             </div>
                         </div>
                     </div>
+                </form>
               </div>
             </div>
         <!--  -->

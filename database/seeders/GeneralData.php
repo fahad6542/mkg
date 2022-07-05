@@ -107,11 +107,11 @@ class GeneralData extends Seeder
         Authors::insert($data);
 
         $data = array(
-            array('name'=>'La Salle Higher Secondary School','company_id'=>1),
-            array('name'=>'Comprehensive School','company_id'=>1),
-            array('name'=>'Zakria Public School','company_id'=>1),
-            array('name'=>'Nishat High School','company_id'=>1),
-            array('name'=>'Lahore Grammer School','company_id'=>1),
+            array('name'=>'La Salle Higher Secondary School','name_urdu' => 'لا سالے ہائیر سیکنڈری اسکول','company_id'=>1),
+            array('name'=>'Comprehensive School','name_urdu' => 'جامع سکول','company_id'=>1),
+            array('name'=>'Zakria Public School','name_urdu' => 'زکریا پبلک سکول','company_id'=>1),
+            array('name'=>'Nishat High School','name_urdu' => 'نشاط ہائی سکول','company_id'=>1),
+            array('name'=>'Lahore Grammer School','name_urdu' => 'لاہور گرامر سکول','company_id'=>1),
         );
 
         Schools::insert($data);

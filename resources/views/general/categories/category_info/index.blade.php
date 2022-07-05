@@ -40,7 +40,7 @@
                 tabindex="-1"
                 aria-labelledby="myModalLabel17"
                 aria-hidden="true">
-                <form class="" id="category_info_form" name="category_info_form"  method="post" action="{{route('category-info.store')}}">
+                <form class="" id="category_info_form" name="category_info_form"  method="post" action="{{route('category.store')}}">
                   @csrf
                   <input type="hidden" name="category_info_id" id="category_info_id">
                   <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -158,7 +158,7 @@ $(document).ready(function() {
     table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('category-info.index') }}",
+        ajax: "{{ route('category.index') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'name', name: 'name'},
@@ -179,7 +179,7 @@ $(document).ready(function() {
     //open modal when edit btn clicked
     $('body').on('click', '.edit-btn', function () {
       var category_info_id = $(this).data('id');
-      $.get("{{ route('category-info.index') }}" +'/' + category_info_id +'/edit', function (data) {
+      $.get("{{ route('category.index') }}" +'/' + category_info_id +'/edit', function (data) {
           $('#model_heading').html("Edit");
         //   $('#save_btn').val("edit-book");
           $('#ajax_model').modal('show');
@@ -266,7 +266,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "DELETE",
-                url: "{{ route('category-info.store') }}"+'/'+id, //PK
+                url: "{{ route('category.store') }}"+'/'+id, //PK
                 success: function (data) {
                     table.draw(); //needs to resolve
                     Swal.fire({
