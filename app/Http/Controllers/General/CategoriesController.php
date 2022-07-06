@@ -23,8 +23,8 @@ class CategoriesController extends Controller
 
             if ($request->ajax()) {
                 $data = Categories::join('product_types','categories.product_type_id', '=', 'product_types.id')
-            ->select('categories.*', 'product_types.name')
-            ->get();
+                ->select('categories.*', 'product_types.name')
+                ->get();
                 return Datatables::of($data)
                         ->addIndexColumn()
                         ->addColumn('action', function($row){
@@ -40,7 +40,7 @@ class CategoriesController extends Controller
             }
             
             // $data          = subCategory::with('type')->get();
-            $categories   = Categories::where('company_id',1)->with('type')->get();
+            $categories   = Categories::where('company_id',1)->get();
             $productTypes = ProductType::get()->pluck('name', 'id');
             // dd($productTypes);
 

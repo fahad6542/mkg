@@ -11,7 +11,7 @@ use App\Http\Controllers\General\TopicsController;
 use App\Http\Controllers\General\ClassesController;
 use App\Http\Controllers\General\LanguagesController;
 use App\Http\Controllers\General\CreditCardController;
-use App\Http\Controllers\General\LocationsController;
+use App\Http\Controlleemrs\General\LocationsController;
 use App\Http\Controllers\General\DenominationController;
 use App\Http\Controllers\General\SchoolsController;
 
@@ -22,10 +22,10 @@ use App\Http\Controllers\HR\HolidayController;
 use App\Http\Controllers\HR\ReportController;
 use App\Http\Controllers\HR\AttendanceSheetController;
 
+
 use App\Http\Controllers\General\ProductTypeController;
 use App\Http\Controllers\General\CategoriesController;
 use App\Http\Controllers\General\SubCategoriesController;
-
 use App\Http\Controllers\General\Products\BooksController;
 
 
@@ -59,37 +59,28 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('credit', CreditCardController::class);
     Route::resource('locations', LocationsController::class);
     Route::resource('denomination', DenominationController::class);
-    Route::resource('school', SchoolsController::class);
 
-
-    // HR Modules
+    Route::resource('schools', SchoolsController::class);
 
     Route::resource('employee', EmployeeController::class);
     Route::resource('attendance',AttendanceController::class);
     Route::resource('leave',LeaveController::class);
     Route::resource('holiday',HolidayController::class);
     Route::resource('report',ReportController::class);
-    Route::get('Attendance/Sheet', [AttendanceSheetController::class, 'index'])->name('Attendance/Sheet');
-    Route::post('Attendance/Show', [AttendanceSheetController::class, 'show'])->name('show');
-
-
+    Route::get('attendance_sheet', [AttendanceSheetController::class, 'index'])->name('attendance_sheet');
+    Route::post('attendance/show', [AttendanceSheetController::class, 'show'])->name('show');
 
     Route::resource('general-info', ProductTypeController::class);
-    Route::resource('category-info', CategoriesController::class);
-    Route::resource('subcategory-info', SubCategoriesController::class);
+    Route::resource('category', CategoriesController::class);
+    Route::resource('subcategory', SubCategoriesController::class);
+    Route::resource('subcategory', SubCategoriesController::class);
+    Route::post('/fetch-category',[SubCategoriesController::class,'fetchCategory']);
 
 
     Route::resource('books', BooksController::class);
 
 
 });
-
-
-
-
-
-
-
 
 // Route Components
 Route::get('layouts/collapsed-menu', [StaterkitController::class, 'collapsed_menu'])->name('collapsed-menu');

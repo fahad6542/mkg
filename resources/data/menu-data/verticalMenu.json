@@ -49,12 +49,12 @@
                             "slug": "app-invoice-list"
                         },
                         {
-                            "url": "category-info",
+                            "url": "category",
                             "name": "Category Info",
                             "slug": "app-invoice-preview"
                         },
                         {
-                            "url": "subcategory-info",
+                            "url": "subcategory",
                             "name": "Sub Category Info",
                             "slug": "app-invoice-edit"
                         }
@@ -207,7 +207,7 @@
                             "slug": "app-invoice-add"
                         },
                         {
-                            "url": "school",
+                            "url": "schools",
                             "name": "School Info",
                             "slug": "app-invoice-add"
                         }
@@ -531,7 +531,7 @@
                     "slug": ""
                 },
                 {
-                    "url": "Attendance/Sheet",
+                    "url": "attendance_sheet",
                     "name": "Attendance Sheet",
                     "slug": ""
                 },

@@ -40,7 +40,7 @@
                 tabindex="-1"
                 aria-labelledby="myModalLabel17"
                 aria-hidden="true">
-			          <form class="" id="language_form" name="language_form" method="post" action="{{route('languages.store')}}">
+			    <form class="" id="language_form" name="language_form" method="post" action="{{route('languages.store')}}">
                     @csrf
                     <input type="hidden" name="language_id" id="language_id">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
