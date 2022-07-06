@@ -56,7 +56,7 @@
                             <div class="row">
                                 <div class="col-12">
                                 <div class="card">
-                                    
+
                                     <div class="card-body">
                                     <form class="form">
                                         <div class="row">
@@ -65,16 +65,16 @@
                                             <label class="" for="">Credit Card Title*</label>
                                             <input
                                                 type="text"
-                                                id="credit_title"
+                                                id="title"
                                                 class="form-control mt-1"
-                                                name="credit_title"
+                                                name="title"
                                                 value=""
                                                 placeholder="Credit Card Title*"
                                             />
-                                            <small class="text-danger error-message" id="credit_title_error"></small>
+                                            <small class="text-danger error-message" id="title_error"></small>
                                             </div>
                                         </div>
-                                                                    
+
                                         <div class="col-md-12 col-12">
                                         <div class="mb-1">
                                             <label class="" for="">Description*</label>
@@ -99,17 +99,17 @@
                                                         placeholder="Account Name*"
                                                     />
                                                 Discontinue*</label>
-                                               
+
                                             </div>
                                         </div>
-                                        
+
                                         </div>
                                     </form>
                                     </div>
                                 </div>
                                 </div>
 
-                                
+
                             </div>
                             </section>
                             </div>
@@ -127,13 +127,13 @@
             <thead>
               <tr>
                 <th>Sr#</th>
-                <th>Credit Card Title</th>                
-                <th>Description</th>                
+                <th>Credit Card Title</th>
+                <th>Description</th>
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody> 
-              
+            <tbody>
+
             </tbody>
           </table>
         </div>
@@ -164,7 +164,7 @@ $(document).ready(function() {
         ajax: "{{ route('credit.index') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'credit_title', name: 'credit_title'},
+            {data: 'title', name: 'title'},
             {data: 'description', name: 'description'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
@@ -189,7 +189,7 @@ $(document).ready(function() {
           $('#ajax_model').modal('show');
           //filling the form
           $('#credit_card_id').val(data.id);
-          $('#credit_title').val(data.credit_title);
+          $('#title').val(data.title);
           $('#description').val(data.description);
 
         })
@@ -300,10 +300,10 @@ $(function () {
     if (jqForm.length) {
         jqForm.validate({
             rules: {
-            'credit_title': {
+            'title': {
                 required: true
             }
-            'description': {
+            ,'description': {
                 required: true
             }
             }

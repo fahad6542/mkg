@@ -11,7 +11,7 @@ use App\Http\Controllers\General\TopicsController;
 use App\Http\Controllers\General\ClassesController;
 use App\Http\Controllers\General\LanguagesController;
 use App\Http\Controllers\General\CreditCardController;
-use App\Http\Controlleemrs\General\LocationsController;
+use App\Http\Controllers\General\LocationsController;
 use App\Http\Controllers\General\DenominationController;
 use App\Http\Controllers\General\SchoolsController;
 
@@ -60,7 +60,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('locations', LocationsController::class);
     Route::resource('denomination', DenominationController::class);
     Route::resource('school', SchoolsController::class);
-   
+
 
     // HR Modules
 

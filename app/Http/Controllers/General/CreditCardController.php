@@ -19,10 +19,10 @@ class CreditCardController extends Controller
     public function index(Request $request)
     {
         //
-        $credit_card = Credit_card::latest()->get();
+        // $credit_card = Credit_card::latest()->get();
 
         if ($request->ajax()) {
-            $data = Credit_card::latest()->get();
+            $data = Credit_card::Where('delete_status','=',1)->get();
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -37,8 +37,9 @@ class CreditCardController extends Controller
                     ->make(true);
         }
 
-        $user=Auth::user();
+        // $user=Auth::user();
         $data['credits']=Credit_card::Where('delete_status','=',1)->get();
+
         return view('general.credit_card.index',$data);
     }
 
@@ -61,8 +62,8 @@ class CreditCardController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'credit_title'          => 'required|string|min:1|max:255',
-            'description'           => 'required|string',
+            'title'          => 'required|string|min:1|max:255',
+            'description'    => 'required|string',
 
         ]);
         $user=Auth::user();
@@ -86,13 +87,13 @@ class CreditCardController extends Controller
         $user=Auth::user();
         $credit_card=Credit_card::updateOrCreate(
             ['id'                   => $request->credit_card_id],
-            ['credit_title'         => $request->credit_title,
+            ['title'                => $request->title,
             'description'           => $request->description,
             'branch_id'             => $user->branch_id,
 
             ]
         );
-        
+
         $response = [
             'success' => true,
             'data'    => $credit_card,
@@ -100,7 +101,7 @@ class CreditCardController extends Controller
         ];
         return response()->json($response);
         //
-        
+
     }
 
     /**
