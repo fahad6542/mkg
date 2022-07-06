@@ -19,10 +19,10 @@ class LocationsController extends Controller
     public function index(Request $request)
     {
         //
-        $locations = Locations::latest()->get();
+        // $locations = Locations::latest()->get();
 
         if ($request->ajax()) {
-            $data = Locations::latest()->get();
+            $data = Locations::Where('delete_status','=',1)->get();
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -92,7 +92,7 @@ class LocationsController extends Controller
 
             ]
         );
-        
+
         $response = [
             'success' => true,
             'data'    => $locations,

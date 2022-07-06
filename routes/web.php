@@ -60,12 +60,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('locations', LocationsController::class);
     Route::resource('denomination', DenominationController::class);
 
-
     Route::resource('schools', SchoolsController::class);
-
-   
-
-    // HR Modules
 
     Route::resource('employee', EmployeeController::class);
     Route::resource('attendance',AttendanceController::class);
