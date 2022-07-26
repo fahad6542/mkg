@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Books List ')
+@section('title', 'Uniform List ')
 
 @section('vendor-style')
   <!-- vendor css files -->
@@ -29,8 +29,8 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header border-bottom">
-          <h4 class="card-title">Books List</h4>
-           <a type="button" class="btn btn-relief-primary" href="{{url('/')}}/books/create">Add New Books</a>
+          <h4 class="card-title">Uniform List</h4>
+           <a type="button" class="btn btn-relief-primary" href="{{url('/')}}/uniform/create">Add New Uniform</a>
 
          
 
@@ -39,58 +39,33 @@
         <div class="card-datatable">
            
 
-          <table class="table table-responsive">
+          <table class="datatables table table-responsive">
             <thead>
               <tr>
                 <th>Product Name</th>
                 <th>Sub Category</th>
                 <th>Description</th>
-                <th>Author</th>
-                <th>Class</th>
                 <th>Comission</th>
                 <th>Purchase Price</th>
-
               </tr>
             </thead>
-                @foreach($data['data'] as $key)    
+            @foreach($data['data'] as $key)    
                     <tr>
                       <td>{{$key->name}}</td>
 
                       @foreach($data['category'] as $subcategory)
-                        @if($key->sub_category_id== $subcategory->id)
-                          <td>{{$subcategory->name}}</td>
-                        @endif
+                      @if($key->sub_category_id== $subcategory->id)
+                      <td>{{$subcategory->name}}</td>
+                      @endif
                       @endforeach
                       
-                      <td>{{$key->description}}</td>
-                      
-                      @foreach($data['meta'] as $keyy)
-                          @if($key->id == $keyy->p_id)
-                            @foreach($data['authors'] as $author)
-                              @if($author->id == $keyy->author)
-                                <td>{{$author->name}}</td>
-                              @endif
-                            @endforeach
-                          @endif
-                        @endforeach
-
-
-                        @foreach($data['meta'] as $keyy)
-                          @if($key->id == $keyy->p_id)
-                            @foreach($data['classes'] as $classes)
-                              @if($classes->id == $keyy->class_id)
-                                <td>{{$classes->name}}</td>
-                              @endif
-                            @endforeach
-                          @endif
-                        @endforeach
-
-                     
+                      <td>{{$key->description}}</td>                     
                       <td>{{$key->l_comission}}</td>
                       <td>{{$key->l_purchase_price}}</td>
                       
                     </tr>
                 @endforeach
+
           </table>
         </div>
       </div>

@@ -14,6 +14,8 @@ use App\Http\Controllers\General\CreditCardController;
 use App\Http\Controlleemrs\General\LocationsController;
 use App\Http\Controllers\General\DenominationController;
 use App\Http\Controllers\General\SchoolsController;
+use App\Http\Controllers\General\PackagesController;
+
 
 use App\Http\Controllers\HR\EmployeeController;
 use App\Http\Controllers\HR\AttendanceController;
@@ -26,6 +28,13 @@ use App\Http\Controllers\General\ProductTypeController;
 use App\Http\Controllers\General\CategoriesController;
 use App\Http\Controllers\General\SubCategoriesController;
 use App\Http\Controllers\General\Products\BooksController;
+use App\Http\Controllers\General\Products\NoteBooksController;
+use App\Http\Controllers\General\Products\UniformController;
+use App\Http\Controllers\General\Products\StationariesController;
+use App\Http\Controllers\General\Products\GiftAndToyesController;
+
+
+
 
 
 
@@ -58,10 +67,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('credit', CreditCardController::class);
     Route::resource('locations', LocationsController::class);
     Route::resource('denomination', DenominationController::class);
-
     Route::resource('schools', SchoolsController::class);
-
-   
+    Route::resource('package/info', PackagesController::class);
 
     // HR Modules
 
@@ -78,19 +85,20 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('subcategory', SubCategoriesController::class);
     Route::resource('subcategory', SubCategoriesController::class);
     Route::post('/fetch-category',[SubCategoriesController::class,'fetchCategory']);
-
-
+    Route::post('/fetch-subcategory',[BooksController::class,'fetchCategory']);
     Route::resource('books', BooksController::class);
+    Route::resource('note-books', NoteBooksController::class);
+    Route::post('/fetch-subcategories',[NoteBooksController::class,'fetchCategory']);
+
+    Route::resource('uniform', UniformController::class);
+    Route::resource('stationary', StationariesController::class);
+    Route::resource('gift-toys', GiftAndToyesController::class);
+
+
+    
 
 
 });
-
-
-
-
-
-
-
 
 // Route Components
 Route::get('layouts/collapsed-menu', [StaterkitController::class, 'collapsed_menu'])->name('collapsed-menu');

@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Books List ')
+@section('title', 'Toys And Gift List ')
 
 @section('vendor-style')
   <!-- vendor css files -->
@@ -29,8 +29,8 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header border-bottom">
-          <h4 class="card-title">Books List</h4>
-           <a type="button" class="btn btn-relief-primary" href="{{url('/')}}/books/create">Add New Books</a>
+          <h4 class="card-title">Toys And Gift List</h4>
+           <a type="button" class="btn btn-relief-primary" href="{{url('/')}}/gift-toys/create">Add New Gift And Toys</a>
 
          
 
@@ -45,14 +45,11 @@
                 <th>Product Name</th>
                 <th>Sub Category</th>
                 <th>Description</th>
-                <th>Author</th>
-                <th>Class</th>
                 <th>Comission</th>
-                <th>Purchase Price</th>
-
+                <th>Label</th>
               </tr>
             </thead>
-                @foreach($data['data'] as $key)    
+            @foreach($data['data'] as $key)    
                     <tr>
                       <td>{{$key->name}}</td>
 
@@ -63,31 +60,8 @@
                       @endforeach
                       
                       <td>{{$key->description}}</td>
-                      
-                      @foreach($data['meta'] as $keyy)
-                          @if($key->id == $keyy->p_id)
-                            @foreach($data['authors'] as $author)
-                              @if($author->id == $keyy->author)
-                                <td>{{$author->name}}</td>
-                              @endif
-                            @endforeach
-                          @endif
-                        @endforeach
-
-
-                        @foreach($data['meta'] as $keyy)
-                          @if($key->id == $keyy->p_id)
-                            @foreach($data['classes'] as $classes)
-                              @if($classes->id == $keyy->class_id)
-                                <td>{{$classes->name}}</td>
-                              @endif
-                            @endforeach
-                          @endif
-                        @endforeach
-
-                     
                       <td>{{$key->l_comission}}</td>
-                      <td>{{$key->l_purchase_price}}</td>
+                      <td>{{$key->label_txt}}</td>
                       
                     </tr>
                 @endforeach

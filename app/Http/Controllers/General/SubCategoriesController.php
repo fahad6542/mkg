@@ -152,6 +152,8 @@ class SubCategoriesController extends Controller
 
         return response()->json(['success'=>'SubCategories Info deleted successfully.']);
     }
+
+    
     public function fetchCategory(Request $request)
     {
         $data['categories'] = Categories::where("product_type_id",$request->product_type_id)->get(["title", "id"]);
