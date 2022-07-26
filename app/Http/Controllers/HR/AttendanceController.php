@@ -95,28 +95,7 @@ else{
     ->with('success','Attendance successfully.');
 }
 
-
-
-
-      
-
-        
-
-        
-
-        //   Attendance::create([
-
-           
-        //     'employee_id'                         => $request->employee_id,
-        //     'Date'                                => $request->Date,
-        //     'shift_time_in'                       => $request->shift_time_in,
-        //     'shift_time_out'                      => $request->shift_time_out,
-            
-          
-        //   ]);
-
-         
-     
+  
     }
 
     /**

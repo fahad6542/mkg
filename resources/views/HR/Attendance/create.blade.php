@@ -67,7 +67,8 @@
                 <div class="row">
                       <div class="col-md-6 mb-1">
                         <label class="form-label" for="fp-time">Shift Time In</label>
-                        <input type="text" id="shift-time-in" name="shift_time_in" class="form-control flatpickr-time text-start flatpickr-input" placeholder="HH:MM" readonly="readonly">
+                        {{-- <input type="text" id="shift-time-in" name="shift_time_in" class="form-control flatpickr-time text-start flatpickr-input" placeholder="HH:MM" readonly="readonly"> --}}
+                        <input type="text" id="shift-time-in"  name="shift_time_in" class="form-control flatpickr-date-time flatpickr-input" placeholder="YYYY-MM-DD HH:MM" readonly="readonly">
                            @error('shift_time_in')
                     <div class="danger text-danger">{{ $message }}</div>
                     @enderror
@@ -76,7 +77,9 @@
 
                       <div class="col-md-6 mb-1">
                         <label class="form-label" for="fp-time">Shift Time Out</label>
-                        <input type="text" id="shift-time-out" name="shift_time_out" class="form-control flatpickr-time text-start flatpickr-input" placeholder="HH:MM" readonly="readonly">
+                        <input type="text" id="shift-time-out"  name="shift-time-out" class="form-control flatpickr-date-time flatpickr-input" placeholder="YYYY-MM-DD HH:MM" readonly="readonly">
+
+                        {{-- <input type="text" id="shift-time-out" name="shift_time_out" class="form-control flatpickr-time text-start flatpickr-input" placeholder="HH:MM" readonly="readonly"> --}}
                       </div>
                 </div> 
             </div>
@@ -144,6 +147,11 @@ $(function () {
 $('#selectem').on('change' , function(){
     document.getElementById('current_date').value = new Date().toISOString().slice(0,10);
     time = new Date();
+
+
+
+
+
     hh = time.getHours();
     mm = time.getMinutes();
     if(hh<10)
@@ -154,8 +162,16 @@ $('#selectem').on('change' , function(){
     {
         mm = '0'+mm;
     }
-    c_time = hh + ':' + mm;
+
+  times=new Date().toISOString().slice(0,10);
+
+    c_time =times + ' ' + hh + ':' + mm;
+
+
+
     document.getElementById('shift-time-in').value = c_time;
+
+
     // $('#validity_Date').datepicker();
     // $('#validity_Date').datepicker('setDate' , new Date());
 });

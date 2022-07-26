@@ -41,8 +41,6 @@
           <div class="card-body">
               <div class="row">
                 <div class="col-md-6 mb-1">
-                  
-                    
                       <select class="select2 form-select  @error('employee_id') error @enderror"  name="employee_id" id="selectem">
                           <option disabled selected>Select Employee</option>
                           @foreach ($data as $item)

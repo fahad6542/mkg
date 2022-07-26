@@ -481,7 +481,7 @@
                 },
                 
                 {
-                    "url": "HR/advance/salaries",
+                    "url": "Advance_salary",
                     "name": "Advance Salaries",
                     "slug": ""
                 },
@@ -501,7 +501,7 @@
                     "slug": ""
                 },
                 {
-                    "url": "HR/over/time",
+                    "url": "overtime",
                     "name": "Over Time",
                     "slug": ""
                 },

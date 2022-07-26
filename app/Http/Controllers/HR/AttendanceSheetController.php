@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\Leave;
 use App\Models\Attendance;
+use App\Models\Holiday;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -23,27 +24,21 @@ class AttendanceSheetController extends Controller
     public function show(Request $request)
     {
 
-        // $emp_data = DB::table('employees')
-        // ->select('employees', 'attendances', 'leaves')
-        // ->where($request->employee_id, '=' ,'employees.id') 
-        // ->leftJoin('leaves', 'employees.id', '=', 'leaves.employee_id')
-        // ->leftJoin('attendances', 'employees.id', '=', 'attendances.employee_id')
-        // ->get();
+        $attendance_data['holidays']=Holiday::all();
+        
+
+        $month=$request->month;
+        $aa_year=$request->year;
 
 
-        $attendance_data = Attendance::leftJoin('leaves', 'attendances.employee_id', '=' ,'leaves.employee_id')
-        ->select('attendances.*','leaves.title', 'leaves.Date')
-        ->get();
+        $attendance_data['emp'] = Employee::where('id' , $request->employee_id)->first();
+        $attendance_data['attendance']= Attendance::where('employee_id' , $request->employee_id)->get();
+        $attendance_data['leave']= Leave::where('employee_id' , $request->employee_id)->get();
+       $total_holidays=count($attendance_data['holidays']);
+       $emp_name=Employee::where('id',$request->employee_id)->first();
+       $total_numer=count($attendance_data);
 
-
-// dd( $attendance_data );
-
-        // $attendance_data=Attendance::where('employee_id' , $request->employee_id)->get();
-        // $leave_data=Leave::where('employee_id' , $request->employee_id)->get();
-
-
-       
-       
+              
         request()->validate([
 
             'employee_id'                   => 'required',
@@ -74,9 +69,9 @@ class AttendanceSheetController extends Controller
             }
             
         
-
-        $data  = Employee::where('delete_status',1)->get();
-        return view('HR.Attendance_sheet.index',compact('data','attendance_data','days','date'));
+       
+        $data= Employee::where('delete_status',1)->get();
+        return view('HR.Attendance_sheet.index',compact('data','attendance_data','days','date','emp_name','total_numer','number_of_days','total_holidays','month','aa_year'));
 
     }
 
@@ -95,7 +90,7 @@ class AttendanceSheetController extends Controller
         
     }
     $data = Employee::where('delete_status',1)->get();
-    return view('HR.Attendance_sheet.index',compact('data','days','attendance_data','date'));
+    return view('HR.Attendance_sheet.index',compact('data','days','attendance_data','date','emp_name','total_numer','number_of_days','total_holidays','month','aa_year'));
 }
 
 
@@ -113,7 +108,7 @@ class AttendanceSheetController extends Controller
     }
 
     $data = Employee::where('delete_status',1)->get();
-    return view('HR.Attendance_sheet.index',compact('data','days','attendance_data','date'));
+    return view('HR.Attendance_sheet.index',compact('data','days','attendance_data','date','emp_name','total_numer','number_of_days','total_holidays','month','aa_year'));
           
  }
 
@@ -130,7 +125,7 @@ class AttendanceSheetController extends Controller
         
         }
         $data = Employee::where('delete_status',1)->get();
-        return view('HR.Attendance_sheet.index',compact('data','days','attendance_data','date'));
+        return view('HR.Attendance_sheet.index',compact('data','days','attendance_data','date','emp_name','total_numer','number_of_days','total_holidays','month','aa_year'));
                
       }  
     

@@ -46,9 +46,6 @@
 
       <form action="{{route('employee.store')}}" method="POST" id="employee_form">
         @csrf
-
-        
-
         <div class="card-body">
        
             <div class="row">

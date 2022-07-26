@@ -1,5 +1,6 @@
-@extends('layouts/contentLayoutMaster')
 
+
+@extends('layouts/contentLayoutMaster')
 @section('title', 'Attendance Sheet')
 
 @section('vendor-style')
@@ -51,7 +52,7 @@
 
 
              <div class="col-md-3 mb-1" style="margin-top: 22px; margin-left:10px;">
-                <select class="select2 form-select  @error('month') error @enderror"  style="" name="month" id="selectem">
+                <select class="select2 form-select  @error('month') error @enderror"  style="" name="month" id="selectm">
                     <option disabled selected>Select Month</option>                          
                     <option value="1">Janaury</option>
                     <option value="2"> February</option>
@@ -72,11 +73,11 @@
                  </div>
 
                  <div class="col-md-3 mb-1" style="margin-top: 22px; margin-left:10px;">
-                    <select class="select2 form-select  @error('year') error @enderror"  style="" name="year" id="selectem">
+                    <select class="select2 form-select  @error('year') error @enderror"  style="" name="year" id="selecty">
                         <option disabled selected>Select Year</option>                          
                         <option >2020</option>
                         <option>2021</option>
-                        <option>2022</option>
+                        <option value="2022">2022</option>
                         <option>2023</option>
                         <option>2024</option>
                         <option>2025</option>
@@ -113,7 +114,22 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">Bordered table</h4>
+          <div class="row">
+              <div class="col-md-12">
+                @if(isset($emp_name))
+                 <h4 class="card-title">Employee Name : {{$emp_name->name}}</h4>
+                 @else
+                 <h4 class="card-title">Employee Name :</h4>
+                 @endif
+              </div>
+           </div>
+
+         
+             <div class="col-md-12">
+                <h4 class="card-title">Designation   : </h4>
+            </div>
+        
+        
         </div>
         <div class="card-body">
           {{-- <p class="card-text">
@@ -128,333 +144,196 @@
                 <th>Daily Date</th>
                 <th>Days</th>
                 <th>Time In</th>
-                {{-- <th>Users</th> --}}
                 <th>Time Out</th>
-                <th>Actions</th>
+                <th>Minutes</th>
+                <th>Hours</th>
               </tr>
             </thead>
             <tbody>
+            @php
+                    $counta=0;
+                    $hh = 0;
+            @endphp
+          
+              @if(isset($number_of_days))
+              @for ($i = 1; $i < $number_of_days; $i++)
+              {{-- @if (Now()->format('Y-m-d') > $date[$i]) --}}
               @php
-                $count=1;
+               $check=0;
               @endphp
-              @if(isset($days,$date))
-              
-              @foreach ($date as $item)
-              @php
-                $check=0;
-              @endphp
-              <tr>   
+              <tr>
               <td>
-                <span class="fw-bold">{{$item}}</span>
+               <span class="fw-bold">{{$date[$i]}}</span>
               </td>     
-                <td>
-                  <span class="fw-bold">{{$days[$count]}}</span>
+              <td>
+                <span class="fw-bold">{{date('l', strtotime($date[$i]))}}</span>
+              </td>
+             @foreach($attendance_data['holidays'] as $ad)
+              @if($date[$i] == $ad->Date)
+              <td colspan="2" class="text-center">
+                <span class="fw-bold" >{{ $ad->title }}</span>
+              </td>
+              @php
+                $check=1;
+              @endphp
+              @endif
+              @endforeach
+              @foreach($attendance_data['leave'] as $ad)
+              @if($date[$i] == $ad->Date)
+              <td colspan="2" class="text-center">
+                <span class="fw-bold" >{{ $ad->title }}</span>
+              </td>
+              @php
+                $check=1;
+              @endphp
+              @endif
+              @endforeach
+              @foreach($attendance_data['attendance'] as $ad)
+              @if($date[$i] == $ad->Date)
+
+
+              @php
+
+                  $check_in=date('g:i A', strtotime($ad->shift_time_in));
+                  $checK_out=date('g:i A', strtotime($ad->shift_time_out));
+              
+               
+//                    if ($check_out==null){
+//                      dd('hy')
+//                     } 
+// else{
+// dd('not null');
+// }
+
+
+               
+              @endphp
+       
+           
+
+       
+              <td>
+                <span class="fw-bold" >{{$check_in}}</span>
+              </td>
+              <td>
+                <span class="fw-bold" >{{$checK_out}}</span>
+              </td>
+
+@php
+
+
+
+
+
+
+
+$time1 = $ad->shift_time_in;
+$time1=strtotime($time1);
+
+// $time1=(date('H:i:s', $time1));
+$time2= $ad->shift_time_out;
+$time2=strtotime($time2);
+
+$diff=$time2 - $time1;
+
+
+
+
+//YERAS
+$years = floor($diff / (365*60*60*24));
+
+//Months
+$months = floor(($diff - $years * 365*60*60*24)/ (30*60*60*24));
+
+
+//Days
+$days = floor(($diff - $years * 365*60*60*24 -$months*30*60*60*24)/ (60*60*24));
+
+$days_in_minutes=$days*24*60;
+$days_in_hours = floor($days / 60);
+
+
+//hours
+$hours = floor(($diff - $years * 365*60*60*24- $months*30*60*60*24 - $days*60*60*24)/ (60*60));
+
+
+
+
+//minutes
+$minutes = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24- $hours*60*60)/ 60);
+
+
+
+//Seconds
+$seconds = floor(($diff - $years * 365*60*60*24- $months*30*60*60*24 - $days*60*60*24 - $hours*60*60 - $minutes*60));
+
+
+
+$m = $hours*60+$minutes+$seconds+$days_in_minutes;
+
+$days_in_hours = floor($m / 60);
+
+$h=$days_in_hours;
+// $s = $s/60;
+// $m = $m+$h+$s;
+// $h = $m/60;
+// $h = round($h ,2);
+// $hh = $hh + $h;
+@endphp
+
+@if ($time2==null)
+    
+<td>
+  <span class="fw-bold" ></span>
+</td>
+<td>
+  <span class="fw-bold" ></span>
+</td>
+
+@else
+<td>
+  <span class="fw-bold" >{{$m}} Minuts</span>
+</td>
+<td>
+  <span class="fw-bold" >{{$hours}}:{{$minutes}}</span>
+</td>
+@endif
+
+
+
+              @php
+                $check=1;
+              @endphp
+              @endif
+              @endforeach
+              @if($check==0 && Now()->format('Y-m-d') >= $date[$i])
+                @if($date[$i] > $attendance_data['emp']->hire_date )
+                <td colspan="2" class="text-center">
+                  <span class="fw-bold" >Absent</span>
                 </td>
                 @php
-                  dd($attendance_data);
+                  $counta++;
                 @endphp
-                @foreach ($attendance_data as $a)
-                  @if($a->Date == $item && $a->title == null)
-                  @php
-                    $check = 1;
-                  @endphp
-                  <td>{{$a->shift_time_in}}</td>
-                  <td>{{$a->shift_time_out}}</td>
-                  @endif
-
-                  @if ($a->title != null && $a->Date == $item)
-                  
-                  <td>{{$a->title}}</td>
-                  <td>{{$a->title}}</td>
-
-                  @php
-                  $check = 1;
-                  @endphp
-
-                  @endif
-                @endforeach 
-
-{{-- @php
-    dd($attendance_data);
-@endphp --}}
-               
-
-                @if($check == 0 )
-                  <td>a</td>
-                  <td>a</td>
+                @elseif($date[$i] == $attendance_data['emp']->hire_date)
+                <td colspan="2" class="text-center">
+                  <span class="fw-bold" >Hiring Date</span>
+                </td>
+                @else
+                <td colspan="2" class="text-center">
+                  <span class="fw-bold" >Not Joined</span>
+                </td>
                 @endif
-                <td><span class="badge rounded-pill badge-light-primary me-1">Active</span></td>
-                <td>
-                  <div class="dropdown">
-                    <button type="button" class="btn btn-sm dropdown-toggle hide-arrow py-0" data-bs-toggle="dropdown">
-                      <i data-feather="more-vertical"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item" href="#">
-                        <i data-feather="edit-2" class="me-50"></i>
-                        <span>Edit</span>
-                      </a>
-                      <a class="dropdown-item" href="#">
-                        <i data-feather="trash" class="me-50"></i>
-                        <span>Delete</span>
-                      </a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              @php
-                
-              $count++;
-              @endphp
-              @endforeach
-                  
               @endif
-            
-              {{-- <tr>
-                <td>
-                  <img
-                    src="{{asset('images/icons/react.svg')}}"
-                    class="me-75"
-                    height="20"
-                    width="20"
-                    alt="React"
-                  />
-                  <span class="fw-bold">React Project</span>
-                </td>
-                <td>Ronald Frest</td>
-                <td>
-                  <div class="avatar-group">
-                    <div
-                      data-bs-toggle="tooltip"
-                      data-popup="tooltip-custom"
-                      data-bs-placement="top"
-                      class="avatar pull-up my-0"
-                      title="Lilian Nenez"
-                    >
-                      <img
-                        src="{{asset('images/portrait/small/avatar-s-5.jpg')}}"
-                        alt="Avatar"
-                        height="26"
-                        width="26"
-                      />
-                    </div>
-                    <div
-                      data-bs-toggle="tooltip"
-                      data-popup="tooltip-custom"
-                      data-bs-placement="top"
-                      class="avatar pull-up my-0"
-                      title="Alberto Glotzbach"
-                    >
-                      <img
-                        src="{{asset('images/portrait/small/avatar-s-6.jpg')}}"
-                        alt="Avatar"
-                        height="26"
-                        width="26"
-                      />
-                    </div>
-                    <div
-                      data-bs-toggle="tooltip"
-                      data-popup="tooltip-custom"
-                      data-bs-placement="top"
-                      class="avatar pull-up my-0"
-                      title="Alberto Glotzbach"
-                    >
-                      <img
-                        src="{{asset('images/portrait/small/avatar-s-7.jpg')}}"
-                        alt="Avatar"
-                        height="26"
-                        width="26"
-                      />
-                    </div>
-                  </div>
-                </td>
-                <td><span class="badge rounded-pill badge-light-success me-1">Completed</span></td>
-                <td>
-                  <div class="dropdown">
-                    <button type="button" class="btn btn-sm dropdown-toggle hide-arrow py-0" data-bs-toggle="dropdown">
-                      <i data-feather="more-vertical"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item" href="#">
-                        <i data-feather="edit-2" class="me-50"></i>
-                        <span>Edit</span>
-                      </a>
-                      <a class="dropdown-item" href="#">
-                        <i data-feather="trash" class="me-50"></i>
-                        <span>Delete</span>
-                      </a>
-                    </div>
-                  </div>
-                </td>
               </tr>
-              <tr>
-                <td>
-                  <img
-                    src="{{asset('images/icons/vuejs.svg')}}"
-                    class="me-75"
-                    height="20"
-                    width="20"
-                    alt="Vuejs"
-                  />
-                  <span class="fw-bold">Vuejs Project</span>
-                </td>
-                <td>Jack Obes</td>
-                <td>
-                  <div class="avatar-group">
-                    <div
-                      data-bs-toggle="tooltip"
-                      data-popup="tooltip-custom"
-                      data-bs-placement="top"
-                      class="avatar pull-up my-0"
-                      title="Lilian Nenez"
-                    >
-                      <img
-                        src="{{asset('images/portrait/small/avatar-s-5.jpg')}}"
-                        alt="Avatar"
-                        height="26"
-                        width="26"
-                      />
-                    </div>
-                    <div
-                      data-bs-toggle="tooltip"
-                      data-popup="tooltip-custom"
-                      data-bs-placement="top"
-                      class="avatar pull-up my-0"
-                      title="Alberto Glotzbach"
-                    >
-                      <img
-                        src="{{asset('images/portrait/small/avatar-s-6.jpg')}}"
-                        alt="Avatar"
-                        height="26"
-                        width="26"
-                      />
-                    </div>
-                    <div
-                      data-bs-toggle="tooltip"
-                      data-popup="tooltip-custom"
-                      data-bs-placement="top"
-                      class="avatar pull-up my-0"
-                      title="Alberto Glotzbach"
-                    >
-                      <img
-                        src="{{asset("images/portrait/small/avatar-s-7.jpg")}}"
-                        alt="Avatar"
-                        height="26"
-                        width="26"
-                      />
-                    </div>
-                  </div>
-                </td>
-                <td><span class="badge rounded-pill badge-light-info me-1">Scheduled</span></td>
-                <td>
-                  <div class="dropdown">
-                    <button type="button" class="btn btn-sm dropdown-toggle hide-arrow py-0" data-bs-toggle="dropdown">
-                      <i data-feather="more-vertical"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item" href="#">
-                        <i data-feather="edit-2" class="me-50"></i>
-                        <span>Edit</span>
-                      </a>
-                      <a class="dropdown-item" href="#">
-                        <i data-feather="trash" class="me-50"></i>
-                        <span>Delete</span>
-                      </a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <img
-                    src="{{asset('images/icons/bootstrap.svg')}}"
-                    class="me-75"
-                    height="20"
-                    width="20"
-                    alt="Bootstrap"
-                  />
-                  <span class="fw-bold">Bootstrap Project</span>
-                </td>
-                <td>Jerry Milton</td>
-                <td>
-                  <div class="avatar-group">
-                    <div
-                      data-bs-toggle="tooltip"
-                      data-popup="tooltip-custom"
-                      data-bs-placement="top"
-                      class="avatar pull-up my-0"
-                      title="Lilian Nenez"
-                    >
-                      <img
-                        src="{{asset('images/portrait/small/avatar-s-5.jpg')}}"
-                        alt="Avatar"
-                        height="26"
-                        width="26"
-                      />
-                    </div>
-                    <div
-                      data-bs-toggle="tooltip"
-                      data-popup="tooltip-custom"
-                      data-bs-placement="top"
-                      class="avatar pull-up my-0"
-                      title="Alberto Glotzbach"
-                    >
-                      <img
-                        src="{{asset('images/portrait/small/avatar-s-6.jpg')}}"
-                        alt="Avatar"
-                        height="26"
-                        width="26"
-                      />
-                    </div>
-                    <div
-                      data-bs-toggle="tooltip"
-                      data-popup="tooltip-custom"
-                      data-bs-placement="top"
-                      class="avatar pull-up my-0"
-                      title="Alberto Glotzbach"
-                    >
-                      <img
-                        src="{{asset('images/portrait/small/avatar-s-7.jpg')}}"
-                        alt="Avatar"
-                        height="26"
-                        width="26"
-                      />
-                    </div>
-                  </div>
-                </td>
-                <td><span class="badge rounded-pill badge-light-warning me-1">Pending</span></td>
-                <td>
-                  <div class="dropdown">
-                    <button type="button" class="btn btn-sm dropdown-toggle hide-arrow py-0" data-bs-toggle="dropdown">
-                      <i data-feather="more-vertical"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item" href="#">
-                        <i data-feather="edit-2" class="me-50"></i>
-                        <span>Edit</span>
-                      </a>
-                      <a class="dropdown-item" href="#">
-                        <i data-feather="trash" class="me-50"></i>
-                        <span>Delete</span>
-                      </a>
-                    </div>
-                  </div>
-                </td>
-              </tr> --}}
-            </tbody>
+            @endfor
+           @endif
+          </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
-  <!-- Bordered table end -->
-
-
- 
 </form>
-
-
-
 
 
 
@@ -509,7 +388,18 @@ $(function () {
 
 
   </script>
-
+<script>
+  $(document).ready(function(){ 
+  @if(isset($attendance_data['emp']))
+  @php
+  $iidd = $attendance_data['emp']->id;
+  @endphp
+  $('#selectem').val({{ $iidd }}).change();
+  $('#selectm').val({{ $month }}).change();
+  $('#selecty').val({{ $aa_year }}).change();
+  @endif
+  });
+</script>
 @endsection
 
 <!-- Product Image Modal -->

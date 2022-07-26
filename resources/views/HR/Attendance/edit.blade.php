@@ -68,8 +68,9 @@
                 <div class="row">
                       <div class="col-md-6 mb-1">
                         <label class="form-label" for="fp-time">Shift Time In</label>
-                        <input type="text" id="shift-time-in" name="shift_time_in" class="form-control flatpickr-time text-start flatpickr-input" value="{{$attendance->shift_time_in}}" placeholder="HH:MM" readonly="readonly">
-                           @error('Date')
+                        {{-- <input type="text" id="shift-time-in" name="shift_time_in" class="form-control flatpickr-time text-start flatpickr-input" value="{{$attendance->shift_time_in}}" placeholder="HH:MM" readonly="readonly"> --}}
+                        <input type="text" id="shift-time-in"  name="shift_time_in" class="form-control flatpickr-date-time flatpickr-input" placeholder="YYYY-MM-DD HH:MM" readonly="readonly"  value="{{$attendance->shift_time_in}}">  
+                        @error('Date')
                     <div class="danger text-danger">{{ $message }}</div>
                     @enderror
           
@@ -77,7 +78,8 @@
 
                       <div class="col-md-6 mb-1">
                         <label class="form-label" for="fp-time">Shift Time Out</label>
-                        <input type="text" id="shift-time-out" name="shift_time_out" class="form-control flatpickr-time text-start flatpickr-input" placeholder="HH:MM" value="{{$attendance->shift_time_out}}" readonly="readonly">
+                        <input type="text" id="shift_time_out"  name="shift_time_out" class="form-control flatpickr-date-time flatpickr-input" placeholder="YYYY-MM-DD HH:MM" readonly="readonly" value="{{$attendance->shift_time_out}}">
+
                       </div>
                 </div> 
             </div>

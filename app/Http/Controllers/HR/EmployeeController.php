@@ -28,7 +28,7 @@ class EmployeeController extends Controller
                     ->addIndexColumn()                
                     ->addColumn('action', function($row){
 
-                           $btn = '<a  href="' . route("attendance.edit",$row->id) .'"  class="edit btn btn-primary btn-sm edit-btn">Edit</a>';
+                           $btn = '<a  href="' . route("employee.edit",$row->id) .'"  class="edit btn btn-primary btn-sm edit-btn">Edit</a>';
                            $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm delete-btn">Delete</a>';
                            $btn = $btn.' <a  href="' . route("employee.show",$row->id) .'"  class="view btn btn-success btn-sm view-btn">View</a>';
                             return $btn;

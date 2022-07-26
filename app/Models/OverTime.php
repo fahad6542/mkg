@@ -5,18 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Leave extends Model
+class OverTime extends Model
 {
     use HasFactory;
     protected $fillable = [
         'employee_id',
-        'title',
-        'Date',
-        'description'
+        'date',
+        'check_in',
+        'check_out',
+        'overtime'
     ];
-
-    public function employees()
-    {
-        return $this->belongsTo(Employee::class);
-    }
 }

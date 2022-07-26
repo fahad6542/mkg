@@ -26,7 +26,6 @@
         @if ($errors->any())
             $('.click_if_invalid')[0].click();
         @endif
-
         $(function () {
         var isRtl = $('html').attr('data-textdirection') === 'rtl',
             typeSuccess = $('#type-success'),

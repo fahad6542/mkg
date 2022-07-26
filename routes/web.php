@@ -21,6 +21,13 @@ use App\Http\Controllers\HR\LeaveController;
 use App\Http\Controllers\HR\HolidayController;
 use App\Http\Controllers\HR\ReportController;
 use App\Http\Controllers\HR\AttendanceSheetController;
+use App\Http\Controllers\HR\AdvanceSalariesController;
+use App\Http\Controllers\HR\OverTimeController;
+
+
+
+
+
 
 
 use App\Http\Controllers\General\ProductTypeController;
@@ -72,6 +79,14 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('leave',LeaveController::class);
     Route::resource('holiday',HolidayController::class);
     Route::resource('report',ReportController::class);
+    Route::resource('Advance_salary',AdvanceSalariesController::class);
+    Route::get('fetch-data', [AdvanceSalariesController::class ,'fetchData']);
+    Route::resource('overtime',OverTimeController::class);
+    Route::get('Over-time', [OverTimeController::class ,'overtime']);
+    
+    
+
+    
     Route::get('attendance_sheet', [AttendanceSheetController::class, 'index'])->name('attendance_sheet');
     Route::post('attendance/show', [AttendanceSheetController::class, 'show'])->name('show');
 
