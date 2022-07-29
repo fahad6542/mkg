@@ -222,80 +222,38 @@
             "slug": "",
             "submenu": [
                 {
-                    "url": "product/books/list",
+                    "url": "books/show",
                     "name": "Books Info",
                     "icon": "circle",
                     "slug": "book-info"
                 },
                 {
-                    "url": "product/note-books/list",
+                    "url": "note-books/show",
                     "name": "Note Books Info",
                     "icon": "circle",
                     "slug": "app-notebooks-list"
                 },
                 {
-                    "url": "product/uniform/list",
+                    "url": "uniform/show",
                     "name": "Uniform Info",
                     "icon": "circle",
                     "slug": "app-uniform-list"
                 },
                 {
-                    "url": "product/stationery/list",
+                    "url": "stationary/show",
                     "name": "Stationery",
                     "icon": "circle",
                     "slug": "app-stationery-list"
                 },
                 {
-                    "url": "product/gift/toys/list",
+                    "url": "gift-toys/show",
                     "name": "Gift And Toys",
                     "icon": "circle",
                     "slug": "app-gift-toys-list"
                 }
             ]
         },
-        {
-            "name": "Discount Policy",
-            "icon": "file-text",
-            "slug": "",
-            "submenu": [
-                {
-                    "url": "discount/books/list",
-                    "name": "Books",
-                    "icon": "circle",
-                    "slug": ""
-                },
-                {
-                    "url": "discount/note-books/list",
-                    "name": "Note Book",
-                    "icon": "circle",
-                    "slug": ""
-                },
-                {
-                    "url": "discount/stationary/list",
-                    "name": "Stationary",
-                    "icon": "circle",
-                    "slug": ""
-                },
-                {
-                    "url": "discount/gift-item/list",
-                    "name": "Gift Item",
-                    "icon": "circle",
-                    "slug": ""
-                },
-                {
-                    "url": "discount/uniform/list",
-                    "name": "Uniform",
-                    "icon": "circle",
-                    "slug": ""
-                },
-                {
-                    "url": "discount/offer",
-                    "name": "Discount Offer",
-                    "icon": "circle",
-                    "slug": ""
-                }
-            ]
-        },
+        
         {
             "name": "System",
             "icon": "file-text",

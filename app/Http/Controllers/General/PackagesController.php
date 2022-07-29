@@ -1,9 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\General;
 
 use App\Models\Packages;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use DataTables;
 
 class PackagesController extends Controller
 {
@@ -15,6 +19,9 @@ class PackagesController extends Controller
     public function index()
     {
         //
+        $user=Auth::user();
+        // $data['packages']=Packages::Where('delete_status','=',1)->get();
+        return view('general.product_label.package_info.index');
     }
 
     /**
