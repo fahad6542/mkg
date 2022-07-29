@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Books Information')
+@section('title', 'Gift And Toys Information')
 
 @section('vendor-style')
   <!-- vendor css files -->
@@ -10,8 +10,7 @@
   <link rel="stylesheet" type="text/css" href="https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/file-uploaders/dropzone.min.css')) }}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-
-
+  
 @endsection
 
 @section('page-style')
@@ -28,269 +27,222 @@
 }
 </style>
 @endsection
+
 @section('content')
 
+
 <!-- Basic multiple Column Form section start -->
-<form class="form"   id="add_book" method="POST" action="{{route('books.store')}}">
+<form class="form"   id="add_book" method="POST" action="{{route('gift-toys.store')}}">
   @csrf
   <section id="multiple-column-form">
     <div class="row">
       <div class="col-9">
         <div class="card">
           <div class="card-header">
-            <h4 class="card-title">Book Information</h4>
+            <h4 class="card-title">Gift And Toys Information</h4>
           </div>
+          <input type="hidden" class="form-control" name="l_purchase_price"/>
+
           <div class="card-body">
               <div class="row">
-            
-
-                <div class="col-md-11 col-12">
+                <div class="col-12">
                   <div class="mb-1">
-                    <input type="text" class="form-control @error('name') error @enderror"
-                      placeholder="Product Name (English)*" name="name" />
-                      @error('name')
+                    <input
+                      type="text"
+                      id="first-name-column"
+                      class="form-control @error('name') error @enderror"
+                      placeholder="Product Name*"
+                      name="name"
+                    />
+                    @error('name')
                           <div class="danger text-danger">{{ $message }}</div>
                       @enderror
                   </div>
                 </div>
-                <div class="col-md-1 col-12">
-                  <div class="mb-1 pb-2">
-                    <label class="" for="inv_display_name">
-                      <input type="radio" class="form-check-input mt-1" name="inv_display_name"
-                            title="Display English Name on Invoice" value="name"/>
-                    </label>
-                  </div>
-                </div>
-                <div class="col-md-11 col-12">
+                <div class="col-md-4 col-12">
                   <div class="mb-1">
-                    <input type="text" class="form-control @error('name_urdu') error @enderror"
-                      name="name_urdu" placeholder="Product Name (Urdu)*" />
+                    <input
+                      type="text"
+                      readonly
+                      id="email-id-column"
+                      class="form-control"
+                      name="product_id"
+                      placeholder="Gift And Toys Information"
+                      value="Gift And Toys"
+                    />
                   </div>
                 </div>
-
-                <div class="col-md-1 col-12">
-                  <div class="mb-3">
-                      <label class="" for="inv_display_name">
-                          <input type="radio" class="form-check-input mt-1" name="inv_display_name"
-                                title="Display Urdu Name on Invoice" value="urdu_name"/>
-                        </label>
-                  </div>
-                </div>
-                <div class="col-md-3 col-12">
+                <div class="col-md-4 col-12">
                   <div class="mb-1">
-                    <input type="text" class="form-control" placeholder="Book" value="Book" name="product_id" readonly/>
+                    <input
+                      type="text"
+                      id="email-id-column"
+                      class="form-control @error('label_txt') error @enderror"
+                      name="label_txt"
+                      placeholder="Label Text*"
+                    />
                   </div>
                 </div>
-                <div class="col-md-3 col-12">
+                <div class="col-md-4 col-12">
                   <div class="mb-1">
-                    <input type="text" class="form-control @error('label_txt') error @enderror"
-                      name="label_txt" placeholder="Label Text*"/>
+                    <input
+                      type="text"
+                      id="company-column"
+                      class="form-control  @error('barcode') error @enderror"
+                      name="barcode"
+                      placeholder="Product Code"
+                    />
                   </div>
                 </div>
-                <div class="col-md-3 col-12">
-                  <div class="mb-1">
-                    <input type="text" class="form-control @error('barcode') error @enderror"
-                      name="barcode" placeholder="Product Code*" title="Input using barcode reader"/>
-                  </div>
-                </div>
-                <div class="col-md-3 col-12">
-                  <div class="mb-1">
-                    <input type="date" class="form-control @error('manufacturing_date') error @enderror"
-                      name="manufacturing_date" placeholder="Month Year" />
-                  </div>
-                </div>
-
+                
                 <div class="col-12">
                   <div class="mb-1">
-                      <textarea name="description" class="form-control @error('description') error @enderror" rows="3"
-                                placeholder="Product Description*"></textarea>
-                  </div>
+                  <textarea
+                    class="form-control  @error('description') error @enderror"
+                    id="exampleFormControlTextarea1"
+                    rows="3"
+                    name="description" 
+                    placeholder="Product Description*"
+                  ></textarea>
                 </div>
-                <div class="col-md-4 col-12">
-                  <div class="mb-1">
-                    <input type="text" class="form-control @error('purchase_price') error @enderror"
-                      name="l_purchase_price" placeholder="Purchase Price"/>
-                  </div>
-                </div>
-                <div class="col-md-4 col-12">
-                  <div class="mb-1">
-                    <input type="text" id="comission" class="form-control @error('comission') error @enderror"
-                      name="l_comission" placeholder="Comission"/>
-                  </div>
-                </div>
-                <div class="col-md-4 col-12">
-                  <div class="mb-1">
-                    <input type="text" id="sale_price" class="form-control @error('l_sale_price') error @enderror"
-                      name="l_sale_price" placeholder="Sale Price"/>
-                  </div>
                 </div>
 
                 <div class="col-md-4 col-12">
                   <div class="mb-1">
-                    <input type="text" id="weight" class="form-control @error('weight') error @enderror"
-                      name="weight" placeholder="Weight"/>
+                    <input
+                      type="text"
+                      id="company-column"
+                      class="form-control @error('purchase_price') error @enderror"
+                      name="purchase_price"
+                      placeholder="Purchase Price"
+                    />
                   </div>
                 </div>
+                <div class="col-md-4 col-12">
+                  <div class="mb-1">
+                    <input
+                      type="text"
+                      id="company-column"
+                      class="form-control @error('l_comission') error @enderror"
+                      name="l_comission"
+                      placeholder="Comission"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4 col-12">
+                  <div class="mb-1">
+                    <input
+                      type="text"
+                      id="company-column"
+                      class="form-control  @error('l_sale_price') error @enderror"
+                      name="l_sale_price"
+                      placeholder="Sale Price"
+                    />
+                  </div>
+                </div>
+                
+                <div class="col-md-4 col-12">
+                  <div class="mb-1">
+                    <input
+                      type="text"
+                      id="company-column"
+                      class="form-control  @error('weight') error @enderror"
+                      name="weight"
+                      placeholder="Weight"
+                    />
+                  </div>
+                </div>
+
                 <div class="col-md-4 col-12">
                   <div class="mb-1">
                       <input type="text" id="dimensions" class="form-control @error('dimensions') error @enderror"
                       name="dimensions" placeholder="Dimensions"/>
                   </div>
                 </div>
-                <div class="col-md-4 col-12">
-                  <div class="mb-1">
-                    <input type="number" id="total_pages" class="form-control @error('total_pages') error @enderror"
-                      name="total_pages" placeholder="No. of Pages" />
-                  </div>
-                </div>
 
                 <div class="col-md-4 col-12">
                   <div class="mb-1">
                     <select class="select2 form-select" id="select2-Unit" name="unit_id">
-                    @foreach($units as $x => $val)
-                      <option value="{{$x}}">{{$val}}</option>
-                    @endforeach  
+                      @foreach($units as $x => $val)
+                        <option value="{{$x}}">{{$val}}</option>
+                      @endforeach  
                     </select>
                   </div>
                 </div>
-
-                <div class="col-md-4 col-12">
-                  <div class="mb-1">
-                    <input type="text" id="size" class="form-control @error('size') error @enderror"
-                      name="size" placeholder="Size" />
-                  </div>
-                </div>
-
-            
-
-                <div class="col-md-4 col-12">
-                  <div class="mb-1">
-                    <input list="Publisher" name="browser" placeholder="Publisher*" id="browser"   class="form-control @error('code') error @enderror">
-
-                      <datalist id="Publisher">
-                        <option value="Edge">
-                        <option value="Firefox">
-                        <option value="Chrome">
-                        <option value="Opera">
-                        <option value="Safari">
-                      </datalist>
-                  </div>
-                </div>
-                <div class="col-md-4 col-12">
-                  <div class="mb-1">
-                  <select class="select2 form-select" id="select2-Unit" name="author">
-                    @foreach($authors as $x => $val)
-                      <option value="{{$x}}">{{$val}}</option>
-                    @endforeach  
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-4 col-12">
-                  <div class="mb-1">
-                  <select class="select2 form-select" id="select2-Unit" name="class_id">
-                    @foreach($classes as $x => $val)
-                      <option value="{{$x}}">{{$val}}</option>
-                    @endforeach  
-                    </select>
-                  </div>
-                </div>
-                <!--  -->
-                <div class="col-md-4 col-12">
-                  <div class="mb-1">
-                    <!-- <label class="form-label" for="country-floating">Topic</label> -->
-
-                    <select class="select2 form-select" id="select2-Unit" name="topic_id">
-                    @foreach($topics as $x => $val)
-                      <option value="{{$x}}">{{$val}}</option>
-                    @endforeach  
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-4 col-12">
-                  <div class="mb-1">
-                    <!-- <label class="form-label" for="country-floating">Topic</label> -->
-
-                    <select class="select2 form-select" id="select2-Unit" name="language_id">
-                    @foreach($languages as $x => $val)
-                      <option value="{{$x}}">{{$val}}</option>
-                    @endforeach  
-                    </select>
-                  </div>
-                </div>
-
-
-
-                <div class="col-md-4 col-12">
-                  <div class="mb-1">
-                    <!-- <label class="form-label" for="country-floating">Language</label> -->
-
-                    <select class="select2 form-select" id="select2-Subject">
-                      <option value="">Edition*</option>
-                    </select>
-
-                  </div>
-                </div>
-
-                <div class="col-md-4 col-12">
-                  <div class="mb-1">
-                    <!-- <label class="form-label" for="country-floating">Subject</label> -->
-
-                    <select class="select2 form-select" id="select2-Subject">
-                      <option value="">Subject*</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="col-md-4 col-12">
-                  <div class="mb-1">
-                    <!-- <label class="form-label" for="country-floating">Binding</label> -->
-
-                    <select class="select2 form-select" id="select2-Subject">
-                      <option value="">Binding*</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="col-md-4 col-12">
-                  <div class="mb-1">
-                    <!-- <label class="form-label" for="country-floating">Series</label> -->
-
-                    <select class="select2 form-select" id="select2-Subject">
-                      <option value="">Series*</option>
-                    </select>
-
-                  </div>
-                </div>
-              
+                
+                
                 <div class="col-md-4 col-12">
                   <div class="mb-1">
                     <input
                       type="text"
                       id="company-column"
-                      class="form-control @error('ISBN') error @enderror"
-                      name="ISBN"
-                      placeholder="ISBN"
+                      class="form-control @error('size') error @enderror"
+                      name="size"
+                      placeholder="Size"
                     />
                   </div>
                 </div>
+
                 <div class="col-md-4 col-12">
                   <div class="mb-1">
                     <input
                       type="text"
                       id="company-column"
-                        class="form-control @error('alternate_code') error @enderror"
-                      name="alternate_code"
+                      class="form-control @error('color') error @enderror"
+                      name="color"
+                      placeholder="Color"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                  <div class="mb-1">
+                    <select class="select2 form-select" id="select2-Calculate">
+                      <option value="">Discount Policy</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4 col-12">
+                  <div class="mb-1">
+                    <!-- <label class="form-label" for="city-column">Supplier</label> -->
+                    
+
+                    <select class="select2 form-select" id="select2-Calculate">
+                      <option value="">Supplier</option>
+                    </select>
+
+                  </div>
+                </div>
+                
+                <div class="col-md-4 col-12">
+                  <div class="mb-1">
+                    <input
+                      type="text"
+                      id="company-column"
+                      class="form-control"
+                      name="company-column"
                       placeholder="Alternate Code"
                     />
                   </div>
                 </div>
+                
+                <div class="col-md-4 col-12">
+                  <div class="mb-1">
+                    <!-- <label class="form-label" for="city-column">Supplier</label> -->
+                    
 
-                <!--  -->
+                    <select class="select2 form-select" id="select2-Calculate">
+                      <option value="">Brand</option>
+                    </select>
+
+                  </div>
+                </div>
 
 
+            
 
                 <div class="col-12">
-
+                  
                 </div>
               </div>
             </form>
@@ -299,6 +251,7 @@
           <div class="col-12 d-flex justify-content-end mb-1">
             <button type="submit" class="btn btn-primary me-1">Submit</button>
             <button type="button" class="btn btn-primary me-1">Send Details to Clipboard</button>
+
             <button type="button" class="btn btn-outline-secondary me-1">Reset</button>
             <button type="button" class="btn btn-outline-secondary me-1">Make Copy</button>
             <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">Discount Policy</button>
@@ -306,16 +259,16 @@
           </div>
       </div>
             <!-- The Modal -->
-            <div class="modal" id="myModal">
-                <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal" id="myModal">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
                   <div class="modal-content">
-
+                  
                     <!-- Modal Header -->
                     <div class="modal-header">
-                      <h4 class="modal-title">Book Discount Policy</h4>
+                      <h4 class="modal-title">Gift And Toys Discount Policy</h4>
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-
+                    
                     <!-- Modal body -->
                     <div class="modal-body">
                     <form action="">
@@ -328,6 +281,10 @@
                                   <th>L.Sale Price</th>
                                   <th>L.Dis %age</th>
                                   <th>L.dis Amt</th>
+                                  <th>P.Sale Price</th>
+                                  <th>P.Dis %age</th>
+                                  <th>P.dis Amt</th>
+
                                   </tr>
                               </thead>
                               <tbody>
@@ -343,7 +300,7 @@
                                       type="text"
                                       name=""
                                       value=""
-                                        class="form-control @error('code') error @enderror"
+                                      class="form-control"
                                       >
                                   </td>
                                   <td>
@@ -351,9 +308,34 @@
                                       type="text"
                                       name=""
                                       value=""
-                                        class="form-control @error('code') error @enderror"
+                                      class="form-control"
                                       >
                                   </td>
+                                  <td>
+                                      <input
+                                      type="text"
+                                      name=""
+                                      value=""
+                                      class="form-control"
+                                      >
+                                  </td>
+                                  <td>
+                                      <input
+                                      type="text"
+                                      name=""
+                                      value=""
+                                      class="form-control"
+                                      >
+                                  </td>
+                                  <td>
+                                      <input
+                                      type="text"
+                                      name=""
+                                      value=""
+                                      class="form-control"
+                                      >
+                                  </td>
+                                  
                                 </tr>
                                 <tr>
                                   <td>
@@ -364,7 +346,7 @@
                                       type="text"
                                       name=""
                                       value=""
-                                        class="form-control @error('code') error @enderror"
+                                      class="form-control"
                                       >
                                   </td>
                                   <td>
@@ -372,7 +354,7 @@
                                       type="text"
                                       name=""
                                       value=""
-                                        class="form-control @error('code') error @enderror"
+                                      class="form-control"
                                       >
                                   </td>
                                   <td>
@@ -380,7 +362,31 @@
                                       type="text"
                                       name=""
                                       value=""
-                                        class="form-control @error('code') error @enderror"
+                                      class="form-control"
+                                      >
+                                  </td>
+                                  <td>
+                                      <input
+                                      type="text"
+                                      name=""
+                                      value=""
+                                      class="form-control"
+                                      >
+                                  </td>
+                                  <td>
+                                      <input
+                                      type="text"
+                                      name=""
+                                      value=""
+                                      class="form-control"
+                                      >
+                                  </td>
+                                  <td>
+                                      <input
+                                      type="text"
+                                      name=""
+                                      value=""
+                                      class="form-control"
                                       >
                                   </td>
                                 </tr>
@@ -393,7 +399,7 @@
                                       type="text"
                                       name=""
                                       value=""
-                                        class="form-control @error('code') error @enderror"
+                                      class="form-control"
                                       >
                                   </td>
                                   <td>
@@ -401,7 +407,7 @@
                                       type="text"
                                       name=""
                                       value=""
-                                        class="form-control @error('code') error @enderror"
+                                      class="form-control"
                                       >
                                   </td>
                                   <td>
@@ -409,7 +415,31 @@
                                       type="text"
                                       name=""
                                       value=""
-                                        class="form-control @error('code') error @enderror"
+                                      class="form-control"
+                                      >
+                                  </td>
+                                  <td>
+                                      <input
+                                      type="text"
+                                      name=""
+                                      value=""
+                                      class="form-control"
+                                      >
+                                  </td>
+                                  <td>
+                                      <input
+                                      type="text"
+                                      name=""
+                                      value=""
+                                      class="form-control"
+                                      >
+                                  </td>
+                                  <td>
+                                      <input
+                                      type="text"
+                                      name=""
+                                      value=""
+                                      class="form-control"
                                       >
                                   </td>
                                 </tr>
@@ -422,7 +452,7 @@
                                       type="text"
                                       name=""
                                       value=""
-                                        class="form-control @error('code') error @enderror"
+                                      class="form-control"
                                       >
                                   </td>
                                   <td>
@@ -430,7 +460,7 @@
                                       type="text"
                                       name=""
                                       value=""
-                                        class="form-control @error('code') error @enderror"
+                                      class="form-control"
                                       >
                                   </td>
                                   <td>
@@ -438,7 +468,31 @@
                                       type="text"
                                       name=""
                                       value=""
-                                        class="form-control @error('code') error @enderror"
+                                      class="form-control"
+                                      >
+                                  </td>
+                                  <td>
+                                      <input
+                                      type="text"
+                                      name=""
+                                      value=""
+                                      class="form-control"
+                                      >
+                                  </td>
+                                  <td>
+                                      <input
+                                      type="text"
+                                      name=""
+                                      value=""
+                                      class="form-control"
+                                      >
+                                  </td>
+                                  <td>
+                                      <input
+                                      type="text"
+                                      name=""
+                                      value=""
+                                      class="form-control"
                                       >
                                   </td>
                                 </tr>
@@ -451,7 +505,7 @@
                                       type="text"
                                       name=""
                                       value=""
-                                        class="form-control @error('code') error @enderror"
+                                      class="form-control"
                                       >
                                   </td>
                                   <td>
@@ -459,7 +513,7 @@
                                       type="text"
                                       name=""
                                       value=""
-                                        class="form-control @error('code') error @enderror"
+                                      class="form-control"
                                       >
                                   </td>
                                   <td>
@@ -467,36 +521,59 @@
                                       type="text"
                                       name=""
                                       value=""
-                                        class="form-control @error('code') error @enderror"
+                                      class="form-control"
+                                      >
+                                  </td>
+                                  <td>
+                                      <input
+                                      type="text"
+                                      name=""
+                                      value=""
+                                      class="form-control"
+                                      >
+                                  </td>
+                                  <td>
+                                      <input
+                                      type="text"
+                                      name=""
+                                      value=""
+                                      class="form-control"
+                                      >
+                                  </td>
+                                  <td>
+                                      <input
+                                      type="text"
+                                      name=""
+                                      value=""
+                                      class="form-control"
                                       >
                                   </td>
                                 </tr>
-
+                                
                               </tbody>
                             </table>
                           </div>
-
+                        
                       </div>
                       <button type="submit" class="btn btn-Primary" data-dismiss="modal">Submit</button>
+
                     </form>
 
                     </div>
-
+                    
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                      
-                      
                       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
                     </div>
-
+                  
                   </div>
                 </div>
               </div>
             <!-- Modale End -->
 
       <div class="col-3">
-
+      
         <div class="card">
           <div class="card-header">
             <h4 class="card-title"></h4>
@@ -516,7 +593,7 @@
                     <a href="">Add Image</a>
                   </div>
                 </div>
-
+              
                   <div class="col-12">
                   <div class="mb-1">
                     <label class="form-label" for="email-id-column">Date Published*</label>
@@ -528,9 +605,8 @@
                     />
                   </div>
                 </div>
-
-              </div>
               
+              </div>
             </form>
           </div>
 
@@ -541,13 +617,15 @@
             <h4 class="card-title">Category</h4>
           </div>
           <div class="card-body">
+           
               <div class="row">
-
-
+                
+              
                 <div class="col-12">
                   <div class="mb-1">
                     <!-- <label class="form-label" for="last-name-column">Sub Category*</label> -->
-                    <select class="form-select mt-1" id="category" name="category_id">
+                    
+                    <select class="form-select mt-1" id="category" name="sub_category_id">
                         @foreach($categories as $x => $val)
                           <option value="{{$x}}">{{$val}}</option>
                         @endforeach  
@@ -555,28 +633,16 @@
 
                   </div>
                 </div>
-                <div class="col-12">
-                  <div class="mb-1">
-                    <!-- <label class="form-label" for="last-name-column">Sub Category*</label> -->
+                
 
-                    <select class="form-select mt-1" id="subcategory" name="sub_category_id">
-                                      
-                    </select>
-
-                  </div>
-                </div>
-
-
-
-
-
+                
                 <div class="col-12">
                   <div class="mb-1">
                     <!-- <label class="form-label" for="select2-multiple">Keywords</label> -->
                     <input
                       type="text"
                       id="Keywords-id-column"
-                        class="form-control @error('keywords') error @enderror"
+                      class="form-control @error('keywords') error @enderror"
                       name="keywords"
                       data-role="tagsinput"
                       placeholder="Keywords"
@@ -589,7 +655,7 @@
                     <input
                       type="text"
                       id="Keywords-id-column"
-                        class="form-control @error('additional_topics') error @enderror"
+                      class="form-control  @error('additional_topics') error @enderror"
                       name="additional_topics"
                       data-role="tagsinput"
                       placeholder="Additional Topics"
@@ -597,6 +663,7 @@
                   </div>
                 </div>
               </div>
+            
           </div>
 
         </div>
@@ -609,7 +676,7 @@
 
             <a  class="up"><i data-feather='arrow-down'></i></a>
 
-
+          
           </div>
           <div class="card-body details" style="display: none;">
             <form class="form">
@@ -644,29 +711,21 @@
                     <label class="form-check-label" for="colorCheck1">Item to be checked Daily</label>
                   </div>
                 </div>
-
-
-
+              
+              
+                
               </div>
-              <button type="submit"></button>
             </form>
           </div>
-
+          
         </div>
       </div>
     </div>
 
-    
+
   </section>
-  
+
 </form>
-
-
-
-
-
-
-
 
 <!-- Basic Floating Label Form section end -->
 @endsection
@@ -677,7 +736,7 @@
 $(document).ready(function(){
   $(".down").click(function(){
     $(".details").slideUp();
-
+    
     $(".down").hide();
     $(".up").show();
   });
@@ -687,30 +746,6 @@ $(document).ready(function(){
     $(".down").show();
   });
 });
-
-
-        $(document).ready(function() {
-       $('#category').on('change', function(e) {
-          e.preventDefault();
-           var cat_id = e.target.value;
-          //  alert(cat_id)
-           $.ajax({
-               url: "{{url('/fetch-subcategory')}}",
-               type: "POST",
-               data: {
-                   sub_category_id: cat_id,
-                    _token: '{{csrf_token()}}'
-               },
-               success: function(data) {
-                console.log(data)
-                  $('#subcategory').html("");
-                   $.each(data , function(index, subcategory) {
-                       $('#subcategory').append('<option value="' + subcategory.id + '">' + subcategory.name + '</option>');
-                   });
-               }
-           })
-       });
-   });
 </script>
 
   <!-- vendor files -->
@@ -758,4 +793,4 @@ $(document).ready(function(){
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>   

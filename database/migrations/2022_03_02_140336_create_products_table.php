@@ -17,17 +17,20 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
 
             $table->id();
+            $table->integer('product_id');
             $table->integer('sr_id')->nullable(); //restarts for each company
             $table->string('barcode')->unique()->comment('Scan from bar code reader or auto generate');
 
             $table->string('name')->unique();
-            $table->string('name_urdu')->unique();
-            $table->string('inv_display_name')->default('name');
+            $table->string('name_urdu')->nullable();
+            $table->string('inv_display_name')->default('name')->nullable();
             $table->string('label_txt');
 
             $table->date('manufacturing_date')->nullable()->comment('publishing date');
             $table->longText('description')->nullable();
             $table->string('keywords')->nullable()->comment('comma seperated, tags');
+            $table->string('additional_topics')->nullable()->comment('comma seperated, tags');
+
             // $table->string('featured_image');
             // $table->string('gallery_images');
             //Packing Size Info
@@ -38,8 +41,8 @@ return new class extends Migration
             $table->float('l_sale_price',15,2)->default('0.00');
             $table->float('l_comission',3,2)->default('0.00');
             $table->float('l_purchase_price',15,2)->default('0.00');
-            $table->integer('retail_discount_policy');
-            $table->integer('whole_sale_discount_policy');
+            $table->integer('retail_discount_policy')->nullable();
+            $table->integer('whole_sale_discount_policy')->nullable();
 
             $table->float('p_sale_price',15,2)->default('0.00');
             $table->float('p_comission',3,2)->default('0.00');
@@ -64,7 +67,7 @@ return new class extends Migration
             $table->string('form_type')->default('others');
             $table->unsignedBigInteger('sub_category_id');
 
-            $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('supplier_id')->nullable();
             $table->unsignedBigInteger('publisher_id')->nullable()->comment('Manufacturer');
 
             //details

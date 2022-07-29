@@ -132,8 +132,8 @@
             <thead>
               <tr>
                 <th>Sr#</th>
-                <th>Category Name</th>
                 <th>Sub Category Name</th>
+                <th>Category Name</th>
                 <th>Description</th>
                 <th>Action</th>
               </tr>
@@ -221,8 +221,8 @@ $(document).ready(function() {
           $('#ajax_model').modal('show');
           //filling the form
           $('#category_info_id').val(data.id);
-          $('#title').val(data.title);
           $('#name').val(data.name);
+          $('#title').val(data.title);
           $('#description').val(data.description);
 
         })

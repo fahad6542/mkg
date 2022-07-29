@@ -17,11 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('sr_id')->nullable();
             $table->integer('product_type_id');
-
-           
             $table->string('title');
             $table->text('description');
-
             $table->tinyInteger('delete_status')->default(1);
             $table->tinyInteger('is_active')->default(1);
             $table->integer('company_id');

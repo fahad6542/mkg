@@ -22,13 +22,14 @@ use App\Http\Controllers\HR\HolidayController;
 use App\Http\Controllers\HR\ReportController;
 use App\Http\Controllers\HR\AttendanceSheetController;
 
-
 use App\Http\Controllers\General\ProductTypeController;
 use App\Http\Controllers\General\CategoriesController;
 use App\Http\Controllers\General\SubCategoriesController;
 use App\Http\Controllers\General\Products\BooksController;
-
-
+use App\Http\Controllers\General\Products\NoteBooksController;
+use App\Http\Controllers\General\Products\UniformController;
+use App\Http\Controllers\General\Products\StationariesController;
+use App\Http\Controllers\General\Products\GiftAndToyesController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StaterkitController;
@@ -75,9 +76,17 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('subcategory', SubCategoriesController::class);
     Route::resource('subcategory', SubCategoriesController::class);
     Route::post('/fetch-category',[SubCategoriesController::class,'fetchCategory']);
-
-
+    Route::post('/fetch-subcategory',[BooksController::class,'fetchCategory']);
     Route::resource('books', BooksController::class);
+    Route::resource('note-books', NoteBooksController::class);
+    Route::post('/fetch-subcategories',[NoteBooksController::class,'fetchCategory']);
+
+    Route::resource('uniform', UniformController::class);
+    Route::resource('stationary', StationariesController::class);
+    Route::resource('gift-toys', GiftAndToyesController::class);
+
+
+    
 
 
 });
