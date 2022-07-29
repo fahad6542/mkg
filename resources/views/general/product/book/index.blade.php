@@ -49,6 +49,7 @@
                 <th>Class</th>
                 <th>Comission</th>
                 <th>Purchase Price</th>
+                <th>Action</th>
 
               </tr>
             </thead>
@@ -88,6 +89,10 @@
                      
                       <td>{{$key->l_comission}}</td>
                       <td>{{$key->l_purchase_price}}</td>
+                      <td>
+                    
+                      </td>
+
                       
                     </tr>
                 @endforeach

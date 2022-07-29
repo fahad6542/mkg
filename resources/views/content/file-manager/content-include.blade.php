@@ -63,7 +63,7 @@
                       <form action="#" class="dropzone dropzone-area" id="dpz-multiple-files">
                         <div class="dz-message">Drop files here or click to upload.</div>
                         <input type='file' hidden id="image_1"> 
-                        <button type="submit">asda</button>
+                      
                       </form>
                     </div>
                   </div>

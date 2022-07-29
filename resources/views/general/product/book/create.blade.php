@@ -144,15 +144,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-4 col-12">
-                  <div class="mb-1">
-                    <select class="select2 form-select" id="select2-Unit" name="unit_id">
-                    @foreach($units as $x => $val)
-                      <option value="{{$x}}">{{$val}}</option>
-                    @endforeach  
-                    </select>
-                  </div>
-                </div>
+                
 
                 <div class="col-md-4 col-12">
                   <div class="mb-1">
@@ -296,14 +288,7 @@
             </form>
           </div>
         </div>
-          <div class="col-12 d-flex justify-content-end mb-1">
-            <button type="submit" class="btn btn-primary me-1">Submit</button>
-            <button type="button" class="btn btn-primary me-1">Send Details to Clipboard</button>
-            <button type="button" class="btn btn-outline-secondary me-1">Reset</button>
-            <button type="button" class="btn btn-outline-secondary me-1">Make Copy</button>
-            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">Discount Policy</button>
-
-          </div>
+          
       </div>
             <!-- The Modal -->
             <div class="modal" id="myModal">
@@ -511,31 +496,16 @@
                   </div>
                 </div>
                 <div class="col-12">
-                  <div class="mb-1">
+                  
                     <label class="form-label" for="first-name-column">Galery Images</label>
                     <a href="">Add Image</a>
-                  </div>
+                  
                 </div>
-
-                  <div class="col-12">
-                  <div class="mb-1">
-                    <label class="form-label" for="email-id-column">Date Published*</label>
-                    <input
-                      type="text"
-                      id="fp-date-time"
-                      class="form-control flatpickr-date-time"
-                      placeholder="YYYY-MM-DD HH:MM"
-                    />
-                  </div>
-                </div>
-
               </div>
               
             </form>
           </div>
-
         </div>
-
         <div class="card">
           <div class="card-header">
             <h4 class="card-title">Category</h4>
@@ -648,12 +618,106 @@
 
 
               </div>
-              <button type="submit"></button>
+              
             </form>
           </div>
 
         </div>
       </div>
+    </div>
+
+    <!--  -->
+    <section class="form-control-repeater">
+      <div class="row">
+        <!-- Invoice repeater -->
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Variations</h4>
+            </div>
+            <div class="card-body">
+              <form action="#" class="invoice-repeater">
+                <div data-repeater-list="invoice">
+                  <div data-repeater-item>
+                    <div class="row d-flex align-items-end">
+                      
+
+                      <div class="col-md-4 col-12">
+                        <div class="mb-1">
+                        <label class="form-label" for="itemname">Units</label>
+                          <select class="select2 form-select" id="select2-Unit" name="unit_id">
+                          @foreach($units as $x => $val)
+                            <option value="{{$x}}">{{$val}}</option>
+                          @endforeach  
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-md-2 col-12">
+                        <div class="mb-1">
+                          <label class="form-label" for="itemcost">SKU</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="itemcost"
+                            aria-describedby="itemcost"
+                            placeholder="32"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-2 col-12">
+                        <div class="mb-1">
+                          <label class="form-label" for="itemquantity">Price</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="itemquantity"
+                            aria-describedby="itemquantity"
+                            placeholder="1"
+                          />
+                        </div>
+                      </div>
+
+                 
+
+                      <div class="col-md-2 col-12 mb-50">
+                        <div class="mb-1">
+                          <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">
+                            <i data-feather="x" class="me-25"></i>
+                            <span>Delete</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <hr />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
+                      <i data-feather="plus" class="me-25"></i>
+                      <span>Add New</span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- /Invoice repeater -->
+      </div>
+    </section>
+
+
+    <!--  -->
+    <div class="col-12 mb-1">
+      <button type="submit" class="btn btn-primary me-1">Submit</button>
+      <button type="button" class="btn btn-primary me-1">Send Details to Clipboard</button>
+      <button type="button" class="btn btn-outline-secondary me-1">Reset</button>
+      <button type="button" class="btn btn-outline-secondary me-1">Make Copy</button>
+      <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">Discount Policy</button>
+
     </div>
 
     
@@ -714,6 +778,7 @@ $(document).ready(function(){
 </script>
 
   <!-- vendor files -->
+  <script src="{{ asset(mix('vendors/js/forms/repeater/jquery.repeater.min.js')) }}"></script>
   <script src="https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
   <script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
   <script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.js')) }}"></script>
@@ -727,6 +792,7 @@ $(document).ready(function(){
 @endsection
 @section('page-script')
   <!-- Page js files -->
+  <script src="{{ asset(mix('js/scripts/forms/form-repeater.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-file-uploader.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/forms/pickers/form-pickers.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>
