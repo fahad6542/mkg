@@ -39,7 +39,7 @@
         <div class="card-datatable">
            
 
-          <table class="table table-responsive data-table">
+          <table class="table data-table">
             <thead>
               <tr>
                 <th>Product Name</th>
