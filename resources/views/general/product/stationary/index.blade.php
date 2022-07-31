@@ -37,9 +37,7 @@
         </div>
 
         <div class="card-datatable">
-           
-
-          <table class="table table-responsive">
+          <table class="table data-table">
             <thead>
               <tr>
                 <th>Product Name</th>
@@ -100,4 +98,27 @@
   <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>
     {{-- Page js files --}}
   <script src="{{ asset(mix('js/scripts/tables/table-datatables-advanced.js')) }}"></script>
+  <script>
+      $(document).ready(function() {
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+table = $('.data-table').DataTable({
+    processing: true,
+    serverSide: false,
+    // ajax: "{{ route('subcategory.index') }}",
+    // columns: [
+    //     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+    //     {data: 'name', name: 'name'},
+    //     {data: 'title', name: 'title'},
+    //     {data: 'description', name: 'description'},
+    //     {data: 'action', name: 'action', orderable: false, searchable: false},          
+    // ]
+});
+});
+    </script>
 @endsection
